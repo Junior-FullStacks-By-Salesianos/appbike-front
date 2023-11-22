@@ -21,8 +21,18 @@ export class RegisterUserFormComponent {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  roles: string[] = [];
+  isLoggedIn = false;
 
   constructor(private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService) { }
+
+  ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      //this.roles = this.tokenStorage.getUser().roles;
+      this.roles = ['ROLE_USER'];
+    }
+  }
 
   onSubmit() {
     this.authService.registerUser(this.form).subscribe({
@@ -33,12 +43,20 @@ export class RegisterUserFormComponent {
 
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data);
+
+        this.roles = ['ROLE_USER'];
+        this.reloadPage();
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+        console.log(err);
       }
     });
+  }
+
+  reloadPage(): void {
+    window.location.reload();
   }
 
 }

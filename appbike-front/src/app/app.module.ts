@@ -10,13 +10,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { PageHomeComponent } from './ui/page-home/page-home.component';
+import { BikeListComponent } from './components/bike-list/bike-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterUserFormComponent,
     LoginFormComponent,
-    PageHomeComponent
+    PageHomeComponent,
+    BikeListComponent
   ],
   imports: [
     BrowserModule,

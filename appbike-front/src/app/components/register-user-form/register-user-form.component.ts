@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'app-register-user-form',
@@ -21,7 +22,7 @@ export class RegisterUserFormComponent {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   onSubmit() {
     this.authService.registerUser(this.form).subscribe({
@@ -29,13 +30,15 @@ export class RegisterUserFormComponent {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+
+        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveUser(data);
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
     });
-    this.router.navigate(['/home']);
   }
 
 }

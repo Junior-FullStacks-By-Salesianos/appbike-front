@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegisterUserResponse } from '../models/register-user.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
 
@@ -15,8 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(form: any): Observable<RegisterUserResponse> {
-    return this.http.post<RegisterUserResponse>(`${environment.authUrl}register`,
+  registerUser(form: any): Observable<any> {
+    return this.http.post(`${environment.authUrl}register`,
       {
         "username": form.username,
         "password": form.password,

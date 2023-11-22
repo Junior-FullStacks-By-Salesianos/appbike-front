@@ -1,0 +1,33 @@
+<div class="wrapper">
+    <form *ngIf="!isLoggedIn" name="form" class="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <h2 class="text-uppercase">Login form</h2>
+
+        <div class="mb-3">
+            <label>Username</label>
+            <input [(ngModel)]="form.username" type="text" class="input-field" name="username"
+                [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel">
+            <div class="alert-danger" *ngIf="username.errors && f.submitted">
+                <div *ngIf="username.errors['required']">Username is required</div>
+                <div *ngIf="username.errors['minlength']">
+                    Username must be at least 3 characters
+                </div>
+                <div *ngIf="username.errors['maxlength']">
+                    Username must be at most 20 characters
+                </div>
+            </div>
+        </div>
+        <label>Password</label>
+        <input [(ngModel)]="form.password" type="password" name="password" id="password" class="input-field" required
+            minlength="6" #password="ngModel">
+        <div class="alert-danger" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors['required']">Password is required</div>
+            <div *ngIf="password.errors['minlength']">
+                Password must be at least 6 characters
+            </div>
+        </div>
+
+        <div class="form-field">
+            <input type="submit" value="Login" class="login" name="login">
+        </div>
+    </form>
+</div>

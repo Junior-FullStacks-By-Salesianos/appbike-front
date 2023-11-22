@@ -1,8 +1,7 @@
 
-export interface BikeListResponse {
+/*export interface BikeListResponse {
     results: Bike[];
-}
-
+}*/
 
 export interface Bike {
     nombre: string;

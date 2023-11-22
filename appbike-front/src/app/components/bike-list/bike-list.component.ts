@@ -16,7 +16,7 @@ export class BikeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.bikeService.getList().subscribe(resp => {
-      this.listBikes = resp.results;
+      this.listBikes = resp;
     });
   }
 }

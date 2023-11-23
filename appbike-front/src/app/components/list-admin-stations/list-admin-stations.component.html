@@ -1,1 +1,24 @@
-
+<h1>Estaciones</h1>
+<button class="btn btn-primary btn-lg btn-block custom-btn" style="border-radius: 15px;" (click)="openModal()"></button>
+<table class="table table-bordered table-striped custom-table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Coordenadas</th>
+      <th>Capacidad</th>
+      <th>Bicicletas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let station of stations">
+      <tr>
+        <td>{{ station.id }}</td>
+        <td>{{ station.name }}</td>
+        <td>{{ station.coordinates }}</td>
+        <td>{{ station.capacity }}</td>
+        <td>{{ station.bikes }}</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

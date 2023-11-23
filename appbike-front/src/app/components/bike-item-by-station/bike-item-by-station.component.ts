@@ -12,7 +12,7 @@ export class BikeItemByStationComponent {
   @Output() bikeClick = new EventEmitter<String>
 
   rent() {
-    this.bikeClick.emit(this.bike.nombre);
+    this.bikeClick.emit(this.bike.uuid);
   }
 
 }

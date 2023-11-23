@@ -4,6 +4,7 @@
 }*/
 
 export interface Bike {
+    uuid: string;
     nombre: string;
     marca: String;
     modelo: String;

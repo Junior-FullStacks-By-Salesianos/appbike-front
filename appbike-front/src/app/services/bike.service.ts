@@ -18,4 +18,8 @@ export class BikeService {
   getBikeListForStation(idEstacion: String): Observable<Bike[]> {
     return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/station/${idEstacion}/bikes`);
   }
+
+  getBikeByUuid(uuid: String): Observable<Bike> {
+    return this.http.get<Bike>(`${environment.apiBaseUrl}bikes/${uuid}`);
+  }
 }

@@ -5,6 +5,7 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { BikeListComponent } from './components/bike-list/bike-list.component';
 import { BikeListByStationComponent } from './components/bike-list-by-station/bike-list-by-station.component';
+import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterUserFormComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'rentbystation', component: BikeListByStationComponent },
+  { path: 'rentbystation/:id', component: PageFinishRideComponent },
 
   {
     path: 'admin',

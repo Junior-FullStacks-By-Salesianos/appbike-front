@@ -22,4 +22,12 @@ export class BikeService {
   getBikeByUuid(uuid: String): Observable<Bike> {
     return this.http.get<Bike>(`${environment.apiBaseUrl}bikes/${uuid}`);
   }
+
+  getBikeByName(name: String): Observable<Bike> {
+    return this.http.get<Bike>(`${environment.apiBaseUrl}bikes/byname/${name}`);
+  }
+
+  rentBikeForStation(idEstacion: String, idBicicleta: string): Observable<Bike[]> {
+    return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/station/${idEstacion}/bikes`);
+  }
 }

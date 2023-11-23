@@ -1,1 +1,14 @@
-<button (click)="rent()" class="btn">{{bike.nombre}}</button>
+<!--<button (click)="rent()" class="btn">{{bike.nombre}}</button>-->
+<div class="card" style="width: 18rem;">
+    <img src="https://static.vecteezy.com/system/resources/previews/014/966/726/original/bicycle-illustration-in-minimal-style-png.png"
+        class="card-img-top" alt="Imagen bici">
+    <div class="card-body">
+        <div class="row">
+            <h6 class="col-6">{{bike.nombre}}</h6>
+            <h6 class="col-6">{{bike.marca}}</h6>
+        </div>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        <button (click)="rent()" class="btn btn-light">Rent</button>
+    </div>
+</div>

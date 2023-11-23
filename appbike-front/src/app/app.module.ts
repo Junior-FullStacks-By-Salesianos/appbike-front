@@ -13,6 +13,8 @@ import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { BikeListComponent } from './components/bike-list/bike-list.component';
 import { BikeListByStationComponent } from './components/bike-list-by-station/bike-list-by-station.component';
 import { BikeItemByStationComponent } from './components/bike-item-by-station/bike-item-by-station.component';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { BikeItemByStationComponent } from './components/bike-item-by-station/bi
     PageHomeComponent,
     BikeListComponent,
     BikeListByStationComponent,
-    BikeItemByStationComponent
+    BikeItemByStationComponent,
+    PageFinishRideComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { BikeItemByStationComponent } from './components/bike-item-by-station/bi
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

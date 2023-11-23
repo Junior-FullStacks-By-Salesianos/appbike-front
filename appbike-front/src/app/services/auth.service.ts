@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
+import { RegisterUserResponse } from '../models/register-user.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,6 +14,7 @@ const httpOptions = {
 export class AuthService {
 
   constructor(private http: HttpClient) { }
+  userRole! :string;
 
   registerUser(form: any): Observable<any> {
     return this.http.post(`${environment.authUrl}register`,

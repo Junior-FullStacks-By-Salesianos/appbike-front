@@ -11,7 +11,11 @@ export class BikeService {
 
   constructor(private http: HttpClient) { }
 
-  getList(): Observable<Bike[]> {
+  getBikeListForAdmin(): Observable<Bike[]> {
     return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/`);
+  }
+
+  getBikeListForStation(idEstacion: String): Observable<Bike[]> {
+    return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/station/${idEstacion}/bikes`);
   }
 }

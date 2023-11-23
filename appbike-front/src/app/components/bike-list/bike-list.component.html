@@ -1,3 +1,33 @@
-<div class="container" *ngFor="let b of listBikes">
-    <p>{{b.nombre}}</p>
-</div>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Condition</th>
+                                <th>Station</th>
+                                <th>Available</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let bike of listBikes">
+                                <th scope="row">{{bike.nombre}}</th>
+                                <td>{{bike.marca}}</td>
+                                <td>{{bike.modelo}}</td>
+                                <td>{{bike.estado}}</td>
+                                <td>{{bike.estacion}}</td>
+                                <td>{{bike.usos}}</td>
+                                <td><a href="#" class="btn btn-success">Yes</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

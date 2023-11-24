@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
+import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizo
     RegisterUserFormComponent,
     LoginFormComponent,
     PageHomeComponent,
-    HorizontalNavbarComponent
+    HorizontalNavbarComponent,
+    AdminIssuesPageComponent
   ],
   imports: [
     BrowserModule,

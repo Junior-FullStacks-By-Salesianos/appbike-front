@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environments';
-import { RegisterUserResponse } from '../models/register-user.interface';
+import { TokenStorageService } from './token-storage.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,6 +15,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
   userRole! :string;
+  tokenStorageService! :TokenStorageService;
 
   registerUser(form: any): Observable<any> {
     return this.http.post(`${environment.authUrl}register`,
@@ -33,5 +34,11 @@ export class AuthService {
       username,
       password
     }, httpOptions);
+  }
+
+  isAdmin(): boolean{
+    if (inject(TokenStorageService).getUser().role === 'ROLE_ADMIN') return true;
+
+    return false;
   }
 }

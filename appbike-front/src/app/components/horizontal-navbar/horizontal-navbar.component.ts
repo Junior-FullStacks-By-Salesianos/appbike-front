@@ -8,10 +8,10 @@ import { TokenStorageService } from '../../services/token-storage.service';
 })
 export class HorizontalNavbarComponent {
   title = 'appbike-front';
-  private roles: string[] = [];
   isLoggedIn = false;
   isAdmin = false;
-  username?: string;
+  user! :any;
+
 
   constructor(private tokenStorageService: TokenStorageService) { }
 
@@ -19,13 +19,10 @@ export class HorizontalNavbarComponent {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-      this.roles = ['ROLE_USER'];
+      this.user = this.tokenStorageService.getUser();
 
-      this.isAdmin = this.roles.includes('ROLE_ADMIN');
-      console.log(JSON.stringify(user));
-      this.username = user.username;
+      this.isAdmin = this.user.role.includes('ROLE_ADMIN');
+      console.log(JSON.stringify(this.user));
     }
   }
 

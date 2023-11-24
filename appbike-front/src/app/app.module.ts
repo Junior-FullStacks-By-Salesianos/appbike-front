@@ -12,6 +12,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-pa
     LoginFormComponent,
     PageHomeComponent,
     HorizontalNavbarComponent,
-    AdminIssuesPageComponent
+    AdminIssuesPageComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,

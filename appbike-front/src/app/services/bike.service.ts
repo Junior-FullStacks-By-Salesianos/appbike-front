@@ -27,7 +27,7 @@ export class BikeService {
     return this.http.get<Bike>(`${environment.apiBaseUrl}bikes/byname/${name}`);
   }
 
-  rentBikeForStation(idEstacion: String, idBicicleta: string): Observable<Bike[]> {
-    return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/station/${idEstacion}/bikes`);
+  rentBikeForStation(idBicicleta: string): Observable<Bike[]> {
+    return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/rent/${idBicicleta}`);
   }
 }

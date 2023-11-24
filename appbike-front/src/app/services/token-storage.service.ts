@@ -15,26 +15,34 @@ export class TokenStorageService {
   }
 
   public saveToken(token: string): void {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.setItem(TOKEN_KEY, token);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.setItem(TOKEN_KEY, token);
+    }
   }
 
   public getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(TOKEN_KEY);
+    }
+    return null;
   }
 
   public saveUser(user: any): void {
     console.log(JSON.stringify(user));
-    localStorage.removeItem(USER_KEY);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(USER_KEY);
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+    }
   }
 
   public getUser(): any {
-    const user = localStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+    if (typeof localStorage !== 'undefined') {
+      const user = localStorage.getItem(USER_KEY);
+      if (user) {
+        return JSON.parse(user);
+      }
     }
-
     return {};
   }
 }

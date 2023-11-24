@@ -17,10 +17,9 @@ export class BikeListByStationComponent implements OnInit {
   constructor(private bikeService: BikeService, private modalService: NgbModal, private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
-    const token = this.tokenService.getToken();
-    console.log('Token:', token);
-    this.bikeService.getBikeListForStation("73dbf288-8714-42d0-b9cf-a7549e5a226e").subscribe(resp => {
+    this.bikeService.getBikeListForStation("bd4cd0ff-2cdc-419e-a6f3-f7989c641f4d").subscribe(resp => {
       this.bikeList = resp
+      debugger;
     })
 
   }

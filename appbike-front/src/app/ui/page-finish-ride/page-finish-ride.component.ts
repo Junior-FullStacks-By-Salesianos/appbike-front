@@ -28,6 +28,7 @@ export class PageFinishRideComponent implements OnInit {
       this.bikeSelected = resp
       this.usoService.beginUso(this.bikeSelected.uuid).subscribe(resp => {
         this.uso = resp;
+        debugger
       })
     })
   }

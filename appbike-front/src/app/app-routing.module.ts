@@ -18,10 +18,10 @@ const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: 'bikes', component: BikeListComponent },
+      { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
+      { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
-  { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
 
 ];
 

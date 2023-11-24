@@ -13,6 +13,8 @@ import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { BikeListComponent } from './components/bike-list/bike-list.component';
 import { BikeListByStationComponent } from './components/bike-list-by-station/bike-list-by-station.component';
 import { BikeItemByStationComponent } from './components/bike-item-by-station/bike-item-by-station.component';
+import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
+import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { BikeItemByStationComponent } from './components/bike-item-by-station/bi
     PageHomeComponent,
     BikeListComponent,
     BikeListByStationComponent,
-    BikeItemByStationComponent
+    BikeItemByStationComponent,
+    HorizontalNavbarComponent,
+    AdminIssuesPageComponent
   ],
   imports: [
     BrowserModule,

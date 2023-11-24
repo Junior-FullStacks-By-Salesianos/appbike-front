@@ -5,6 +5,8 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { BikeListComponent } from './components/bike-list/bike-list.component';
 import { BikeListByStationComponent } from './components/bike-list-by-station/bike-list-by-station.component';
+import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -19,6 +21,7 @@ const routes: Routes = [
       { path: 'bikes', component: BikeListComponent },
     ]
   },
+  { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
 
 ];
 

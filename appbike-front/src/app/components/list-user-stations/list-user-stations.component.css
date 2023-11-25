@@ -1,0 +1,10 @@
+.container {
+    height: 100vh; /* Ocupa toda la pantalla vertical */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .google-map {
+    flex: 1;
+  }
+  

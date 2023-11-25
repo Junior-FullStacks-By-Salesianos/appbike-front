@@ -13,6 +13,7 @@ import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
     PageHomeComponent,
     HorizontalNavbarComponent,
     AdminIssuesPageComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    AdminTravelsPageComponent
   ],
   imports: [
     BrowserModule,

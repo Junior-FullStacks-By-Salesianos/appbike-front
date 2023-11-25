@@ -10,13 +10,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { PageHomeComponent } from './ui/page-home/page-home.component';
+import { ListStationComponent } from './component/list-station/list-station.component';
+import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
+import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterUserFormComponent,
     LoginFormComponent,
-    PageHomeComponent
+    PageHomeComponent,
+    ListStationComponent,
+    ListAdminStationsComponent,
+    ListUserStationsComponent
   ],
   imports: [
     BrowserModule,

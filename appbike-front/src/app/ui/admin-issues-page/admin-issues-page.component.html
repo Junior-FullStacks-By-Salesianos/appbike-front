@@ -64,7 +64,7 @@
                 <label for="station">Station</label>
                 <div class="input-group">
                     <select name="station" id="station">
-                        <option *ngFor="let station of stationList" value=""></option>
+                        <option *ngFor="let station of stationList" [value]="station.number">{{station.name}}</option>
                     </select>
                 </div>
             </div>

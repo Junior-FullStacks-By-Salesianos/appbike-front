@@ -3,6 +3,7 @@ import { IssuesService } from '../../services/issues.service';
 import { Issue } from '../../models/issues.interface';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StationsService } from '../../services/station.service';
+import { Station } from '../../models/list-all-stations';
 
 @Component({
   selector: 'app-admin-issues-page',
@@ -11,10 +12,11 @@ import { StationsService } from '../../services/station.service';
 })
 export class AdminIssuesPageComponent implements OnInit {
   constructor(private issueService: IssuesService,
-    private stationService :StationsService) { }
+    private stationService: StationsService) { }
   issueList: Issue[] = [];
   private modalService = inject(NgbModal);
-	closeResult = '';
+  closeResult = '';
+  stationList: Station[] = [];
 
   ngOnInit(): void {
     this.issueService.getAll().subscribe(resp => {
@@ -42,14 +44,18 @@ export class AdminIssuesPageComponent implements OnInit {
   }
 
   open(content: TemplateRef<any>) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
+    this.stationService.getAllStations().subscribe(resp => {
+      this.stationList = resp;
+
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        },
+      );
+    })
   }
 
   private getDismissReason(reason: any): string {

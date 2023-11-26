@@ -4,7 +4,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
-import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +21,8 @@ import { ListAdminStationsComponent } from './components/list-admin-stations/lis
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { RemoveWrapperInterceptor } from '../RemoveWrapperInterceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-pa
     ListAdminStationsComponent,
     ListUserStationsComponent,
     HorizontalNavbarComponent,
-    AdminIssuesPageComponent
+    AdminIssuesPageComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,11 @@ import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-pa
     FormsModule,
     HttpClientModule,
   ],
-  providers: [authInterceptorProviders, provideHttpClient(withFetch())],
+  providers: [authInterceptorProviders, provideHttpClient(withFetch()), {
+    provide: HTTP_INTERCEPTORS,
+    useClass: RemoveWrapperInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

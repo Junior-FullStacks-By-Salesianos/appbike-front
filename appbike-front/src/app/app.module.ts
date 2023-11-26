@@ -19,6 +19,8 @@ import { DetailsUseBarComponent } from './components/details-use-bar/details-use
 import { ListStationComponent } from './component/list-station/list-station.component';
 import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
+import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
+import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { PageError404Component } from './ui/page-error-404/page-error-404.component';
 import { PageError403Component } from './ui/page-error-403/page-error-403.component';
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
@@ -38,6 +40,8 @@ import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-er
     ListStationComponent,
     ListAdminStationsComponent,
     ListUserStationsComponent,
+    HorizontalNavbarComponent,
+    AdminIssuesPageComponent,
     PageError404Component,
     PageError403Component,
     PageError400Component,

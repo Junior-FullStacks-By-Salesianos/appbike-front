@@ -12,6 +12,8 @@ import { PageError404Component } from './ui/page-error-404/page-error-404.compon
 import { PageError403Component } from './ui/page-error-403/page-error-403.component';
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
+import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -28,7 +30,8 @@ const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: 'bikes', component: BikeListComponent },
+      { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
+      { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
 

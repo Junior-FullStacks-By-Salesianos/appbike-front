@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Issue, IssuesResponse } from '../models/issues.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
+import { NewIssue } from '../models/new-issue.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,5 +28,11 @@ export class IssuesService {
 
   delete(id :number){
     return this.http.delete(`${environment.apiBaseUrl}issues/${id}`);
+  }
+
+  createNewIssue(issue:NewIssue){
+    return this.http.post(`${environment.apiBaseUrl}issues/`,{
+      issue
+    }, httpOptions);
   }
 }

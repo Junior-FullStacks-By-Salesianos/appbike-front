@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
@@ -10,6 +10,7 @@ import { ListAdminStationsComponent } from './components/list-admin-stations/lis
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AuthGuard } from './auth.guard';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -23,7 +24,7 @@ const routes: Routes = [
     path: 'admin',
     children: [
       { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
-      { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
+      { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
 

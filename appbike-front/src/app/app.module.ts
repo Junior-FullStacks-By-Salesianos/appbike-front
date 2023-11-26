@@ -23,6 +23,7 @@ import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizo
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { RemoveWrapperInterceptor } from '../RemoveWrapperInterceptor';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,12 +51,14 @@ import { RemoveWrapperInterceptor } from '../RemoveWrapperInterceptor';
     NgbModule,
     FormsModule,
     HttpClientModule,
+    CommonModule
   ],
   providers: [authInterceptorProviders, provideHttpClient(withFetch()), {
     provide: HTTP_INTERCEPTORS,
     useClass: RemoveWrapperInterceptor,
     multi: true,
-  }],
+  },
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

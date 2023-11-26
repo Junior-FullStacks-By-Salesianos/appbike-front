@@ -13,6 +13,11 @@ export class AppComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  tiempoTranscurrido: string = '00:00:00';
+
+  actualizarTiempoTranscurrido(nuevoTiempo: any): void {
+    this.tiempoTranscurrido = nuevoTiempo;
+  }
 
   constructor(private tokenStorageService: TokenStorageService) { }
 

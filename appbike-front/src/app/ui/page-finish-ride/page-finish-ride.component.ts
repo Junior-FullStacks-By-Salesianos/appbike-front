@@ -1,10 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import { BikeService } from '../../services/bike.service';
-import { Bike } from '../../models/bike-list.interface';
+import { Component, OnInit } from '@angular/core';
 import { UsoService } from '../../services/uso.service';
-import { UsoBegin } from '../../models/uso-begin.interface';
+import { UsoResponse } from '../../models/uso.interface';
 
 @Component({
   selector: 'app-page-finish-ride',
@@ -13,24 +9,17 @@ import { UsoBegin } from '../../models/uso-begin.interface';
 })
 export class PageFinishRideComponent implements OnInit {
 
-  bikeName: string = "";
-  route: ActivatedRoute = inject(ActivatedRoute);
-  bikeSelected!: Bike;
-  uso!: UsoBegin;
+  uso!: UsoResponse;
 
-  constructor(private sanitazer: DomSanitizer, private bikeService: BikeService, private usoService: UsoService) {
-    this.bikeName = String(this.route.snapshot.params['id']);
-  }
+  constructor(private usoService: UsoService) { }
 
 
   ngOnInit(): void {
-    this.bikeService.getBikeByName(this.bikeName).subscribe(resp => {
-      this.bikeSelected = resp
-      this.usoService.beginUso(this.bikeSelected.uuid).subscribe(resp => {
-        this.uso = resp;
-        debugger
-      })
+    this.usoService.getActiveUse().subscribe(resp => {
+      this.uso = resp;
     })
   }
+
+
 
 }

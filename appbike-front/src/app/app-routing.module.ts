@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'register', component: RegisterUserFormComponent },
   { path: 'login', component: LoginFormComponent },
-  { path: 'rentbystation', component: BikeListByStationComponent },
-  { path: 'rentbystation/:id', component: PageFinishRideComponent },
+  { path: 'rentbystation', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
+  { path: 'use/trip', component: PageFinishRideComponent },
 
   {
     path: 'admin',

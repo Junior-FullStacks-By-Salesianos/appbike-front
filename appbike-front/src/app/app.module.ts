@@ -15,6 +15,7 @@ import { BikeListByStationComponent } from './components/bike-list-by-station/bi
 import { BikeItemByStationComponent } from './components/bike-item-by-station/bike-item-by-station.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
+import { DetailsUseBarComponent } from './components/details-use-bar/details-use-bar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.
     BikeListComponent,
     BikeListByStationComponent,
     BikeItemByStationComponent,
-    PageFinishRideComponent
+    PageFinishRideComponent,
+    DetailsUseBarComponent
   ],
   imports: [
     BrowserModule,

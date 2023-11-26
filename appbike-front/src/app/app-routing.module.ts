@@ -8,6 +8,8 @@ import { BikeListByStationComponent } from './components/bike-list-by-station/bi
 import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
 import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
+import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -20,7 +22,8 @@ const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: 'bikes', component: BikeListComponent },
+      { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
+      { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
 

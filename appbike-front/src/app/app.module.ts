@@ -19,6 +19,8 @@ import { DetailsUseBarComponent } from './components/details-use-bar/details-use
 import { ListStationComponent } from './component/list-station/list-station.component';
 import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
+import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
+import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ListUserStationsComponent } from './components/list-user-stations/list-
     DetailsUseBarComponent,
     ListStationComponent,
     ListAdminStationsComponent,
-    ListUserStationsComponent
+    ListUserStationsComponent,
+    HorizontalNavbarComponent,
+    AdminIssuesPageComponent
   ],
   imports: [
     BrowserModule,

@@ -15,15 +15,14 @@ export class LoginFormComponent {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
+  role! :string;
+  username! :string;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      //this.roles = this.tokenStorage.getUser().roles;
-      this.roles = ['ROLE_USER'];
     }
   }
 
@@ -38,8 +37,8 @@ export class LoginFormComponent {
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        //this.roles = this.tokenStorage.getUser().roles;
-        this.roles = ['ROLE_USER'];
+        this.role = data.role;
+        this.username = data.username;
         this.reloadPage();
       },
       error: err => {

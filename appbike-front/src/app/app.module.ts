@@ -36,9 +36,9 @@ import { DetailsUseBarComponent } from './components/details-use-bar/details-use
     RouterModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, provideHttpClient(withFetch())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

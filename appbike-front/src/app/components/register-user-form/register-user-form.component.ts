@@ -35,8 +35,18 @@ export class RegisterUserFormComponent {
   }
 
   onSubmit() {
+    const { password, verifyPassword } = this.form;
+
+    // Validate that the passwords match
+    if (password !== verifyPassword) {
+      this.errorMessage = 'Passwords do not match';
+      this.isSignUpFailed = true;
+      return;
+    }
+
     this.authService.registerUser(this.form).subscribe({
       next: data => {
+        // Handle successful registration
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
@@ -48,12 +58,15 @@ export class RegisterUserFormComponent {
         this.reloadPage();
       },
       error: err => {
+        // Handle registration failure
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
         console.log(err);
-      }
+      },
     });
   }
+
+
 
   reloadPage(): void {
     window.location.reload();

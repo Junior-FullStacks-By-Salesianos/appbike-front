@@ -7,11 +7,11 @@
                 <input [(ngModel)]="form.nombre" type="text" name="first_name" id="first_name" class="input-field"
                     required minlength="3" maxlength="30" #nombre="ngModel">
                 <div class="alert-danger" *ngIf="nombre.errors && f.submitted">
-                    <div *ngIf="nombre.errors['required']">First Name is required</div>
-                    <div *ngIf="nombre.errors['minlength']">
+                    <div class="error" *ngIf="nombre.errors['required']">First Name is required</div>
+                    <div class="error" *ngIf="nombre.errors['minlength']">
                         First Name must be at least 3 characters
                     </div>
-                    <div *ngIf="nombre.errors['maxlength']">
+                    <div class="error" *ngIf="nombre.errors['maxlength']">
                         Name must be at most 30 characters
                     </div>
                 </div>
@@ -21,11 +21,11 @@
                 <input [(ngModel)]="form.apellidos" type="text" name="last_name" id="last_name" class="input-field"
                     required minlength="3" maxlength="50" #apellidos="ngModel">
                 <div class="alert-danger" *ngIf="apellidos.errors && f.submitted">
-                    <div *ngIf="apellidos.errors['required']">Last Name is required</div>
-                    <div *ngIf="apellidos.errors['minlength']">
+                    <div class="error" *ngIf="apellidos.errors['required']">Last Name is required</div>
+                    <div class="error" *ngIf="apellidos.errors['minlength']">
                         Last Name must be at least 3 characters
                     </div>
-                    <div *ngIf="apellidos.errors['maxlength']">
+                    <div class="error" *ngIf="apellidos.errors['maxlength']">
                         Last Name must be at most 50 characters
                     </div>
                 </div>
@@ -36,8 +36,8 @@
             <input [(ngModel)]="form.email" type="email" class="input-field" name="email" [(ngModel)]="form.email"
                 required email #email="ngModel">
             <div class="alert-danger" *ngIf="email.errors && f.submitted">
-                <div *ngIf="email.errors['required']">Email is required</div>
-                <div *ngIf="email.errors['email']">
+                <div class="error" *ngIf="email.errors['required']">Email is required</div>
+                <div class="error" *ngIf="email.errors['email']">
                     Email must be a valid email address
                 </div>
             </div>
@@ -47,11 +47,11 @@
             <input [(ngModel)]="form.username" type="text" class="input-field" name="username"
                 [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel">
             <div class="alert-danger" *ngIf="username.errors && f.submitted">
-                <div *ngIf="username.errors['required']">Username is required</div>
-                <div *ngIf="username.errors['minlength']">
+                <div class="error" *ngIf="username.errors['required']">Username is required</div>
+                <div class="error" *ngIf="username.errors['minlength']">
                     Username must be at least 3 characters
                 </div>
-                <div *ngIf="username.errors['maxlength']">
+                <div class="error" *ngIf="username.errors['maxlength']">
                     Username must be at most 20 characters
                 </div>
             </div>
@@ -62,18 +62,21 @@
                 <input [(ngModel)]="form.password" type="password" name="password" id="password" class="input-field"
                     required minlength="6" #password="ngModel">
                 <div class="alert-danger" *ngIf="password.errors && f.submitted">
-                    <div *ngIf="password.errors['required']">Password is required</div>
-                    <div *ngIf="password.errors['minlength']">
+                    <div class="error" *ngIf="password.errors['required']">Password is required</div>
+                    <div class="error" *ngIf="password.errors['minlength']">
                         Password must be at least 6 characters
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 mb-3">
                 <label>Repeat Password</label>
-                <input [(ngModel)]="form.verifyPassword" type="password" name="cpwd" id="cpwd" class="input-field"
-                    required minlength="6" #password="ngModel">
-                <div class="alert-danger" *ngIf="password.errors && f.submitted">
-                    <div *ngIf="password.errors['required']">Verify Password is required</div>
+                <input [(ngModel)]="form.verifyPassword" type="password" name="verifyPassword" id="verifyPassword"
+                    class="input-field" required minlength="6" #verifyPassword="ngModel">
+                <div class="alert-danger" *ngIf="f.submitted && password !== verifyPassword">
+                    <div class="error">Passwords do not match</div>
+                </div>
+                <div class="alert-danger" *ngIf="verifyPassword.errors && f.submitted">
+                    <div class="error" *ngIf="verifyPassword.errors['required']">Verify Password is required</div>
                 </div>
             </div>
         </div>

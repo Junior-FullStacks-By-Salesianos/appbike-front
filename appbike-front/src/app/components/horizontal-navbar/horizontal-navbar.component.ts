@@ -10,9 +10,12 @@ export class HorizontalNavbarComponent {
   title = 'appbike-front';
   isLoggedIn = false;
   isAdmin = false;
-  user! :any;
+  user!: any;
+  tiempoTranscurrido: string = '00:00:00'
 
-
+  actualizarTiempoTranscurrido(nuevoTiempo: any): void {
+    this.tiempoTranscurrido = nuevoTiempo;
+  }
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {

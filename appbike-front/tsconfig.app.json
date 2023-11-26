@@ -4,12 +4,8 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [
-<<<<<<< HEAD
       "@angular/localize",
       "node"
-=======
-      "@angular/localize"
->>>>>>> main
     ]
   },
   "files": [
@@ -20,5 +16,4 @@
   "include": [
     "src/**/*.d.ts"
   ]
-  
 }

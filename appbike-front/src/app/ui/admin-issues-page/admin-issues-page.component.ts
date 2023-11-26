@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IssuesService } from '../../services/issues.service';
 import { Issue } from '../../models/issues.interface';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StationsService } from '../../services/station.service';
-import { Station } from '../../models/list-all-stations';
 
 @Component({
   selector: 'app-admin-issues-page',
@@ -11,8 +9,7 @@ import { Station } from '../../models/list-all-stations';
   styleUrl: './admin-issues-page.component.css'
 })
 export class AdminIssuesPageComponent implements OnInit {
-  constructor(private issueService: IssuesService,
-    private stationService: StationsService) { }
+  constructor(private issueService: IssuesService, private stationService: StationsService) { }
   issueList: Issue[] = [];
   private modalService = inject(NgbModal);
   closeResult = '';

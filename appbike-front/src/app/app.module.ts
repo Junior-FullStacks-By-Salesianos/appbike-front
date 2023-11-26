@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
@@ -27,7 +26,8 @@ import { RemoveWrapperInterceptor } from './RemoveWrapperInterceptor';
     HorizontalNavbarComponent,
     AdminIssuesPageComponent,
     AdminNavbarComponent,
-    AdminTravelsPageComponent
+    AdminTravelsPageComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,

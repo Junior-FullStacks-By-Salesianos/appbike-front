@@ -20,13 +20,9 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
-<<<<<<< HEAD
     "@angular/ssr": "^17.0.2",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0-rc.2",
     "@ngneat/overview": "^5.1.1",
-=======
-    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
->>>>>>> main
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",
@@ -40,10 +36,7 @@
     "@angular/cli": "^17.0.3",
     "@angular/compiler-cli": "^17.0.0",
     "@angular/localize": "^17.0.0",
-<<<<<<< HEAD
     "@types/express": "^4.17.17",
-=======
->>>>>>> main
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "jasmine-core": "~5.1.0",

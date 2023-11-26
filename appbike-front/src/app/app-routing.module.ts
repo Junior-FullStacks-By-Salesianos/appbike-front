@@ -6,6 +6,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { BikeListComponent } from './components/bike-list/bike-list.component';
 import { BikeListByStationComponent } from './components/bike-list-by-station/bike-list-by-station.component';
 import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
+import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
+import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
     ]
   },
 
+  { path: 'stations/get', component: ListAdminStationsComponent },
+  { path: 'user/get', component: ListUserStationsComponent }
 ];
 
 @NgModule({

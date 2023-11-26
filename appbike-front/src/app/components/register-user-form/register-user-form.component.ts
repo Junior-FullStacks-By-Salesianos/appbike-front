@@ -55,8 +55,6 @@ export class RegisterUserFormComponent {
     });
   }
 
-
-
   reloadPage(): void {
     window.location.reload();
   }

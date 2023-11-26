@@ -6,8 +6,7 @@
 
         <div class="col-11 d-flex flex-column flex-wrap align-content-center">
             <h1 class="text-center ">Issues</h1>
-            <button class="btn btn-gray w-50 side-margin-auto mb-3 " (click)="open(newIssueModal)"><i
-                    class=" m-auto fa-plus"></i></button>
+            <button class="btn btn-gray w-50 side-margin-auto mb-3 "><i class=" m-auto fa-plus"></i></button>
             <table class="table">
                 <thead>
                     <tr>
@@ -27,8 +26,7 @@
                         <td>{{issue.fechaRealizacion}}</td>
                         <td>{{issue.trabajador.nombre}}</td>
                         <td class="text-end ">
-                            <button *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i class="fa-solid fa-check"
-                                    style="color: #2fb63f;"></i></button>
+                            <button *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i class="fa-solid fa-check" style="color: #2fb63f;"></i></button>
                             <button><i class="fa-solid fa-notes-medical"></i></button>
                             <button><i class="fa-solid fa-trash" (click)="deleteIssue(issue.id)"></i></button>
                         </td>

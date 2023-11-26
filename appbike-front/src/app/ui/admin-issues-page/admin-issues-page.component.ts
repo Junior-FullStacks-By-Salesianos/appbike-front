@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IssuesService } from '../../services/issues.service';
 import { Issue } from '../../models/issues.interface';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -24,20 +24,20 @@ export class AdminIssuesPageComponent implements OnInit {
     })
   }
 
-  isFinished(issue: Issue) {
-    if (issue.estado == "FINISHED") return true;
+  isFinished(issue:Issue){
+    if(issue.estado == "FINISHED") return true;
 
     return false;
   }
 
-  setAsDone(issue: Issue) {
+  setAsDone(issue:Issue){
     issue.estado = "FINISHED"
     this.issueService.setAsDone(issue).subscribe(resp => {
       window.location.reload();
     })
   }
 
-  deleteIssue(id: number) {
+  deleteIssue(id:number){
     this.issueService.delete(id).subscribe(resp => {
       window.location.reload();
     });

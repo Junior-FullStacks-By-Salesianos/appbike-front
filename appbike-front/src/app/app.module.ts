@@ -13,9 +13,6 @@ import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizo
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RemoveWrapperInterceptor } from './RemoveWrapperInterceptor';
 
 @NgModule({
   declarations: [
@@ -36,16 +33,9 @@ import { RemoveWrapperInterceptor } from './RemoveWrapperInterceptor';
     AppRoutingModule,
     RouterModule,
     NgbModule,
-    FormsModule,
-    FontAwesomeModule
+    FormsModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RemoveWrapperInterceptor,
-      multi: true,
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,32 +4,21 @@
             <app-admin-navbar class="w-100 vh-100 d-block"></app-admin-navbar>
         </div>
 
-        <div class="col-11 d-flex flex-column flex-wrap align-content-center">
-            <h1 class="text-center ">Issues</h1>
-            <button class="btn btn-gray w-50 side-margin-auto mb-3 "><i class=" m-auto fa-plus"></i></button>
-            <table class="table">
+        <div class="col-11 d-flex flex-column flex-wrap  align-content-center ">
+            <h1>Issues</h1>
+            <table class="table ">
                 <thead>
                     <tr>
                         <th scope="col">Station Name</th>
                         <th scope="col">Deadline Day</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Finished At</th>
                         <th scope="col">Assigned To</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let issue of issueList">
-                        <td>{{issue.estacion.name}}</td>
-                        <td>{{issue.fechaProgramada}}</td>
-                        <td>{{issue.estado}}</td>
-                        <td>{{issue.fechaRealizacion}}</td>
-                        <td>{{issue.trabajador.nombre}}</td>
-                        <td class="text-end ">
-                            <button *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i class="fa-solid fa-check" style="color: #2fb63f;"></i></button>
-                            <button><i class="fa-solid fa-notes-medical"></i></button>
-                            <button><i class="fa-solid fa-trash" (click)="deleteIssue(issue.id)"></i></button>
-                        </td>
+                    <tr>
+                        <td colspan="5" class="text-center "><button class="btn btn-gray w-50 "><i class="bi bi-plus-square-fill"></i></button></td>
                     </tr>
                 </tbody>
             </table>

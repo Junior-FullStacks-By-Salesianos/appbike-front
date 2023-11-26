@@ -16,11 +16,12 @@
                                         class="form-control form-control-lg" [(ngModel)]="form.username" required
                                         minlength="3" maxlength="20" #username="ngModel" />
                                     <div class="alert-danger" *ngIf="username.errors && f.submitted">
-                                        <div *ngIf="username.errors['required']">Username is required</div>
-                                        <div *ngIf="username.errors['minlength']">
+                                        <div class="error" *ngIf="username.errors['required']">Username is required
+                                        </div>
+                                        <div class="error" *ngIf="username.errors['minlength']">
                                             Username must be at least 3 characters
                                         </div>
-                                        <div *ngIf="username.errors['maxlength']">
+                                        <div class="error" *ngIf="username.errors['maxlength']">
                                             Username must be at most 20 characters
                                         </div>
                                     </div>
@@ -33,7 +34,7 @@
                                         #password="ngModel" />
                                     <div class="alert-danger" *ngIf="password.errors && f.submitted">
                                         <div *ngIf="password.errors['required']">Password is required</div>
-                                        <div *ngIf="password.errors['minlength']">
+                                        <div class="error" *ngIf="password.errors['minlength']">
                                             Password must be at least 6 characters
                                         </div>
                                     </div>

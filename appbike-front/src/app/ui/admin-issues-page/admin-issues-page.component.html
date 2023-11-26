@@ -6,7 +6,8 @@
 
         <div class="col-11 d-flex flex-column flex-wrap align-content-center">
             <h1 class="text-center ">Issues</h1>
-            <button class="btn btn-gray w-50 side-margin-auto mb-3 "><i class=" m-auto fa-plus"></i></button>
+            <button class="btn btn-gray w-50 side-margin-auto mb-3 " (click)="open(newIssueModal)"><i
+                    class=" m-auto fa-plus"></i></button>
             <table class="table">
                 <thead>
                     <tr>
@@ -26,7 +27,8 @@
                         <td>{{issue.fechaRealizacion}}</td>
                         <td>{{issue.trabajador.nombre}}</td>
                         <td class="text-end ">
-                            <button *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i class="fa-solid fa-check" style="color: #2fb63f;"></i></button>
+                            <button *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i class="fa-solid fa-check"
+                                    style="color: #2fb63f;"></i></button>
                             <button><i class="fa-solid fa-notes-medical"></i></button>
                             <button><i class="fa-solid fa-trash" (click)="deleteIssue(issue.id)"></i></button>
                         </td>
@@ -36,3 +38,39 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL -->
+<ng-template #newIssueModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create a new issue</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <label for="deadline">Deadline Date</label>
+                <div class="input-group">
+                    <input id="deadline" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                        #dp="ngbDatepicker" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()"
+                        type="button"></button>
+                </div>
+
+                <label for="anotaciones">Note</label>
+                <div class="input-group">
+                    <textarea name="" id="anotaciones" cols="50" rows="3"></textarea>
+                </div>
+
+                <label for="station">Station</label>
+                <div class="input-group">
+                    <select name="station" id="station">
+                        <option *ngFor="let station of stationList" value=""></option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>

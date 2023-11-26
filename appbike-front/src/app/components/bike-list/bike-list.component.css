@@ -1,0 +1,19 @@
+button {
+    border-radius: 20px;
+    background-color: #09090948;
+    border: 1px solid black;
+    margin-left: 29%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+i {
+    margin-left: 250px;
+    margin-right: 250px;
+    font-size: 20pt;
+    background-color: #757575;
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
+}

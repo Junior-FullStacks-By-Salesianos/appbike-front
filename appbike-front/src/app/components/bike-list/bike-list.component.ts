@@ -11,6 +11,8 @@ export class BikeListComponent implements OnInit {
 
 
   listBikes: Bike[] = [];
+  selectVisible: boolean = false;
+
 
   constructor(private bikeService: BikeService) { }
 
@@ -18,5 +20,9 @@ export class BikeListComponent implements OnInit {
     this.bikeService.getBikeListForAdmin().subscribe(resp => {
       this.listBikes = resp;
     });
+  }
+
+  toggleSelect() {
+    this.selectVisible = !this.selectVisible;
   }
 }

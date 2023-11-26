@@ -13,6 +13,11 @@ export class AppComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  tiempoTranscurrido: string = '00:00:00';
+
+  actualizarTiempoTranscurrido(nuevoTiempo: any): void {
+    this.tiempoTranscurrido = nuevoTiempo;
+  }
 
   constructor(private tokenStorageService: TokenStorageService) { }
 
@@ -23,10 +28,9 @@ export class AppComponent {
       const user = this.tokenStorageService.getUser();
       //this.roles = user.roles;
       this.roles = ['ROLE_USER'];
-
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-      console.log(JSON.stringify(user));
+      //console.log(JSON.stringify(user));
       this.username = user.username;
     }
   }

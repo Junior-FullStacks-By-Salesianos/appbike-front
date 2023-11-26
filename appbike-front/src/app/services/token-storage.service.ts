@@ -11,30 +11,38 @@ export class TokenStorageService {
   constructor() { }
 
   signOut(): void {
-    window.sessionStorage.clear();
+    localStorage.clear();
   }
 
   public saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.setItem(TOKEN_KEY, token);
+    }
   }
 
   public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(TOKEN_KEY);
+    }
+    return null;
   }
 
   public saveUser(user: any): void {
     console.log(JSON.stringify(user));
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(USER_KEY);
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+    }
   }
 
   public getUser(): any {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+    if (typeof localStorage !== 'undefined') {
+      const user = localStorage.getItem(USER_KEY);
+      if (user) {
+        return JSON.parse(user);
+      }
     }
-
     return {};
   }
 }

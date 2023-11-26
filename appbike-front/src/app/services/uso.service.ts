@@ -22,4 +22,8 @@ export class UsoService {
     getActiveUse(): Observable<UsoResponse> {
         return this.http.get<UsoResponse>(`${environment.apiBaseUrl}use/active`)
     }
+
+    finishUse(IdEstacion: string): Observable<UsoResponse> {
+        return this.http.post<UsoResponse>(`${environment.apiBaseUrl}use/finish/${IdEstacion}`, null);
+    }
 }

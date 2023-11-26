@@ -23,7 +23,7 @@ export class BikeListByStationComponent implements OnInit {
   constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.bikeService.getBikeListForStation("307eab5f-7f28-45db-9ea9-f92ac36280dc").subscribe(resp => {
+    this.bikeService.getBikeListForStation("8d1a084b-33d4-4270-ac67-c28d5eb6c8ec").subscribe(resp => {
       this.bikeList = resp
       this.countBikes = resp.length;
     })
@@ -47,7 +47,7 @@ export class BikeListByStationComponent implements OnInit {
         return [];
       })
     ).subscribe(
-      _resp => {
+      resp => {
         this.router.navigate(['/use/trip']);
       }
     );

@@ -25,6 +25,9 @@ import { PageError404Component } from './ui/page-error-404/page-error-404.compon
 import { PageError403Component } from './ui/page-error-403/page-error-403.component';
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
+import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
+import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/bike-card-resume-trip.component';
+import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-er
     PageError404Component,
     PageError403Component,
     PageError400Component,
-    PageErrorUnespectedComponent
+    PageErrorUnespectedComponent,
+    PageDetailsTripComponent,
+    BikeCardResumeTripComponent,
+    SummaryTripComponent
   ],
   imports: [
     BrowserModule,

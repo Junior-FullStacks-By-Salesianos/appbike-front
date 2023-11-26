@@ -8,6 +8,10 @@ import { BikeListByStationComponent } from './components/bike-list-by-station/bi
 import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
 import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
+import { PageError404Component } from './ui/page-error-404/page-error-404.component';
+import { PageError403Component } from './ui/page-error-403/page-error-403.component';
+import { PageError400Component } from './ui/page-error-400/page-error-400.component';
+import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -16,6 +20,10 @@ const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
   { path: 'rentbystation', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
   { path: 'use/trip', component: PageFinishRideComponent },
+  { path: 'error-404', component: PageError404Component },
+  { path: 'access-denied', component: PageError403Component },
+  { path: 'error-400', component: PageError400Component },
+  { path: 'error', component: PageErrorUnespectedComponent },
 
   {
     path: 'admin',
@@ -25,7 +33,8 @@ const routes: Routes = [
   },
 
   { path: 'stations/get', component: ListAdminStationsComponent },
-  { path: 'user/get', component: ListUserStationsComponent }
+  { path: 'user/get', component: ListUserStationsComponent },
+  { path: '**', redirectTo: '/error-404' }
 ];
 
 @NgModule({

@@ -30,7 +30,7 @@ import { PageError404Component } from './ui/page-error-404/page-error-404.compon
 import { PageError403Component } from './ui/page-error-403/page-error-403.component';
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
     ReactiveFormsModule
   ],
   providers: [authInterceptorProviders, provideHttpClient(withFetch())],

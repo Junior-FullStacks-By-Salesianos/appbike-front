@@ -23,4 +23,8 @@ export class StationsService {
   deleteStation(naturalId:number){
     return this.http.delete(`http://localhost:8080/stations/delete/${naturalId}`)
   }
+
+  editStation(naturalId:number,stationData: any){
+    return this.http.put(`http://localhost:8080/stations/edit/${naturalId}`, stationData);
+  }
 }

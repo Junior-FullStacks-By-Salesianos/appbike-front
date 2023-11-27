@@ -30,7 +30,11 @@
                 <td>{{ station.bikes }}</td>
                 <td>
                   <img src="../../../assets/img/eliminar.png" alt="trash" style="width: 20px; cursor: pointer;"
-                    (click)="delete(station.number)">
+                  (click)="delete(station.number)">
+                </td>
+                <td>
+                  <img src="../../../assets/img/edit.png" alt="trash" style="width: 20px; cursor: pointer;"
+                  (click)="openEditModal(content,station)">
                 </td>
               </tr>
             </ng-container>
@@ -97,7 +101,7 @@
               <button type="submit"
                 class="btn btn-gray btn-transparent d-flex justify-content-center align-items-center"
                 style="width: 100%; margin-top: 10px;">
-                Crear Estación
+                Save
               </button>
             </form>
           </div>

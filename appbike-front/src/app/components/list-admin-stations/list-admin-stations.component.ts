@@ -11,6 +11,7 @@ import { response } from 'express';
 })
 export class ListAdminStationsComponent {
 
+
   stationData = {
     nombre: '',
     coordenadas: '',
@@ -18,7 +19,9 @@ export class ListAdminStationsComponent {
   };
   capacityNumbers = Array.from({ length: 31 }, (_, i) => i + 1);
   private modalRef: NgbModalRef | undefined;
+  selectedStation: Station | undefined;
   stations: Station[] = [];
+  stationForm: any;
 
   constructor(private stationService: StationsService, private modalService: NgbModal,private formBuilder: FormBuilder) {
     
@@ -32,9 +35,31 @@ export class ListAdminStationsComponent {
     this.modalRef = this.modalService.open(content, { 
       ariaLabelledBy: 'modal-title' });
   }
+  openEditModal(content: any, station: Station) {
+    this.selectedStation = station;
+    this.stationData = {
+      nombre: station.name,
+      coordenadas: station.coordinates,
+      capacidad: station.capacity
+    };
+    this.modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-title' });
+    this.stationForm.resetForm(this.stationData);
+  }
 
+
+  
+  clearFormData() {
+    this.selectedStation = undefined;
+    this.stationData = {
+      nombre: '',
+      coordenadas: '',
+      capacidad: 0
+    };
+  }
+  
   closeModal() {
     this.modalService.dismissAll();
+    this.clearFormData();
   }
 
   loadNewPage() {
@@ -45,26 +70,57 @@ export class ListAdminStationsComponent {
 
   submitForm() {
     this.stationData.capacidad = +this.stationData.capacidad;
-
-    this.stationService.createStation(this.stationData).subscribe(
-      (response) => {
-        console.log('La estación se ha creado con éxito:', response);
-        this.loadNewPage();
-        this.closeModal();
-      },
-      (error) => {
-        console.error('Hubo un error al crear la estación:', error);
-      }
-    );
+  
+    if (this.selectedStation) {
+      this.stationService.editStation(this.selectedStation.number, this.stationData).subscribe(
+        (response) => {
+          console.log('La estación se ha editado con éxito:', response);
+          this.loadNewPage();
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Hubo un error al editar la estación:', error);
+        }
+      );
+    } else {
+      this.stationService.createStation(this.stationData).subscribe(
+        (response) => {
+          console.log('La estación se ha creado con éxito:', response);
+          this.loadNewPage();
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Hubo un error al crear la estación:', error);
+        }
+      );
+    }
+  }
+  edit() {
+    if (this.selectedStation) {
+      this.stationService.editStation(this.selectedStation.number, this.stationData).subscribe(
+        (response) => {
+          console.log('La estación se ha editado con éxito:', response);
+          this.clearFormData();
+          this.loadNewPage();
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Hubo un error al editar la estación:', error);
+        }
+      );
+    }
   }
   delete(naturalId: number) {
     this.stationService.deleteStation(naturalId).subscribe(
-      (response)=>{
-      console.log('La estación se ha borrado con éxito:', response);
+      (response) => {
+        console.log('La estación se ha borrado con éxito:', response);
         this.loadNewPage();
-    },
-    (error) => {
-      console.error('Hubo un error al borrar la estación:', error);
-    })
-    }
+      },
+      (error) => {
+        alert("No se puede borrar una estación que tiene bicicletas asociadas. Por favor, cambie las bicis de estación primero.")
+        console.error('Hubo un error al borrar la estación:', error);
+      }
+    );
+  }
+  
 }

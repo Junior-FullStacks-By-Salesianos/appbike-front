@@ -31,6 +31,7 @@ import { PageError403Component } from './ui/page-error-403/page-error-403.compon
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PageError404Component,
     PageError403Component,
     PageError400Component,
-    PageErrorUnespectedComponent
+    PageErrorUnespectedComponent,
+    AdminBikesPageComponent
   ],
   imports: [
     BrowserModule,

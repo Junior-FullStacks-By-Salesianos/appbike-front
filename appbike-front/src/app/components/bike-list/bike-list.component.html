@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-wrap">
-                    <table class="table table-striped">
-                        <thead>
+                    <table class="table table-bordered table-striped custom-table">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>Name</th>
                                 <th>Brand</th>
@@ -35,9 +35,11 @@
     </div>
 </section>
 
-<ngb-pagination class="custom-pagination" [maxSize]="5" [boundaryLinks]="true" [collectionSize]="countBikes"
-    [(page)]="currentPage" [pageSize]="20" (pageChange)="loadNewPage()" aria-label="Default pagination">
-</ngb-pagination>
+<div class="d-flex" style="margin-left: 40%;">
+    <ngb-pagination class="custom-pagination" [maxSize]="5" [boundaryLinks]="true" [collectionSize]="countBikes"
+        [(page)]="currentPage" [pageSize]="20" (pageChange)="loadNewPage()" aria-label="Default pagination">
+    </ngb-pagination>
+</div>
 
 <ng-template #newBikeModal let-modal>
     <div class="modal-header">
@@ -47,53 +49,53 @@
     <div class="modal-body">
         <form #newBike="ngForm" (ngSubmit)="newBike.form.valid && onSubmit()">
             <div class="mb-3">
-                <label for="name">Name</label>
+                <label for="nombre">Name</label>
                 <div class="input-group">
-                    <input [(ngModel)]="formBikeAdd.name" #name="ngModel" name="name" class="form-control"
+                    <input [(ngModel)]="formBikeAdd.nombre" #nombre="ngModel" name="nombre" class="form-control"
                         placeholder="Enter name of the bike" required />
                 </div>
-                <div class="alert-danger" *ngIf="name.errors && newBike.submitted">
-                    <p class="text-danger " *ngIf="name.errors['required']">Name is required</p>
+                <div class="alert-danger" *ngIf="nombre.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="nombre.errors['required']">Name is required</p>
                 </div>
 
-                <label for="brand">Brand</label>
+                <label for="marca">Brand</label>
                 <div class="input-group">
-                    <input [(ngModel)]="formBikeAdd.brand" #brand="ngModel" name="brand" class="form-control"
+                    <input [(ngModel)]="formBikeAdd.marca" #marca="ngModel" name="marca" class="form-control"
                         placeholder="Enter brand of the bike" required />
                 </div>
-                <div class="alert-danger" *ngIf="brand.errors && newBike.submitted">
-                    <p class="text-danger " *ngIf="brand.errors['required']">Brand is required</p>
+                <div class="alert-danger" *ngIf="marca.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="marca.errors['required']">Brand is required</p>
                 </div>
-
-                <label for="model">Model</label>
+                <div class="alert-danger" *ngIf="marca.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="marca.errors['minlength']">Brand must be at least 3 characters/p>
+                </div>
+                <label for="modelo">Model</label>
                 <div class="input-group">
-                    <input [(ngModel)]="formBikeAdd.model" #model="ngModel" name="model" class="form-control"
+                    <input [(ngModel)]="formBikeAdd.modelo" #modelo="ngModel" name="modelo" class="form-control"
                         placeholder="Enter model of the bike" required />
                 </div>
-                <div class="alert-danger" *ngIf="model.errors && newBike.submitted">
-                    <p class="text-danger " *ngIf="model.errors['required']">Model is required</p>
+                <div class="alert-danger" *ngIf="modelo.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="modelo.errors['required']">Model is required</p>
                 </div>
 
-                <label for="condition">Condition</label>
+                <label for="estado">Condition</label>
                 <div class="input-group">
-                    <select [(ngModel)]="formBikeAdd.condition" #condition="ngModel" name="condition" required>
+                    <select [(ngModel)]="formBikeAdd.estado" #estado="ngModel" name="estado" required>
                         <option *ngFor="let condition of getConditionEnumValues()" [value]="condition">{{condition}}
                         </option>
                     </select>
                 </div>
-                <div class="alert-danger" *ngIf="condition.errors && newBike.submitted">
-                    <p class="text-danger " *ngIf="condition.errors['required']">You must select a condition of the bike
+                <div class="alert-danger" *ngIf="estado.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="estado.errors['required']">You must select a condition of the bike
                     </p>
                 </div>
 
-                <label for="station">Station</label>
+                <label for="estacion">Station</label>
                 <div class="input-group">
-                    <select #station="ngModel" [(ngModel)]="formBikeAdd.station" name="station" required>
+                    <select #estacion="ngModel" [(ngModel)]="formBikeAdd.estacion" name="estacion">
+                        <option value="null" style="font-weight: bold;">Without station</option>
                         <option *ngFor="let station of stations" [value]="station.number">{{station.name}}</option>
                     </select>
-                </div>
-                <div class="alert-danger" *ngIf="station.errors && newBike.submitted">
-                    <p class="text-danger " *ngIf="station.errors['required']">You must select a station</p>
                 </div>
             </div>
             <div class="modal-footer">

@@ -22,11 +22,11 @@ export class BikeListComponent implements OnInit {
   myControl = new FormControl<string | Station>('');
 
   formBikeAdd: any = {
-    name: null,
-    brand: null,
-    model: null,
-    condition: null,
-    station: null
+    nombre: null,
+    marca: null,
+    modelo: null,
+    estado: null,
+    estacion: null
   }
 
   messageOfError!: string;
@@ -82,16 +82,18 @@ export class BikeListComponent implements OnInit {
   }
 
   onSubmit() {
-    this.modalService.dismissAll();
-    this.bikeService.createNewBike(this.formBikeAdd()).subscribe({
+    this.bikeService.createNewBike(this.formBikeAdd).subscribe({
+
       next: data => {
+        this.modalService.dismissAll();
+        debugger
       },
       error: err => {
         this.messageOfError = err.error.message;
         console.log(err);
       }
     });
-    window.location.reload();
+    //window.location.reload();
   }
 
   displayFn(station: Station): string {

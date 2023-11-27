@@ -15,6 +15,7 @@ import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-er
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AuthGuard } from './auth.guard';
 import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -33,9 +34,9 @@ const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
-      { path: 'stations/get', component: ListAdminStationsComponent, canActivate: [AuthGuard]},
-      { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
+      { path: 'bikes', component: AdminBikesPageComponent, canActivate: [AuthGuard] },
+      { path: 'stations/get', component: ListAdminStationsComponent, canActivate: [AuthGuard] },
+      { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
   { path: 'user/get', component: ListUserStationsComponent },

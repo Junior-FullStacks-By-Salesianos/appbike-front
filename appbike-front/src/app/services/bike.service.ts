@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
 import { NewBikeResponse } from '../models/new-bike.interface';
 
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 }
@@ -37,9 +36,8 @@ export class BikeService {
     return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/rent/${idBicicleta}`);
   }
 
-  createNewBike(bike: NewBikeResponse) {
-    return this.http.post(`${environment.apiBaseUrl}bikes/add`, {
-      bike
-    }, httpOptions);
+  createNewBike(bikeData: NewBikeResponse) {
+    return this.http.post(`${environment.apiBaseUrl}bikes/add`, bikeData)
   }
+
 }

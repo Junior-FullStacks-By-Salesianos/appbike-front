@@ -4,13 +4,13 @@ h1{
 
 .btn-gray{
     background-color:#c4c4c4;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 i{
     height: 20px;
     width: 20px;
     display: block;
-    color: red;
 }
 
 th{

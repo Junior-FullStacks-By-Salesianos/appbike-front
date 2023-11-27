@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Issue, IssuesResponse } from '../models/issues.interface';
+import { Issue, IssueResponse } from '../models/issues.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
 import { NewIssue } from '../models/new-issue.interface';
@@ -16,22 +16,22 @@ const httpOptions = {
 export class IssuesService {
   constructor(private http: HttpClient) { }
 
-  getAll():Observable<IssuesResponse>{
-    return this.http.get<IssuesResponse>(`${environment.apiBaseUrl}issues/`);
+  getAll():Observable<IssueResponse>{
+    return this.http.get<IssueResponse>(`${environment.apiBaseUrl}admin/issues/`);
   }
 
   setAsDone(issue:Issue){
-    return this.http.put(`${environment.apiBaseUrl}issues/${issue.id}`,{
+    return this.http.put(`${environment.apiBaseUrl}admin/issues/${issue.id}`,{
       issue
     }, httpOptions);
   }
 
   delete(id :number){
-    return this.http.delete(`${environment.apiBaseUrl}issues/${id}`);
+    return this.http.delete(`${environment.apiBaseUrl}admin/issues/${id}`);
   }
 
   createNewIssue(issue:NewIssue){
-    return this.http.post(`${environment.apiBaseUrl}issues/`,{
+    return this.http.post(`${environment.apiBaseUrl}admin/issues/`,{
       issue
     }, httpOptions);
   }

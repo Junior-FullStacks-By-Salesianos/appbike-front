@@ -16,7 +16,7 @@ import { BikeItemByStationComponent } from './components/bike-item-by-station/bi
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
 import { DetailsUseBarComponent } from './components/details-use-bar/details-use-bar.component';
-import { ListStationComponent } from './component/list-station/list-station.component';
+import { ListStationComponent } from './components/list-station/list-station.component';
 import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
@@ -28,6 +28,7 @@ import { PageError403Component } from './ui/page-error-403/page-error-403.compon
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 import {ReactiveFormsModule } from '@angular/forms';
+import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {ReactiveFormsModule } from '@angular/forms';
     PageError404Component,
     PageError403Component,
     PageError400Component,
-    PageErrorUnespectedComponent
+    PageErrorUnespectedComponent,
+    AdminStationsPageComponent
   ],
   imports: [
     BrowserModule,

@@ -34,3 +34,23 @@
     outline: none;
     cursor: pointer;
   }
+  h1{
+    color: #7B7777;
+}
+
+.btn-gray{
+    background-color:#c4c4c4;
+}
+
+i{
+    height: 20px;
+    width: 20px;
+    display: block;
+}
+.non-scroll{
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.btn-transparent:hover {
+  background-color: transparent;
+}

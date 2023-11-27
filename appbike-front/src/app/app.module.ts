@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +11,7 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
 import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { BikeListComponent } from './components/bike-list/bike-list.component';
@@ -26,6 +30,8 @@ import { PageError404Component } from './ui/page-error-404/page-error-404.compon
 import { PageError403Component } from './ui/page-error-403/page-error-403.component';
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/bike-card-resume-trip.component';
 import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
@@ -51,6 +57,7 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     PageError403Component,
     PageError400Component,
     PageErrorUnespectedComponent,
+    AdminBikesPageComponent,
     PageDetailsTripComponent,
     BikeCardResumeTripComponent,
     SummaryTripComponent
@@ -63,6 +70,13 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     NgbModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [authInterceptorProviders, provideHttpClient(withFetch())],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { StationsService } from '../../services/stations.service';
 import { Station } from '../../models/list-all-stations';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-list-admin-stations',
   templateUrl: './list-admin-stations.component.html',
@@ -17,7 +18,9 @@ export class ListAdminStationsComponent {
   private modalRef: NgbModalRef | undefined;
   stations: Station[] = [];
 
-  constructor(private stationService: StationsService, private modalService: NgbModal) {}
+  constructor(private stationService: StationsService, private modalService: NgbModal,private formBuilder: FormBuilder) {
+    
+  }
 
   ngOnInit(): void {
     this.loadNewPage();

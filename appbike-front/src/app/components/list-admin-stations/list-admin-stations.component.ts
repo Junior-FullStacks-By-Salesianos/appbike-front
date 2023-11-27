@@ -3,12 +3,14 @@ import { StationsService } from '../../services/stations.service';
 import { Station } from '../../models/list-all-stations';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
+import { response } from 'express';
 @Component({
   selector: 'app-list-admin-stations',
   templateUrl: './list-admin-stations.component.html',
   styleUrls: ['./list-admin-stations.component.css']
 })
 export class ListAdminStationsComponent {
+
   stationData = {
     nombre: '',
     coordenadas: '',
@@ -55,4 +57,14 @@ export class ListAdminStationsComponent {
       }
     );
   }
+  delete(naturalId: number) {
+    this.stationService.deleteStation(naturalId).subscribe(
+      (response)=>{
+      console.log('La estación se ha borrado con éxito:', response);
+        this.loadNewPage();
+    },
+    (error) => {
+      console.error('Hubo un error al borrar la estación:', error);
+    })
+    }
 }

@@ -19,7 +19,8 @@ export class StationsService {
   getAllStations():Observable<Station[]>{
     return this.http.get<Station[]>(`http://localhost:8080/stations/get`)
   }
-  createAndRefreshStation(stationData: any): Observable<any> {
-    return this.http.post('tu_url_de_creacion', stationData)
+
+  deleteStation(naturalId:number){
+    return this.http.delete(`http://localhost:8080/stations/delete/${naturalId}`)
   }
 }

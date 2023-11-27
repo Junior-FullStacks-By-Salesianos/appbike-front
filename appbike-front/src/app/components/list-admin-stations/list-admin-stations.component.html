@@ -28,6 +28,10 @@
                 <td>{{ station.coordinates }}</td>
                 <td>{{ station.capacity }}</td>
                 <td>{{ station.bikes }}</td>
+                <td>
+                  <img src="../../../assets/img/eliminar.png" alt="trash" style="width: 20px; cursor: pointer;"
+                    (click)="delete(station.number)">
+                </td>
               </tr>
             </ng-container>
           </tbody>

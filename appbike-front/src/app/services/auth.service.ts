@@ -33,7 +33,7 @@ export class AuthService {
     return this.http.post(`${environment.authUrl}login`, {
       username,
       password
-    }, httpOptions);
+    });
   }
 
   isAdmin(): boolean{

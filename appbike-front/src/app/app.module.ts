@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +16,6 @@ import { BikeItemByStationComponent } from './components/bike-item-by-station/bi
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
 import { DetailsUseBarComponent } from './components/details-use-bar/details-use-bar.component';
-import { ListStationComponent } from './component/list-station/list-station.component';
 import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
@@ -25,6 +24,14 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { RemoveWrapperInterceptor } from '../RemoveWrapperInterceptor';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ValidDateDirective } from './directives/valid-date.directive';
+import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
+import { PageError404Component } from './ui/page-error-404/page-error-404.component';
+import { PageError403Component } from './ui/page-error-403/page-error-403.component';
+import { PageError400Component } from './ui/page-error-400/page-error-400.component';
+import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
+import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
+import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/bike-card-resume-trip.component';
+import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
 
 @NgModule({
   declarations: [
@@ -37,13 +44,20 @@ import { ValidDateDirective } from './directives/valid-date.directive';
     BikeItemByStationComponent,
     PageFinishRideComponent,
     DetailsUseBarComponent,
-    ListStationComponent,
     ListAdminStationsComponent,
     ListUserStationsComponent,
     HorizontalNavbarComponent,
     AdminIssuesPageComponent,
     AdminNavbarComponent,
-    ValidDateDirective
+    ValidDateDirective,
+    AdminTravelsPageComponent,
+    PageError404Component,
+    PageError403Component,
+    PageError400Component,
+    PageErrorUnespectedComponent,
+    PageDetailsTripComponent,
+    BikeCardResumeTripComponent,
+    SummaryTripComponent
   ],
   imports: [
     BrowserModule,

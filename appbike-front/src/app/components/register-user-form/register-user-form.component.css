@@ -225,3 +225,8 @@ body {
         padding: 25px;
     }
 }
+
+.error {
+    color: red;
+    font-size: 0.8em;
+}

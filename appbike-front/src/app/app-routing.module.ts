@@ -15,12 +15,15 @@ import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-er
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AuthGuard } from './auth.guard';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
+import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'register', component: RegisterUserFormComponent },
   { path: 'login', component: LoginFormComponent },
+  { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] },
+  { path: 'admin/travels', component: AdminTravelsPageComponent, canActivate: [AuthGuard] },
   { path: 'rentbystation', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
   { path: 'use/trip', component: PageFinishRideComponent },
   { path: 'error-404', component: PageError404Component },

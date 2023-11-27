@@ -1,17 +1,16 @@
 
 import { IssuesService } from '../../services/issues.service';
 import { Issue } from '../../models/issues.interface';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Station } from '../../models/list-all-stations';
 import { StationsService } from '../../services/stations.service';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, NgModule, OnInit, TemplateRef, inject } from '@angular/core';
 import { WorkerService } from '../../services/worker.service';
 import { forkJoin } from 'rxjs';
 import { Workerr } from '../../models/worker.interface';
 import { NewIssue } from '../../models/new-issue.interface';
-import { DatePipe } from '@angular/common';
-import { FormBuilder, Validators } from '@angular/forms';
-import { dateNotLaterThanTodayValidator } from './customDateValidator';
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-issues-page',
@@ -20,25 +19,19 @@ import { dateNotLaterThanTodayValidator } from './customDateValidator';
 })
 export class AdminIssuesPageComponent implements OnInit {
   constructor(private issueService: IssuesService, private stationService: StationsService,
-    private workerService :WorkerService, private modalService: NgbModal, private datePipe :DatePipe, private fb: FormBuilder) {
-
-      this.form = this.fb.group({
-        deadline: ['', [Validators.required, dateNotLaterThanTodayValidator(this.crapDateToUsableDate(this.form.deadline))]],
-      });
-
-     }
+    private workerService: WorkerService, private modalService: NgbModal, private datePipe: DatePipe, private fb: FormBuilder) { }
 
   issueList: Issue[] = [];
   closeResult = '';
   stationList: Station[] = [];
-  workerList :Workerr[] = [];
-  errorMessage! :string;
+  workerList: Workerr[] = [];
+  errorMessage!: string;
 
-  form:any = {
-    deadline  :null,
-    note : null,
-    station : null,
-    worker : null
+  form: any = {
+    deadline: null,
+    note: null,
+    station: null,
+    worker: null
   };
 
   ngOnInit(): void {
@@ -47,15 +40,15 @@ export class AdminIssuesPageComponent implements OnInit {
     })
   }
 
-  setAsDone(issue:Issue){
+  setAsDone(issue: Issue) {
     issue.estado = "FINISHED"
-    issue.fechaRealizacion = this.datePipe.transform(Date.now(),"yyyy-MM-dd");
+    issue.fechaRealizacion = this.datePipe.transform(Date.now(), "yyyy-MM-dd");
     this.issueService.setAsDone(issue).subscribe(resp => {
       window.location.reload();
     })
   }
 
-  deleteIssue(id:number){
+  deleteIssue(id: number) {
     this.issueService.delete(id).subscribe(resp => {
       window.location.reload();
     });
@@ -65,7 +58,7 @@ export class AdminIssuesPageComponent implements OnInit {
     const stationRequest = this.stationService.getAllStations();
     const workerRequest = this.workerService.getAll();
 
-    forkJoin([workerRequest,stationRequest]).subscribe(resp => {
+    forkJoin([workerRequest, stationRequest]).subscribe(resp => {
       this.workerList = resp[0];
       this.stationList = resp[1];
       console.log(resp[0])
@@ -78,7 +71,7 @@ export class AdminIssuesPageComponent implements OnInit {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         },
       );
-  
+
     })
   }
 
@@ -93,7 +86,7 @@ export class AdminIssuesPageComponent implements OnInit {
     }
   }
 
-  onSubmit(){
+  onSubmit() {
     this.modalService.dismissAll();
     this.issueService.createNewIssue(this.formToIssue()).subscribe({
       next: data => {
@@ -108,21 +101,28 @@ export class AdminIssuesPageComponent implements OnInit {
 
   formToIssue() {
     const newIssue: NewIssue = {
-      fechaProgramada: this.crapDateToUsableDate(this.form.deadline),
+      fechaProgramada: this.JSDateToUsableDate(this.form.deadline),
       anotaciones: this.form.note,
       nombreEstacion: this.form.station,
       nombreTrabajador: this.form.worker,
-      estado : "IN_PROGRESS"
+      estado: "IN_PROGRESS"
     };
-  
+
     return newIssue;
   }
 
-  crapDateToUsableDate(crapDate :any){
-    return this.datePipe.transform(crapDate,"yyyy-MM-dd");
+  JSDateToUsableDate(crapDate: any) {
+    const year = crapDate.year;
+    const month = crapDate.month.toString().padStart(2, '0');;
+    const day = crapDate.day.toString().padStart(2, '0');;
+    return `${year}-${month}-${day}`;
   }
 
-  isOnTime(issue:Issue){
+  crapDateToUsableDate(crapDate: any) {
+    return this.datePipe.transform(crapDate, "yyyy-MM-dd");
+  }
+
+  isOnTime(issue: Issue) {
     if (issue.fechaProgramada && issue.fechaRealizacion) {
       return new Date(issue.fechaRealizacion) <= new Date(issue.fechaProgramada);
     }
@@ -130,14 +130,43 @@ export class AdminIssuesPageComponent implements OnInit {
     return true;
   }
 
-  isFinished(issue:Issue){
-    if(issue.estado == "FINISHED") return true;
+  isFinished(issue: Issue) {
+    if (issue.estado == "FINISHED") return true;
 
     return false;
   }
 
-  isDeadlineEarlier(crapDeadline:any){
+  isDeadlineEarlier(crapDeadline: any) {
     const usableDeadline = this.crapDateToUsableDate(crapDeadline);
     console.log(usableDeadline);
   }
+
+  showNotes(notes: string) {
+    if(notes == null) notes = "There are no notes for this issue."
+
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.notes = notes;
+  }
+  
 }
+
+
+@Component({
+	selector: 'ngbd-modal-content',
+	standalone: true,
+	template: `
+		<div class="modal-header">
+			<h4 class="modal-title">Notes</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<p>{{notes}}</p>
+		</div>
+	`,
+})
+export class NgbdModalContent {
+	activeModal = inject(NgbActiveModal);
+
+	@Input() notes: string | undefined;
+}
+

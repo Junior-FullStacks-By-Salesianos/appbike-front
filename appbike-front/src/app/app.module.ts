@@ -24,6 +24,7 @@ import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-pa
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { RemoveWrapperInterceptor } from '../RemoveWrapperInterceptor';
 import { CommonModule, DatePipe } from '@angular/common';
+import { ValidDateDirective } from './directives/valid-date.directive';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CommonModule, DatePipe } from '@angular/common';
     ListUserStationsComponent,
     HorizontalNavbarComponent,
     AdminIssuesPageComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    ValidDateDirective
   ],
   imports: [
     BrowserModule,

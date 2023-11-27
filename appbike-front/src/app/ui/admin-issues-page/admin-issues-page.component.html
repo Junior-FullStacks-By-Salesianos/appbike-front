@@ -27,7 +27,7 @@
                         <td>{{issue.nombreTrabajador}}</td>
                         <td class="text-end ">
                             <button class="btn btn-light" *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i class="bi bi-check" style="color: #2fb63f;"></i></button>
-                            <button class="btn btn-light"><i class="bi bi-journal-bookmark "></i></button>
+                            <button class="btn btn-light" (click)="showNotes(issue.anotaciones)"><i class="bi bi-journal-bookmark "></i></button>
                             <button class="btn btn-light"><i class="bi bi-trash" (click)="deleteIssue(issue.id)"></i></button>
                         </td>
                     </tr>
@@ -49,16 +49,12 @@
                 <label for="deadline">Deadline Date</label>
                 <div class="input-group">
                     <input [(ngModel)]="form.deadline" #deadline="ngModel" name="deadline" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
-                        #dp="ngbDatepicker" required/>
+                        #dp="ngbDatepicker" required laterThanToday/>
                     <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()"
                         type="button"></button>
                 </div>
-                <div class="alert-danger" *ngIf="newIssue.submitted">
-                    <p class="text-danger " *ngIf="form.get('deadline').hasError('dateNotEarlierThanToday')">Deadline must be later than today.</p>
-                </div>
-
-                <div class="alert-danger" *ngIf="deadline.errors && newIssue.submitted">
-                    <p class="text-danger "  *ngIf="deadline.errors['required']">Deadline date is required</p>
+                <div class="alert-danger" *ngIf="deadline.errors &&  newIssue.submitted">
+                    <p class="text-danger " *ngIf="deadline.errors['laterThanToday']">Deadline must be after today.</p>
                 </div>
 
                 <label for="anotaciones">Note</label>
@@ -86,7 +82,7 @@
                     </select>
                 </div>
                 <div class="alert-danger" *ngIf="worker.errors && newIssue.submitted">
-                    <p class="text-danger " *ngIf="worker.errors['required']">You must select a station</p>
+                    <p class="text-danger " *ngIf="worker.errors['required']">You must select a worker</p>
                 </div>
             </div>
             <div class="modal-footer">

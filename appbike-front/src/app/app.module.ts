@@ -62,7 +62,7 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     RouterModule,
     NgbModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [authInterceptorProviders, provideHttpClient(withFetch())],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,9 @@ import { PageError400Component } from './ui/page-error-400/page-error-400.compon
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 import {ReactiveFormsModule } from '@angular/forms';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
+import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
+import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/bike-card-resume-trip.component';
+import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,6 @@ import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stati
     BikeItemByStationComponent,
     PageFinishRideComponent,
     DetailsUseBarComponent,
-    ListStationComponent,
     ListAdminStationsComponent,
     ListUserStationsComponent,
     HorizontalNavbarComponent,
@@ -52,7 +54,10 @@ import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stati
     PageError403Component,
     PageError400Component,
     PageErrorUnespectedComponent,
-    AdminStationsPageComponent
+    AdminStationsPageComponent,
+    PageDetailsTripComponent,
+    BikeCardResumeTripComponent,
+    SummaryTripComponent
   ],
   imports: [
     BrowserModule,

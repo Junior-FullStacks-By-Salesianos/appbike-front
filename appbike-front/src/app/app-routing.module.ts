@@ -14,6 +14,7 @@ import { PageError400Component } from './ui/page-error-400/page-error-400.compon
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AuthGuard } from './auth.guard';
+import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'access-denied', component: PageError403Component },
   { path: 'error-400', component: PageError400Component },
   { path: 'error', component: PageErrorUnespectedComponent },
+  { path: 'use/trip/resume', component: PageDetailsTripComponent },
 
   {
     path: 'admin',

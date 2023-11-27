@@ -34,11 +34,10 @@ const routes: Routes = [
     path: 'admin',
     children: [
       { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
+      { path: 'stations/get', component: ListAdminStationsComponent, canActivate: [AuthGuard]},
       { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
-
-  { path: 'stations/get', component: ListAdminStationsComponent },
   { path: 'user/get', component: ListUserStationsComponent },
   { path: '**', redirectTo: '/error-404' }
 ];

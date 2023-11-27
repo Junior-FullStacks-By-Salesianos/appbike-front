@@ -25,7 +25,7 @@
                                 <td>{{b.estado}}</td>
                                 <td>{{b.estacion}}</td>
                                 <td>{{b.usos}}</td>
-                                <td><a href="#" class="btn btn-success">Yes</a></td>
+                                <td><a class="btn btn-success boton">Yes</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -52,7 +52,14 @@
                 <label for="nombre">Name</label>
                 <div class="input-group">
                     <input [(ngModel)]="formBikeAdd.nombre" #nombre="ngModel" name="nombre" class="form-control"
-                        placeholder="Enter name of the bike" required />
+                        placeholder="Enter name of the bike" required minlength="3" maxlength="20" />
+                </div>
+                <p class="text-danger " *ngIf="messageOfNameDuplicated">{{ messageOfNameDuplicated }}</p>
+                <div class="alert-danger" *ngIf="nombre.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="nombre.errors['maxlength']">Name must be max 20 characters</p>
+                </div>
+                <div class="alert-danger" *ngIf="nombre.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="nombre.errors['minlength']">Name must be at least 3 characters</p>
                 </div>
                 <div class="alert-danger" *ngIf="nombre.errors && newBike.submitted">
                     <p class="text-danger " *ngIf="nombre.errors['required']">Name is required</p>
@@ -61,18 +68,29 @@
                 <label for="marca">Brand</label>
                 <div class="input-group">
                     <input [(ngModel)]="formBikeAdd.marca" #marca="ngModel" name="marca" class="form-control"
-                        placeholder="Enter brand of the bike" required />
+                        placeholder="Enter brand of the bike" required minlength="3" maxlength="20" />
+                </div>
+
+                <div class="alert-danger" *ngIf="marca.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="marca.errors['maxlength']">Brand must be max 20 characters</p>
+                </div>
+                <div class="alert-danger" *ngIf="marca.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="marca.errors['minlength']">Brand must be at least 3 characters</p>
                 </div>
                 <div class="alert-danger" *ngIf="marca.errors && newBike.submitted">
                     <p class="text-danger " *ngIf="marca.errors['required']">Brand is required</p>
                 </div>
-                <div class="alert-danger" *ngIf="marca.errors && newBike.submitted">
-                    <p class="text-danger " *ngIf="marca.errors['minlength']">Brand must be at least 3 characters/p>
-                </div>
                 <label for="modelo">Model</label>
                 <div class="input-group">
                     <input [(ngModel)]="formBikeAdd.modelo" #modelo="ngModel" name="modelo" class="form-control"
-                        placeholder="Enter model of the bike" required />
+                        placeholder="Enter model of the bike" required minlength="3" maxlength="20" />
+                </div>
+
+                <div class="alert-danger" *ngIf="modelo.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="modelo.errors['maxlength']">Model must be max 20 characters</p>
+                </div>
+                <div class="alert-danger" *ngIf="modelo.errors && newBike.submitted">
+                    <p class="text-danger " *ngIf="modelo.errors['minlength']">Model must be at least 3 characters</p>
                 </div>
                 <div class="alert-danger" *ngIf="modelo.errors && newBike.submitted">
                     <p class="text-danger " *ngIf="modelo.errors['required']">Model is required</p>
@@ -80,7 +98,8 @@
 
                 <label for="estado">Condition</label>
                 <div class="input-group">
-                    <select [(ngModel)]="formBikeAdd.estado" #estado="ngModel" name="estado" required>
+                    <select [(ngModel)]="formBikeAdd.estado" #estado="ngModel" class="form-select" name="estado"
+                        required>
                         <option *ngFor="let condition of getConditionEnumValues()" [value]="condition">{{condition}}
                         </option>
                     </select>
@@ -92,14 +111,15 @@
 
                 <label for="estacion">Station</label>
                 <div class="input-group">
-                    <select #estacion="ngModel" [(ngModel)]="formBikeAdd.estacion" name="estacion">
-                        <option value="null" style="font-weight: bold;">Without station</option>
+                    <select #estacion="ngModel" class="form-select" [(ngModel)]="formBikeAdd.estacion" name="estacion">
+                        <option value="-1" style="font-weight: bold;">Without station</option>
                         <option *ngFor="let station of stations" [value]="station.number">{{station.name}}</option>
                     </select>
                 </div>
+                <p class="text-danger " *ngIf="messageOfStationFull">{{ messageOfStationFull }}</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-dark">Save</button>
+                <button type="submit" class="btn btnSubmit btn-outline-dark">Save</button>
             </div>
         </form>
     </div>

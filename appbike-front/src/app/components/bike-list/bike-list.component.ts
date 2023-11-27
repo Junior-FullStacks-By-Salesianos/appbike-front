@@ -7,6 +7,8 @@ import { StationsService } from '../../services/stations.service';
 import { FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewBikeResponse } from '../../models/new-bike.interface';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-bike-list',
@@ -28,11 +30,12 @@ export class BikeListComponent implements OnInit {
     estado: null,
     estacion: null
   }
-
   messageOfError!: string;
+  messageOfNameDuplicated: string = '';
+  messageOfStationFull: string = '';
   closeResult = '';
 
-  constructor(private bikeService: BikeService, private stationService: StationsService, private modalService: NgbModal) { }
+  constructor(private bikeService: BikeService, private stationService: StationsService, private modalService: NgbModal, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.bikeService.getBikeListForAdmin(this.currentPage - 1).subscribe(resp => { //Se le resta uno a la página actual ya que el ngb-pagination empieza por uno cuando en la API empezamos por 0
@@ -55,26 +58,9 @@ export class BikeListComponent implements OnInit {
     this.stationService.getAllStations().subscribe(resp => {
       this.stations = resp;
     });
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result: any) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason: any) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result;
   }
 
-  private getDismissReason(reason: any): string {
-    switch (reason) {
-      case ModalDismissReasons.ESC:
-        return 'by pressing ESC';
-      case ModalDismissReasons.BACKDROP_CLICK:
-        return 'by clicking on a backdrop';
-      default:
-        return `with: ${reason}`;
-    }
-  }
 
   private _filter(name: string): Station[] {
     const filterValue = name.toLowerCase();
@@ -82,18 +68,39 @@ export class BikeListComponent implements OnInit {
   }
 
   onSubmit() {
-    this.bikeService.createNewBike(this.formBikeAdd).subscribe({
+    this.messageOfStationFull = '';
 
-      next: data => {
-        this.modalService.dismissAll();
-        debugger
-      },
-      error: err => {
-        this.messageOfError = err.error.message;
-        console.log(err);
+    this.bikeService.getBikeListForAdminWithouPageable().subscribe({
+      next: bikeList => {
+        const bikeNames = bikeList.map(bike => bike.nombre);
+        const newBikeName = this.formBikeAdd.nombre;
+
+        if (bikeNames.includes(newBikeName)) {
+          this.messageOfNameDuplicated = 'Error: Ya existe una bicicleta con este nombre.';
+        } else {
+          this.bikeService.createNewBike(this.formBikeAdd).subscribe({
+            next: data => {
+              this.modalService.dismissAll();
+              this.messageOfNameDuplicated = '';
+              this.formBikeAdd.nombre = ''
+              this.formBikeAdd.marca = ''
+              this.formBikeAdd.modelo = ''
+              this.snackBar.open('Bicicleta añadida correctamente', 'Cerrar', {
+                duration: 3000,
+              });
+            },
+            error: err => {
+              if (err.status === 400) {
+                this.messageOfStationFull = 'Error: Esa estación ya esta completa de bicicletas';
+              } else {
+                this.messageOfError = err.error.message;
+              }
+            }
+          });
+          this.messageOfNameDuplicated = '';
+        }
       }
     });
-    //window.location.reload();
   }
 
   displayFn(station: Station): string {
@@ -105,7 +112,7 @@ export class BikeListComponent implements OnInit {
       nombre: this.formBikeAdd.name,
       marca: this.formBikeAdd.marca,
       modelo: this.formBikeAdd.modelo,
-      estacion: this.formBikeAdd.station,
+      estacion: this.formBikeAdd.station == -1 ? null : this.formBikeAdd.station,
       estado: this.formBikeAdd.condition
     };
     return newBike;

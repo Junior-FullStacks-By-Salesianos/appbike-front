@@ -89,3 +89,16 @@ i {
 .btn-transparent:hover {
     background-color: transparent;
 }
+
+.btn {
+    margin-left: 36px !important;
+    cursor: default;
+}
+
+.btn:hover {
+    cursor: default;
+}
+
+.btnSubmit {
+    margin-right: 45%;
+}

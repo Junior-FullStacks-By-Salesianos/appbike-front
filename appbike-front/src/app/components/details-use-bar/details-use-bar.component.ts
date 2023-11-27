@@ -11,17 +11,22 @@ import { Router } from '@angular/router';
   templateUrl: './details-use-bar.component.html',
   styleUrl: './details-use-bar.component.css'
 })
-export class DetailsUseBarComponent implements OnChanges, OnDestroy {
+export class DetailsUseBarComponent implements OnChanges, OnDestroy, OnInit {
 
   @Input() uso!: UsoResponse;
   fechaInicio: any;
-  cost: Number = environment.coste;
+  cost: number = 0;
   bike: any;
   tiempoTranscurrido: string = '00:00:00';  // Inicializar con el valor deseado
-  @Output() tiempoTranscurridoChange = new Subject<string>();
   intervalId: any;
 
   constructor(private modalService: NgbModal, private usoService: UsoService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.usoService.getCurrentCost().subscribe(resp => {
+      this.cost = resp.precioMinuto;
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['uso'] && changes['uso'].currentValue) {
@@ -43,9 +48,6 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy {
         const ahora = new Date();
         const diferencia = ahora.getTime() - this.fechaInicio.getTime();
         this.tiempoTranscurrido = this.formatoTiempo(diferencia);
-        if (this.tiempoTranscurrido) {
-          this.tiempoTranscurridoChange.next(this.tiempoTranscurrido);
-        }
       }
     }, 1000);
   }
@@ -73,11 +75,10 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy {
   }
 
   finishTrip() {
-    this.usoService.finishUse("8d1a084b-33d4-4270-ac67-c28d5eb6c8ec").subscribe(resp => {
+    this.usoService.finishUse("140ecf7b-5ba8-46f6-945b-2f91d3f0c08d").subscribe(resp => {
       this.uso = resp;
     })
 
-    console.log(this.uso.fechaFin)
-    this.router.navigate(['use/trip/resume', this.uso.id]);
+    this.router.navigate(['use/trip/resume']);
   }
 }

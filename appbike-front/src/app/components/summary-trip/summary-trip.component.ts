@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { UsoResponse } from '../../models/uso.interface';
 
 @Component({
@@ -9,6 +9,7 @@ import { UsoResponse } from '../../models/uso.interface';
 export class SummaryTripComponent {
 
   @Input() use!: UsoResponse;
+
 
   formatDate(fecha: string): string {
     const DateFormat = new Date(fecha)

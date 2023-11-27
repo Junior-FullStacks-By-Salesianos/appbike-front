@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Bike } from '../../models/bike-list.interface';
 import { BikeService } from '../../services/bike.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,13 +19,19 @@ export class BikeListByStationComponent implements OnInit {
   countBikes: number = 0;
   uso!: UsoBegin;
   errorRent = false;
+  isLoading = true;
 
   constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.bikeService.getBikeListForStation("8d1a084b-33d4-4270-ac67-c28d5eb6c8ec").subscribe(resp => {
-      this.bikeList = resp
-      this.countBikes = resp.length;
+    this.bikeService.getBikeListForStation("140ecf7b-5ba8-46f6-945b-2f91d3f0c08d").subscribe({
+      next: resp => {
+        this.bikeList = resp
+        this.countBikes = resp.length;
+        this.isLoading = false
+      }, error: err => {
+        this.router.navigate(['/page-404'])
+      }
     })
 
   }

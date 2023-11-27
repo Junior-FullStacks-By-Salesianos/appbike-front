@@ -1,10 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsoService } from '../../services/uso.service';
 import { UsoResponse } from '../../models/uso.interface';
 import { Bike } from '../../models/bike-list.interface';
 import { BikeService } from '../../services/bike.service';
+import { error } from 'console';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'app-page-details-trip',
@@ -18,19 +20,27 @@ export class PageDetailsTripComponent implements OnInit {
   use!: UsoResponse;
   bike!: Bike;
   bikeName!: string;
-  route: ActivatedRoute = inject(ActivatedRoute);
+  isLoading = true;
 
-  constructor(private sanitazer: DomSanitizer, private useService: UsoService, private bikeService: BikeService) {
-    this.useId = Number(this.route.snapshot.params['id']);
+  constructor(private useService: UsoService, private bikeService: BikeService, private router: Router, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
-    this.useService.getUsoById(this.useId).subscribe(resp => {
-      this.use = resp;
-      this.bikeName = resp.bicicleta;
-      this.bikeService.getBikeByName(this.bikeName).subscribe(resp => {
-        this.bike = resp;
-      })
+    console.log(this.tokenStorage.getUser())
+    this.useService.getLastUso().subscribe({
+      next: data => {
+        this.use = data;
+        this.bikeName = data.bicicleta;
+
+        this.bikeService.getBikeByName(this.bikeName).subscribe(resp => {
+          this.bike = resp;
+        })
+        this.isLoading = false;
+      }, error: err => {
+        if (err.status == 404) {
+          this.router.navigate(['/page-404'])
+        }
+      }
     })
   }
 

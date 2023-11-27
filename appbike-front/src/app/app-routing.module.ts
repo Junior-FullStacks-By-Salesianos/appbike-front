@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'access-denied', component: PageError403Component },
   { path: 'error-400', component: PageError400Component },
   { path: 'error', component: PageErrorUnespectedComponent },
-  { path: 'use/trip/resume/:id', component: PageDetailsTripComponent },
+  { path: 'use/trip/resume', component: PageDetailsTripComponent },
 
   {
     path: 'admin',

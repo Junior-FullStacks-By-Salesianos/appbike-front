@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +16,6 @@ import { BikeItemByStationComponent } from './components/bike-item-by-station/bi
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { PageFinishRideComponent } from './ui/page-finish-ride/page-finish-ride.component';
 import { DetailsUseBarComponent } from './components/details-use-bar/details-use-bar.component';
-import { ListStationComponent } from './component/list-station/list-station.component';
 import { ListAdminStationsComponent } from './components/list-admin-stations/list-admin-stations.component';
 import { ListUserStationsComponent } from './components/list-user-stations/list-user-stations.component';
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
@@ -40,7 +39,6 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     BikeItemByStationComponent,
     PageFinishRideComponent,
     DetailsUseBarComponent,
-    ListStationComponent,
     ListAdminStationsComponent,
     ListUserStationsComponent,
     HorizontalNavbarComponent,

@@ -54,5 +54,12 @@ export class BikeListByStationComponent implements OnInit {
     );
   }
 
+  getBikeListLenght() {
+    if (this.bikeList.length != null) {
+      return this.bikeList.length
+    }
+    return 0
+  }
+
 
 }

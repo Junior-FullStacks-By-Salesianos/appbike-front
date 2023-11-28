@@ -1,10 +1,12 @@
-.container {
-    height: 100vh; /* Ocupa toda la pantalla vertical */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .google-map {
-    flex: 1;
-  }
+#map {
+  width: 100%;
+  height: calc(81.4vh - 81.4px);
+}
+
+
+footer {
+  height: 182.5px; 
+  background-color: #000000; 
+}
+
   

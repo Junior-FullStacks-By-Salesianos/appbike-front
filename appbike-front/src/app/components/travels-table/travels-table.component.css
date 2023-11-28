@@ -60,3 +60,12 @@ i {
 .btn-transparent:hover {
     background-color: transparent;
 }
+
+.editButton {
+    cursor: pointer;
+}
+
+.error {
+    font-size: 0.8em;
+    color: red;
+}

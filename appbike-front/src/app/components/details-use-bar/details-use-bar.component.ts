@@ -75,10 +75,10 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy, OnInit {
   }
 
   finishTrip() {
-    this.usoService.finishUse("140ecf7b-5ba8-46f6-945b-2f91d3f0c08d").subscribe(resp => {
+    this.usoService.finishUse("601c5250-9d2e-4d29-af43-7f61cf1309e2").subscribe(resp => {
       this.uso = resp;
-    })
 
-    this.router.navigate(['use/trip/resume']);
+      this.router.navigate(['use/trip/resume']);
+    })
   }
 }

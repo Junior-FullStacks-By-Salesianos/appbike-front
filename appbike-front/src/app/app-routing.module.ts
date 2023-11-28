@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'user/stations', component: ListUserStationsComponent},
   { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] },
   { path: 'admin/travels', component: AdminTravelsPageComponent, canActivate: [AuthGuard] },
-  { path: 'rentbystation', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
+  { path: 'rentbystation/:id', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
   { path: 'use/trip', component: PageFinishRideComponent },
   { path: 'error-404', component: PageError404Component },
   { path: 'access-denied', component: PageError403Component },

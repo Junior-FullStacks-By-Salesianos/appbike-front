@@ -83,7 +83,7 @@
               <div class="form-group">
                 <label for="stationCapacity">Capacity</label>
                 <select class="form-control" id="stationCapacity" name="stationCapacity"
-                  [(ngModel)]="stationData.capacidad" required min="1" max="31">
+                  [(ngModel)]="stationData.capacidad" required min="0" max="31">
                   <option *ngFor="let number of capacityNumbers" [value]="number">{{ number }}</option>
                 </select>
                 <div class="alert-danger"

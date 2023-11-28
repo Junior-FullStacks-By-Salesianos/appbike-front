@@ -17,7 +17,7 @@ export class ListAdminStationsComponent {
     coordenadas: '',
     capacidad: 0
   };
-  capacityNumbers = Array.from({ length: 31 }, (_, i) => i + 1);
+  capacityNumbers = Array.from({ length: 31 }, (_, i) => i );
   private modalRef: NgbModalRef | undefined;
   selectedStation: Station | undefined;
   stations: Station[] = [];

@@ -1,3 +1,16 @@
-a{
+a {
     cursor: pointer !important;
+}
+
+.saldo {
+    font-size: 3em;
+}
+
+.error {
+    font-size: 0.8em;
+    color: red;
+}
+
+.alert {
+    top: 100px;
 }

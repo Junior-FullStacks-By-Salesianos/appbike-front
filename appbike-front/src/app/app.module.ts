@@ -28,7 +28,6 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { RemoveWrapperInterceptor } from '../RemoveWrapperInterceptor';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ValidDateDirective } from './directives/valid-date.directive';
-import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 import { PageError404Component } from './ui/page-error-404/page-error-404.component';
 import { PageError403Component } from './ui/page-error-403/page-error-403.component';
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
@@ -39,6 +38,8 @@ import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/
 import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
+import { PageAdminTravelsComponent } from './ui/page-admin-travels/page-admin-travels.component';
+import { TravelsTableComponent } from './components/travels-table/travels-table.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,6 @@ import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.
     AdminIssuesPageComponent,
     AdminNavbarComponent,
     ValidDateDirective,
-    AdminTravelsPageComponent,
     PageError404Component,
     PageError403Component,
     PageError400Component,
@@ -66,7 +66,9 @@ import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.
     AdminBikesPageComponent,
     PageDetailsTripComponent,
     BikeCardResumeTripComponent,
-    SummaryTripComponent
+    SummaryTripComponent,
+    PageAdminTravelsComponent,
+    TravelsTableComponent
   ],
   imports: [
     BrowserModule,

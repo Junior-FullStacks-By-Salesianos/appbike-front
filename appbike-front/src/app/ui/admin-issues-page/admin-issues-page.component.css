@@ -4,10 +4,27 @@ h1{
 
 .btn-gray{
     background-color:#c4c4c4;
+<<<<<<< HEAD
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+=======
+>>>>>>> 8373dd42dbcbaf1e2e07f14509771fa9cb9d9d41
 }
 
 i{
     height: 20px;
     width: 20px;
     display: block;
+<<<<<<< HEAD
+}
+
+th{
+    font-weight: 300;
+    font-style: italic;
+}
+
+.side-margin-auto{
+    margin-left: auto;
+    margin-right: auto;
+=======
+>>>>>>> 8373dd42dbcbaf1e2e07f14509771fa9cb9d9d41
 }

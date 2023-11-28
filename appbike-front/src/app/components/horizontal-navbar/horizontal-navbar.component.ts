@@ -51,6 +51,7 @@ export class HorizontalNavbarComponent {
       this.userDetails = resp
       this.isLoadingModal = false;
     })
+    this.isSuccessful = false;
     this.modalService.open(arg0, {
       keyboard: false
 
@@ -62,12 +63,14 @@ export class HorizontalNavbarComponent {
       next: data => {
         console.log(data);
         this.isSuccessful = true;
+        this.incorrectPin = false;
+        this.modalService.dismissAll()
         this.ngOnInit();
       },
       error: err => {
         if (err.status == 400) {
           this.incorrectPin = true;
-          debugger
+          this.isSuccessful = false;
         }
         this.errorMessage = err.error.message;
         console.log(err);

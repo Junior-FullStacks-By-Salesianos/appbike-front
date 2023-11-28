@@ -10,3 +10,7 @@ a {
     font-size: 0.8em;
     color: red;
 }
+
+.alert {
+    top: 100px;
+}

@@ -19,12 +19,13 @@ export class BikeListByStationComponent implements OnInit {
   countBikes: number = 0;
   uso!: UsoBegin;
   errorRent = false;
+  errorBalance = false;
   isLoading = true;
 
   constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.bikeService.getBikeListForStation("140ecf7b-5ba8-46f6-945b-2f91d3f0c08d").subscribe({
+    this.bikeService.getBikeListForStation("f81345bb-894d-4dcd-8aa4-49987a95ff76").subscribe({
       next: resp => {
         this.bikeList = resp
         this.countBikes = resp.length;
@@ -49,11 +50,18 @@ export class BikeListByStationComponent implements OnInit {
   rent() {
     this.usoService.beginUso(this.bikeDetails.uuid).pipe(
       catchError(error => {
-        this.errorRent = true;
+        if (error.error.title === "Already in use") {
+          this.errorRent = true;
+        }
+        if (error.error.title === "Not enough balance") {
+          this.errorBalance = true;
+        }
         return [];
       })
     ).subscribe(
       resp => {
+        this.errorRent = false;
+        this.errorBalance = false;
         this.router.navigate(['/use/trip']);
       }
     );

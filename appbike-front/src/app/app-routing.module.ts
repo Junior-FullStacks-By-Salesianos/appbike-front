@@ -16,17 +16,16 @@ import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-pa
 import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
-import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
+import { PageAdminTravelsComponent } from './ui/page-admin-travels/page-admin-travels.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'register', component: RegisterUserFormComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] },
-  { path: 'admin/travels', component: AdminTravelsPageComponent, canActivate: [AuthGuard] },
   { path: 'rentbystation', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
   { path: 'use/trip', component: PageFinishRideComponent },
   { path: 'error-404', component: PageError404Component },
@@ -41,7 +40,8 @@ const routes: Routes = [
       { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
       { path: 'bikes', component: AdminBikesPageComponent, canActivate: [AuthGuard] },
       { path: 'stations/get', component: AdminStationsPageComponent, canActivate: [AuthGuard] },
-      { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
+      { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] },
+      { path: 'travels', component: PageAdminTravelsComponent, canActivate: [AuthGuard] }
     ]
   },
   { path: 'user/get', component: ListUserStationsComponent },

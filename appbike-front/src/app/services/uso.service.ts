@@ -31,4 +31,8 @@ export class UsoService {
     getCurrentCost(): Observable<CostResponse> {
         return this.http.get<CostResponse>(`${environment.apiBaseUrl}cost/current`)
     }
+
+    getUsosByUser(userId: string): Observable<>{
+        
+    }
 }

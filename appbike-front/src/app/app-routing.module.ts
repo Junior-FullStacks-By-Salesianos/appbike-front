@@ -19,6 +19,7 @@ import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-tr
 import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
+import { AccountPageComponent } from './ui/account-page/account-page.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -27,13 +28,14 @@ const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
   { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] },
   { path: 'admin/travels', component: AdminTravelsPageComponent, canActivate: [AuthGuard] },
-  { path: 'rentbystation', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
+  { path: 'rentbystation', component: BikeListByStationComponent },
   { path: 'use/trip', component: PageFinishRideComponent },
   { path: 'error-404', component: PageError404Component },
   { path: 'access-denied', component: PageError403Component },
   { path: 'error-400', component: PageError400Component },
   { path: 'error', component: PageErrorUnespectedComponent },
   { path: 'use/trip/resume', component: PageDetailsTripComponent },
+  {path: 'user', component:AccountPageComponent},
 
   {
     path: 'admin',

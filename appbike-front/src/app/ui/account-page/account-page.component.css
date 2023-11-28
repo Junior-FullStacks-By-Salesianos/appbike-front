@@ -31,3 +31,12 @@
 .sentToTop{
     margin-top: -1.25rem;
 }
+
+.min-vh-90{
+    min-height: 90vh;
+}
+
+.center{
+    left: 50%;
+    transform: translateX(-50%);
+}

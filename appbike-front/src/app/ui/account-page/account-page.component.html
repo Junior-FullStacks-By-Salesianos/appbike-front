@@ -1,5 +1,5 @@
 <div class="banner position-absolute"></div>
-<div class="container z-3 position-relative">
+<div class="container z-3 position-relative min-vh-90 ">
     <div class="row">
         <div class="col-8">
             <div class="userDetailscontainer d-flex vh-25 flex-wrap align-content-center overflow-hidden">
@@ -21,14 +21,45 @@
                         <p class="text-light">{{today}}</p>
                     </div>
                     <div class="logoContainer m-left-auto mt-4 m-left-auto">
-                        <img _ngcontent-ng-c2855160279="" src="../../../favicon.ico" class="me-2 sentToTop" alt="BikeApp" width="55px">
+                        <img _ngcontent-ng-c2855160279="" src="../../../favicon.ico" class="me-2 sentToTop"
+                            alt="BikeApp" width="55px">
                     </div>
                 </div>
                 <div class="balanceContainer mt-auto d-flex">
                     <h1 class="ps-2">69'69€</h1>
-                    <button class="btn btn-dark m-left-auto me-2">Add Balance</button>
+                    <button class="btn btn-dark m-left-auto me-2 btn-outline-light ">Add Balance</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th scope="col">Bike</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Model</th>
+                <th scope="col">Started At</th>
+                <th scope="col">Finished At</th>
+                <th scope="col">Final Cost</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let uso of usesByUserList">
+                <td>{{uso.bicicleta}}</td>
+                <td>{{uso.marcaBicicleta}}</td>
+                <td>{{uso.modeloBicicleta}}</td>
+                <td>{{uso.fechaInicio}}</td>
+                <td>{{uso.fechaFin}} in {{uso.estacionFin}}</td>
+                <td>{{uso.coste}}€</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="listSize >= 10" class="paginationContainer position-absolute  bottom-0 center">
+        <ngb-pagination class="custom-pagination" [boundaryLinks]="true" [collectionSize]="listSize"
+        [(page)]="currentPage" [pageSize]="10" (pageChange)="loadNewPage()" aria-label="Default pagination">
+    </ngb-pagination>
     </div>
 </div>

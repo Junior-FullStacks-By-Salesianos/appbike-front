@@ -97,8 +97,14 @@ i {
 
 .avail:hover {
     cursor: default;
+    background-color: #198754;
+
 }
 
 .btnSubmit {
     margin-right: 45%;
+}
+
+i {
+    background-color: transparent;
 }

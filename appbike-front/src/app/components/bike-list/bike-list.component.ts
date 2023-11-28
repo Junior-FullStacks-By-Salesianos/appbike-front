@@ -77,17 +77,20 @@ export class BikeListComponent implements OnInit {
   openEditModal(content: any, bike: Bike) {
     this.stationService.getAllStations().subscribe(resp => {
       this.stations = resp;
-    });
-    this.selectedBike = bike;
-    this.formEditBike = {
-      nombre: bike.nombre,
-      marca: bike.marca,
-      modelo: bike.modelo,
-      estado: bike.estado,
-      estacion: bike.estacion
-    };
-    this.modalRef = this.modalService.open(content, {
-      ariaLabelledBy: 'modal-basic-title'
+
+      const estacionSeleccionada = this.stations.find(station => station.name === bike.estacion);
+
+      this.selectedBike = bike;
+      this.formEditBike = {
+        nombre: bike.nombre,
+        marca: bike.marca,
+        modelo: bike.modelo,
+        estado: bike.estado,
+        estacion: estacionSeleccionada ? estacionSeleccionada.number : null
+      };
+      this.modalRef = this.modalService.open(content, {
+        ariaLabelledBy: 'modal-basic-title'
+      });
     });
   }
 
@@ -164,7 +167,7 @@ export class BikeListComponent implements OnInit {
       nombre: this.formBike.name,
       marca: this.formBike.marca,
       modelo: this.formBike.modelo,
-      estacion: this.formBike.station == -1 ? null : this.formBike.station,
+      estacion: this.formBike.station == null ? null : this.formBike.station,
       estado: this.formBike.condition
     };
     return newBike;

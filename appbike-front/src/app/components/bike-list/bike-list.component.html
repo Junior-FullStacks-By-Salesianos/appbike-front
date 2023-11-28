@@ -28,7 +28,10 @@
                                 <td>{{b.estacion}}</td>
                                 <td>{{b.usos}}</td>
                                 <td><a class="btn avail btn-success boton">Yes</a></td>
-                                <td><a class="btn btn-info" (click)="openEditModal(bikeEditModal,b)">Edit</a></td>
+                                <td class="columnaButtons"><a class="btn btn-info"
+                                        (click)="openEditModal(bikeEditModal,b)"><span class="bi bi-pencil-square"
+                                            style="color: white; font-size: 17px;"></span></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -182,7 +185,7 @@
                 <label for="estacion">Station</label>
                 <div class="input-group">
                     <select #estacion="ngModel" class="form-select" [(ngModel)]="formEditBike.estacion" name="estacion">
-                        <option value="-1" style="font-weight: bold;">Without station</option>
+                        <option [ngValue]="null" style="font-weight: bold;">Without station</option>
                         <option *ngFor="let station of stations" [value]="station.number">{{station.name}}</option>
                     </select>
                 </div>

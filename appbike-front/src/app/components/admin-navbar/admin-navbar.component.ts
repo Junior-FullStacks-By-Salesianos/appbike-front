@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +11,7 @@ export class AdminNavbarComponent {
   constructor(private router: Router) { }
 
   isStationsRoute(): any {
-    if (this.router.url == "/admin/stations") return true;
+    if (this.router.url == "/admin/stations/get") return true;
 
     return false;
   }

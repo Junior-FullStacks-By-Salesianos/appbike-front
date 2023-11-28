@@ -7,7 +7,7 @@ import { StationsService } from '../../services/stations.service';
 import { FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewBikeResponse } from '../../models/new-bike.interface';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,6 +18,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class BikeListComponent implements OnInit {
 
   listBikes: Bike[] = [];
+  selectedBike!: Bike;
   countBikes: number = 0;
   currentPage: number = 1;
   stations: Station[] = [];
@@ -69,7 +70,6 @@ export class BikeListComponent implements OnInit {
 
   onSubmit() {
     this.messageOfStationFull = '';
-
     this.bikeService.getBikeListForAdminWithouPageable().subscribe({
       next: bikeList => {
         const bikeNames = bikeList.map(bike => bike.nombre);
@@ -120,5 +120,27 @@ export class BikeListComponent implements OnInit {
 
   getConditionEnumValues(): string[] {
     return Object.values(Estado);
+  }
+
+
+  editBike() {
+    this.messageOfStationFull = '';
+    if (this.selectedBike) {
+      this.bikeService.editBike(this.selectedBike.nombre, this.formBikeAdd).subscribe({
+        next: data => {
+          this.modalService.dismissAll();
+          this.snackBar.open('Bicicleta editada correctamente', 'Cerrar', {
+            duration: 3000,
+          });
+        },
+        error: err => {
+          if (err.status === 400) {
+            this.messageOfStationFull = 'Error: Esa estación ya esta completa de bicicletas';
+          } else {
+            this.messageOfError = err.error.message;
+          }
+        }
+      });
+    }
   }
 }

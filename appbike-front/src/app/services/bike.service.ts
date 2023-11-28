@@ -17,11 +17,11 @@ export class BikeService {
   constructor(private http: HttpClient) { }
 
   getBikeListForAdmin(page: number): Observable<BikeListResponse> {
-    return this.http.get<BikeListResponse>(`${environment.apiBaseUrl}bikes/paged?page=${page}`);
+    return this.http.get<BikeListResponse>(`${environment.apiBaseUrl}admin/bikes/paged?page=${page}`);
   }
 
   getBikeListForAdminWithouPageable(): Observable<Bike[]> {
-    return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/`);
+    return this.http.get<Bike[]>(`${environment.apiBaseUrl}admin/bikes/`);
   }
   getBikeListForStation(idEstacion: String): Observable<Bike[]> {
     return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/station/${idEstacion}/bikes`);
@@ -39,9 +39,11 @@ export class BikeService {
     return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/rent/${idBicicleta}`);
   }
 
-  createNewBike(bikeData: NewBikeResponse) {
-    return this.http.post(`${environment.apiBaseUrl}bikes/add`, bikeData)
+  createNewBike(bikeData: NewBikeResponse): Observable<any> {
+    return this.http.post<any>(`${environment.apiBaseUrl}admin/bikes/add`, bikeData)
   }
 
-
+  editBike(name: String, bikeData: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiBaseUrl}admin/bikes/edit/${name}`, bikeData);
+  }
 }

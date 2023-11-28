@@ -90,12 +90,12 @@ i {
     background-color: transparent;
 }
 
-.btn {
+.avail {
     margin-left: 36px !important;
     cursor: default;
 }
 
-.btn:hover {
+.avail:hover {
     cursor: default;
 }
 

@@ -21,7 +21,7 @@ export class BikeService {
   }
 
   getBikeListForAdminWithouPageable(): Observable<Bike[]> {
-    return this.http.get<Bike[]>(`${environment.apiBaseUrl}admin/bikes/`);
+    return this.http.get<Bike[]>(`${environment.apiBaseUrl}admin/bikes`);
   }
   getBikeListForStation(idEstacion: String): Observable<Bike[]> {
     return this.http.get<Bike[]>(`${environment.apiBaseUrl}bikes/station/${idEstacion}/bikes`);

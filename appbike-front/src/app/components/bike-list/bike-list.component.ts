@@ -24,7 +24,7 @@ export class BikeListComponent implements OnInit {
   stations: Station[] = [];
   myControl = new FormControl<string | Station>('');
 
-  formBikeAdd: any = {
+  formBike: any = {
     nombre: null,
     marca: null,
     modelo: null,
@@ -44,7 +44,6 @@ export class BikeListComponent implements OnInit {
       this.countBikes = resp.totalElements;
       this.currentPage = resp.number;
     });
-
   }
 
   loadNewPage(): void {
@@ -53,6 +52,7 @@ export class BikeListComponent implements OnInit {
       this.countBikes = resp.totalElements;
     });
   }
+
 
   openForm(content: TemplateRef<any>) {
 
@@ -73,21 +73,22 @@ export class BikeListComponent implements OnInit {
     this.bikeService.getBikeListForAdminWithouPageable().subscribe({
       next: bikeList => {
         const bikeNames = bikeList.map(bike => bike.nombre);
-        const newBikeName = this.formBikeAdd.nombre;
+        const newBikeName = this.formBike.nombre;
 
         if (bikeNames.includes(newBikeName)) {
           this.messageOfNameDuplicated = 'Error: Ya existe una bicicleta con este nombre.';
         } else {
-          this.bikeService.createNewBike(this.formBikeAdd).subscribe({
+          this.bikeService.createNewBike(this.formBike).subscribe({
             next: data => {
               this.modalService.dismissAll();
               this.messageOfNameDuplicated = '';
-              this.formBikeAdd.nombre = ''
-              this.formBikeAdd.marca = ''
-              this.formBikeAdd.modelo = ''
+              this.formBike.nombre = ''
+              this.formBike.marca = ''
+              this.formBike.modelo = ''
               this.snackBar.open('Bicicleta añadida correctamente', 'Cerrar', {
                 duration: 3000,
               });
+              this.loadNewPage();
             },
             error: err => {
               if (err.status === 400) {
@@ -109,11 +110,11 @@ export class BikeListComponent implements OnInit {
 
   takeFormResults() {
     const newBike: NewBikeResponse = {
-      nombre: this.formBikeAdd.name,
-      marca: this.formBikeAdd.marca,
-      modelo: this.formBikeAdd.modelo,
-      estacion: this.formBikeAdd.station == -1 ? null : this.formBikeAdd.station,
-      estado: this.formBikeAdd.condition
+      nombre: this.formBike.name,
+      marca: this.formBike.marca,
+      modelo: this.formBike.modelo,
+      estacion: this.formBike.station == -1 ? null : this.formBike.station,
+      estado: this.formBike.condition
     };
     return newBike;
   }
@@ -126,12 +127,13 @@ export class BikeListComponent implements OnInit {
   editBike() {
     this.messageOfStationFull = '';
     if (this.selectedBike) {
-      this.bikeService.editBike(this.selectedBike.nombre, this.formBikeAdd).subscribe({
+      this.bikeService.editBike(this.selectedBike.nombre, this.formBike).subscribe({
         next: data => {
           this.modalService.dismissAll();
           this.snackBar.open('Bicicleta editada correctamente', 'Cerrar', {
             duration: 3000,
           });
+          this.loadNewPage();
         },
         error: err => {
           if (err.status === 400) {

@@ -38,7 +38,6 @@ const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
       { path: 'bikes', component: AdminBikesPageComponent, canActivate: [AuthGuard] },
       { path: 'stations/get', component: AdminStationsPageComponent, canActivate: [AuthGuard] },
       { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }

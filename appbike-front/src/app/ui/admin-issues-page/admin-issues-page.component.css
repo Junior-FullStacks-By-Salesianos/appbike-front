@@ -1,30 +1,24 @@
-h1{
+h1 {
     color: #7B7777;
 }
 
-.btn-gray{
-    background-color:#c4c4c4;
-<<<<<<< HEAD
+.btn-gray {
+    background-color: #c4c4c4;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-=======
->>>>>>> 8373dd42dbcbaf1e2e07f14509771fa9cb9d9d41
 }
 
-i{
+i {
     height: 20px;
     width: 20px;
     display: block;
-<<<<<<< HEAD
 }
 
-th{
+th {
     font-weight: 300;
     font-style: italic;
 }
 
-.side-margin-auto{
+.side-margin-auto {
     margin-left: auto;
     margin-right: auto;
-=======
->>>>>>> 8373dd42dbcbaf1e2e07f14509771fa9cb9d9d41
 }

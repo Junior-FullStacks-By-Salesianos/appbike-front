@@ -37,6 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/bike-card-resume-trip.component';
 import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
+import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 
 @NgModule({
   declarations: [

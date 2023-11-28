@@ -31,6 +31,8 @@
                                 <td class="columnaButtons"><a class="btn btn-info"
                                         (click)="openEditModal(bikeEditModal,b)"><span class="bi bi-pencil-square"
                                             style="color: white; font-size: 17px;"></span></a>
+                                    <a class="btn btn-info" (click)="openPopDelete(deleteModal,b)"><span
+                                            class="bi bi-trash" style="color: white; font-size: 17px;"></span></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -195,5 +197,23 @@
                 <button type="submit" class="btn btnSubmit btn-outline-dark">Save</button>
             </div>
         </form>
+    </div>
+</ng-template>
+
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" style="color: rgb(255, 51, 51);">Delete bike</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <h5>Are you sure you want to delete <span style="color: rgb(255, 51, 51);"
+                [textContent]="selectedBike.nombre"></span>
+            bicycle?</h5>
+        <div class="container buttonsDelete" style="margin-left: 8%;">
+            <a class="btn btn-success" (click)="delete(selectedBike.nombre)"><span class="bi bi-check-lg"
+                    style="color: white; font-size: 17px;"></span></a>
+            <a class="btn btn-danger" (click)="modal.dismiss()"><span class="bi bi-x-lg"
+                    style="color: white; font-size: 17px;"></span></a>
+        </div>
     </div>
 </ng-template>

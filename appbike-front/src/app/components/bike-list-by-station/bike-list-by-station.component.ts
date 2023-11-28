@@ -7,6 +7,7 @@ import { UsoBegin } from '../../models/uso.interface';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
+
 @Component({
   selector: 'app-bike-list-by-station',
   templateUrl: './bike-list-by-station.component.html',

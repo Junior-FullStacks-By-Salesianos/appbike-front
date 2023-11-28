@@ -17,6 +17,7 @@ import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -37,11 +38,11 @@ const routes: Routes = [
     path: 'admin',
     children: [
       { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
+      { path: 'bikes', component: AdminBikesPageComponent, canActivate: [AuthGuard] },
+      { path: 'stations/get', component: ListAdminStationsComponent, canActivate: [AuthGuard] },
       { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
-
-  { path: 'stations/get', component: ListAdminStationsComponent },
   { path: 'user/get', component: ListUserStationsComponent },
   { path: '**', redirectTo: '/error-404' }
 ];

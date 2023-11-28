@@ -11,7 +11,7 @@ export class AdminNavbarComponent {
   constructor(private router: Router) { }
 
   isStationsRoute(): any {
-    if (this.router.url == "/admin/stations") return true;
+    if (this.router.url == "/admin/stations/get") return true;
 
     return false;
   }

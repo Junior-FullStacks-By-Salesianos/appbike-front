@@ -24,6 +24,7 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.3",
+    "@googlemaps/js-api-loader": "^1.16.2",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0-rc.2",
     "@ngneat/overview": "^5.1.1",
     "@popperjs/core": "^2.11.8",

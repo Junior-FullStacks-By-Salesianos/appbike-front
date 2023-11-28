@@ -13,7 +13,7 @@ export class StationsService {
   constructor(private http: HttpClient) { }
 
   createStation(stationData: any) {
-    return this.http.post('http://localhost:8080/stations/add', stationData);
+    return this.http.post('http://localhost:8080/admin/add', stationData);
   }
 
   getAllStations(): Observable<Station[]> {
@@ -21,11 +21,11 @@ export class StationsService {
   }
 
   deleteStation(naturalId:number){
-    return this.http.delete(`http://localhost:8080/stations/delete/${naturalId}`)
+    return this.http.delete(`http://localhost:8080/admin/delete/${naturalId}`)
   }
 
   editStation(naturalId:number,stationData: any){
-    return this.http.put(`http://localhost:8080/stations/edit/${naturalId}`, stationData);
+    return this.http.put(`http://localhost:8080/admin/edit/${naturalId}`, stationData);
   }
 
   isStationAvailable(stationId: number): Observable<boolean> {

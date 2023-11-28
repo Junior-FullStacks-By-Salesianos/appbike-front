@@ -17,14 +17,14 @@ export class ListAdminStationsComponent {
     coordenadas: '',
     capacidad: 0
   };
-  capacityNumbers = Array.from({ length: 31 }, (_, i) => i + 1);
+  capacityNumbers = Array.from({ length: 31 }, (_, i) => i );
   private modalRef: NgbModalRef | undefined;
   selectedStation: Station | undefined;
   stations: Station[] = [];
   stationForm: any;
 
-  constructor(private stationService: StationsService, private modalService: NgbModal,private formBuilder: FormBuilder) {
-    
+  constructor(private stationService: StationsService, private modalService: NgbModal, private formBuilder: FormBuilder) {
+
   }
 
   ngOnInit(): void {
@@ -32,9 +32,11 @@ export class ListAdminStationsComponent {
   }
 
   openModal(content: any) {
-    this.modalRef = this.modalService.open(content, { 
-      ariaLabelledBy: 'modal-title' });
+    this.modalRef = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-title'
+    });
   }
+
   openEditModal(content: any, station: Station) {
     this.selectedStation = station;
     this.stationData = {
@@ -47,7 +49,7 @@ export class ListAdminStationsComponent {
   }
 
 
-  
+
   clearFormData() {
     this.selectedStation = undefined;
     this.stationData = {
@@ -56,7 +58,7 @@ export class ListAdminStationsComponent {
       capacidad: 0
     };
   }
-  
+
   closeModal() {
     this.modalService.dismissAll();
     this.clearFormData();
@@ -70,7 +72,7 @@ export class ListAdminStationsComponent {
 
   submitForm() {
     this.stationData.capacidad = +this.stationData.capacidad;
-  
+
     if (this.selectedStation) {
       this.stationService.editStation(this.selectedStation.number, this.stationData).subscribe(
         (response) => {
@@ -122,5 +124,5 @@ export class ListAdminStationsComponent {
       }
     );
   }
-  
+
 }

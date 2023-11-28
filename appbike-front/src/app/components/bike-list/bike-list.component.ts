@@ -176,4 +176,25 @@ export class BikeListComponent implements OnInit {
   getConditionEnumValues(): string[] {
     return Object.values(Estado);
   }
+
+  openPopDelete(content: any, bike: Bike) {
+
+    this.selectedBike = bike;
+    this.modalRef = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title'
+    });
+  }
+
+
+  delete(name: String) {
+    this.bikeService.deleteBikeByName(name).subscribe({
+      next: data => {
+        this.modalService.dismissAll();
+        this.snackBar.open('Bicicleta eliminada correctamente', 'Cerrar', {
+          duration: 3000,
+        });
+        this.loadNewPage();
+      }
+    });
+  }
 }

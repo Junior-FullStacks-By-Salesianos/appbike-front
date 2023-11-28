@@ -108,3 +108,11 @@ i {
 i {
     background-color: transparent;
 }
+
+.columnaButtons a {
+    margin-left: 10px;
+}
+
+.buttonsDelete a {
+    margin-left: 90px;
+}

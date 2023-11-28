@@ -46,4 +46,7 @@ export class BikeService {
   editBike(name: String, bikeData: any): Observable<any> {
     return this.http.put<any>(`${environment.apiBaseUrl}admin/bikes/edit/${name}`, bikeData);
   }
+  deleteBikeByName(name: String) {
+    return this.http.delete(`${environment.apiBaseUrl}admin/bikes/delete/${name}`)
+  }
 }

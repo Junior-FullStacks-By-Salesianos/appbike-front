@@ -21,6 +21,13 @@ export class RemoveWrapperInterceptor implements HttpInterceptor {
             });
         }
 
+        if (request.body && request.body.userDetails) {
+            // Replace the request body with the "issue" property
+            request = request.clone({
+                body: request.body.userDetails,
+            });
+        }
+
         return next.handle(request);
     }
 }

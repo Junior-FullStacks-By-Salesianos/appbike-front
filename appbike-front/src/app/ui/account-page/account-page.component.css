@@ -40,3 +40,12 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+.addCardSize{
+    width: 80%;
+    height: 50%;
+}
+
+.cardSize{
+    font-size: 2rem;
+}

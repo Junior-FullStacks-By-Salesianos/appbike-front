@@ -40,6 +40,7 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 import { AccountPageComponent } from './ui/account-page/account-page.component';
+import { EqualValidatorDirective } from './directives/confirmed-pin.directive';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AccountPageComponent } from './ui/account-page/account-page.component';
     PageDetailsTripComponent,
     BikeCardResumeTripComponent,
     SummaryTripComponent,
-    AccountPageComponent
+    AccountPageComponent,
+    EqualValidatorDirective,
   ],
   imports: [
     BrowserModule,

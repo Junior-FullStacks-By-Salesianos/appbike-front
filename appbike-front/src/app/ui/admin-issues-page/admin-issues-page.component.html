@@ -64,6 +64,7 @@
                 </div>
                 <div class="alert-danger" *ngIf="deadline.errors &&  newIssue.submitted">
                     <p class="text-danger " *ngIf="deadline.errors['laterThanToday']">Deadline must be after today.</p>
+                    <p class="text-danger " *ngIf="deadline.errors['required']">Deadline is required.</p>
                 </div>
 
                 <label for="anotaciones">Note</label>

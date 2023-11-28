@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
-import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,16 +25,20 @@ import { ListUserStationsComponent } from './components/list-user-stations/list-
 import { HorizontalNavbarComponent } from './components/horizontal-navbar/horizontal-navbar.component';
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { RemoveWrapperInterceptor } from '../RemoveWrapperInterceptor';
+import { CommonModule, DatePipe } from '@angular/common';
+import { ValidDateDirective } from './directives/valid-date.directive';
 import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 import { PageError404Component } from './ui/page-error-404/page-error-404.component';
 import { PageError403Component } from './ui/page-error-403/page-error-403.component';
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/bike-card-resume-trip.component';
 import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
+import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 
 @NgModule({
   declarations: [
@@ -52,11 +56,13 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     HorizontalNavbarComponent,
     AdminIssuesPageComponent,
     AdminNavbarComponent,
+    ValidDateDirective,
     AdminTravelsPageComponent,
     PageError404Component,
     PageError403Component,
     PageError400Component,
     PageErrorUnespectedComponent,
+    AdminStationsPageComponent,
     AdminBikesPageComponent,
     PageDetailsTripComponent,
     BikeCardResumeTripComponent,
@@ -70,6 +76,7 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     NgbModule,
     FormsModule,
     HttpClientModule,
+    CommonModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -78,7 +85,12 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     MatSelectModule,
     ReactiveFormsModule
   ],
-  providers: [authInterceptorProviders, provideHttpClient(withFetch())],
+  providers: [authInterceptorProviders, provideHttpClient(withFetch()), {
+    provide: HTTP_INTERCEPTORS,
+    useClass: RemoveWrapperInterceptor,
+    multi: true,
+  },
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

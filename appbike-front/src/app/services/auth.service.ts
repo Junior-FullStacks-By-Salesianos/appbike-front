@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environments';
 import { TokenStorageService } from './token-storage.service';
+import { Injectable, inject } from '@angular/core';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

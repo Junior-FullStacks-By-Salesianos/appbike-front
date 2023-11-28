@@ -25,9 +25,10 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'register', component: RegisterUserFormComponent },
   { path: 'login', component: LoginFormComponent },
+  { path: 'user/stations', component: ListUserStationsComponent},
   { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] },
   { path: 'admin/travels', component: AdminTravelsPageComponent, canActivate: [AuthGuard] },
-  { path: 'rentbystation', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
+  { path: 'rentbystation/:id', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
   { path: 'use/trip', component: PageFinishRideComponent },
   { path: 'error-404', component: PageError404Component },
   { path: 'access-denied', component: PageError403Component },
@@ -39,7 +40,7 @@ const routes: Routes = [
     path: 'admin',
     children: [
       { path: 'bikes', component: AdminBikesPageComponent, canActivate: [AuthGuard] },
-      { path: 'stations/get', component: AdminStationsPageComponent, canActivate: [AuthGuard] },
+      { path: 'stations', component: AdminStationsPageComponent, canActivate: [AuthGuard] },
       { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },

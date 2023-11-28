@@ -34,10 +34,11 @@ import { PageError403Component } from './ui/page-error-403/page-error-403.compon
 import { PageError400Component } from './ui/page-error-400/page-error-400.component';
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/bike-card-resume-trip.component';
 import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
+import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SummaryTripComponent } from './components/summary-trip/summary-trip.com
     PageError403Component,
     PageError400Component,
     PageErrorUnespectedComponent,
+    AdminStationsPageComponent,
     AdminBikesPageComponent,
     PageDetailsTripComponent,
     BikeCardResumeTripComponent,

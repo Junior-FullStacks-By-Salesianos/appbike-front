@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import { PageHomeComponent } from './ui/page-home/page-home.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
@@ -14,9 +14,11 @@ import { PageError400Component } from './ui/page-error-400/page-error-400.compon
 import { PageErrorUnespectedComponent } from './ui/page-error-unespected/page-error-unespected.component';
 import { AdminIssuesPageComponent } from './ui/admin-issues-page/admin-issues-page.component';
 import { AuthGuard } from './auth.guard';
+import { NgModule } from '@angular/core';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { AdminTravelsPageComponent } from './ui/admin-travels-page/admin-travels-page.component';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
+import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 
 const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
@@ -37,8 +39,9 @@ const routes: Routes = [
     path: 'admin',
     children: [
       { path: 'bikes', component: BikeListComponent, canActivate: [AuthGuard] },
-      { path: 'stations/get', component: AdminStationsPageComponent, canActivate: [AuthGuard]},
-      { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
+      { path: 'bikes', component: AdminBikesPageComponent, canActivate: [AuthGuard] },
+      { path: 'stations/get', component: AdminStationsPageComponent, canActivate: [AuthGuard] },
+      { path: 'issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] }
     ]
   },
   { path: 'user/get', component: ListUserStationsComponent },

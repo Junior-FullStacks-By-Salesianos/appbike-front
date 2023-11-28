@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {  Station } from '../models/list-all-stations';
-import { Observable } from 'rxjs';
+import { Station } from '../models/list-all-stations';
+import { Observable, map } from 'rxjs';
 import { environment } from '../environments/environments';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class StationsService {
     return this.http.post('http://localhost:8080/stations/add', stationData);
   }
 
-  getAllStations():Observable<Station[]>{
+  getAllStations(): Observable<Station[]> {
     return this.http.get<Station[]>(`http://localhost:8080/stations/get`)
   }
 
@@ -26,5 +26,14 @@ export class StationsService {
 
   editStation(naturalId:number,stationData: any){
     return this.http.put(`http://localhost:8080/stations/edit/${naturalId}`, stationData);
+  }
+
+  isStationAvailable(stationId: number): Observable<boolean> {
+    return this.getAllStations().pipe(
+      map((stations) => {
+        const station = stations.find((s) => s.number === stationId);
+        return station ? station.bikes < station.capacity : false;
+      })
+    );
   }
 }

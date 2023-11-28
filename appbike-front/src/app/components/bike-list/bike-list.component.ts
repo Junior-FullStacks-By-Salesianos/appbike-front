@@ -5,7 +5,7 @@ import { Station } from '../../models/list-all-stations';
 import { Observable, map, startWith } from 'rxjs';
 import { StationsService } from '../../services/stations.service';
 import { FormControl } from '@angular/forms';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NewBikeResponse } from '../../models/new-bike.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -23,6 +23,7 @@ export class BikeListComponent implements OnInit {
   currentPage: number = 1;
   stations: Station[] = [];
   myControl = new FormControl<string | Station>('');
+  private modalRef: NgbModalRef | undefined;
 
   formBike: any = {
     nombre: null,
@@ -31,6 +32,16 @@ export class BikeListComponent implements OnInit {
     estado: null,
     estacion: null
   }
+
+  formEditBike: any = {
+    nombre: null,
+    marca: null,
+    modelo: null,
+    estado: null,
+    estacion: null
+  }
+
+  formBikea: any;
   messageOfError!: string;
   messageOfNameDuplicated: string = '';
   messageOfStationFull: string = '';
@@ -55,13 +66,30 @@ export class BikeListComponent implements OnInit {
 
 
   openForm(content: TemplateRef<any>) {
-
     this.stationService.getAllStations().subscribe(resp => {
       this.stations = resp;
     });
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result;
+    this.modalRef = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title'
+    });
   }
 
+  openEditModal(content: any, bike: Bike) {
+    this.stationService.getAllStations().subscribe(resp => {
+      this.stations = resp;
+    });
+    this.selectedBike = bike;
+    this.formEditBike = {
+      nombre: bike.nombre,
+      marca: bike.marca,
+      modelo: bike.modelo,
+      estado: bike.estado,
+      estacion: bike.estacion
+    };
+    this.modalRef = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title'
+    });
+  }
 
   private _filter(name: string): Station[] {
     const filterValue = name.toLowerCase();
@@ -74,7 +102,6 @@ export class BikeListComponent implements OnInit {
       next: bikeList => {
         const bikeNames = bikeList.map(bike => bike.nombre);
         const newBikeName = this.formBike.nombre;
-
         if (bikeNames.includes(newBikeName)) {
           this.messageOfNameDuplicated = 'Error: Ya existe una bicicleta con este nombre.';
         } else {
@@ -104,6 +131,30 @@ export class BikeListComponent implements OnInit {
     });
   }
 
+  edit() {
+    this.messageOfStationFull = '';
+    if (this.selectedBike) {
+      if (this.selectedBike) {
+        this.bikeService.editBike(this.selectedBike.nombre, this.formEditBike).subscribe({
+          next: data => {
+            this.modalService.dismissAll();
+            this.snackBar.open('Bicicleta editada correctamente', 'Cerrar', {
+              duration: 3000,
+            });
+            this.loadNewPage();
+          },
+          error: err => {
+            if (err.status === 400) {
+              this.messageOfStationFull = 'Error: Esa estación ya esta completa de bicicletas';
+            } else {
+              this.messageOfError = err.error.message;
+            }
+          }
+        });
+      }
+    }
+  }
+
   displayFn(station: Station): string {
     return station.name && station ? station.name : '';
   }
@@ -121,28 +172,5 @@ export class BikeListComponent implements OnInit {
 
   getConditionEnumValues(): string[] {
     return Object.values(Estado);
-  }
-
-
-  editBike() {
-    this.messageOfStationFull = '';
-    if (this.selectedBike) {
-      this.bikeService.editBike(this.selectedBike.nombre, this.formBike).subscribe({
-        next: data => {
-          this.modalService.dismissAll();
-          this.snackBar.open('Bicicleta editada correctamente', 'Cerrar', {
-            duration: 3000,
-          });
-          this.loadNewPage();
-        },
-        error: err => {
-          if (err.status === 400) {
-            this.messageOfStationFull = 'Error: Esa estación ya esta completa de bicicletas';
-          } else {
-            this.messageOfError = err.error.message;
-          }
-        }
-      });
-    }
   }
 }

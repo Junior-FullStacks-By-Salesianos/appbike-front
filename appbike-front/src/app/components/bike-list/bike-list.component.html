@@ -28,7 +28,7 @@
                                 <td>{{b.estacion}}</td>
                                 <td>{{b.usos}}</td>
                                 <td><a class="btn avail btn-success boton">Yes</a></td>
-                                <!--<td><a class="btn btn-info" (click)="openEditModal(formBikeAdd,b.nombre)">Edit</a></td>!-->
+                                <td><a class="btn btn-info" (click)="openEditModal(bikeEditModal,b)">Edit</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -114,6 +114,74 @@
                 <label for="estacion">Station</label>
                 <div class="input-group">
                     <select #estacion="ngModel" class="form-select" [(ngModel)]="formBike.estacion" name="estacion">
+                        <option value="-1" style="font-weight: bold;">Without station</option>
+                        <option *ngFor="let station of stations" [value]="station.number">{{station.name}}</option>
+                    </select>
+                </div>
+                <p class="text-danger " *ngIf="messageOfStationFull">{{ messageOfStationFull }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btnSubmit btn-outline-dark">Save</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #bikeEditModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit bike - <span [textContent]="selectedBike.nombre"></span>
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form #editBike="ngForm" (ngSubmit)="editBike.form.valid && edit()">
+            <div class="mb-3">
+                <label for="marca">Brand</label>
+                <div class="input-group">
+                    <input [(ngModel)]="formEditBike.marca" #marca="ngModel" name="marca" class="form-control"
+                        placeholder="Enter brand of the bike" required minlength="3" maxlength="20" />
+                </div>
+                <div class="alert-danger" *ngIf="marca.errors && editBike.submitted">
+                    <p class="text-danger " *ngIf="marca.errors['maxlength']">Brand must be max 20 characters</p>
+                </div>
+                <div class="alert-danger" *ngIf="marca.errors && editBike.submitted">
+                    <p class="text-danger " *ngIf="marca.errors['minlength']">Brand must be at least 3 characters</p>
+                </div>
+                <div class="alert-danger" *ngIf="marca.errors && editBike.submitted">
+                    <p class="text-danger " *ngIf="marca.errors['required']">Brand is required</p>
+                </div>
+                <label for="modelo">Model</label>
+                <div class="input-group">
+                    <input [(ngModel)]="formEditBike.modelo" #modelo="ngModel" name="modelo" class="form-control"
+                        placeholder="Enter model of the bike" required minlength="3" maxlength="20" />
+                </div>
+
+                <div class="alert-danger" *ngIf="modelo.errors && editBike.submitted">
+                    <p class="text-danger " *ngIf="modelo.errors['maxlength']">Model must be max 20 characters</p>
+                </div>
+                <div class="alert-danger" *ngIf="modelo.errors && editBike.submitted">
+                    <p class="text-danger " *ngIf="modelo.errors['minlength']">Model must be at least 3 characters</p>
+                </div>
+                <div class="alert-danger" *ngIf="modelo.errors && editBike.submitted">
+                    <p class="text-danger " *ngIf="modelo.errors['required']">Model is required</p>
+                </div>
+
+                <label for="estado">Condition</label>
+                <div class="input-group">
+                    <select [(ngModel)]="formEditBike.estado" #estado="ngModel" class="form-select" name="estado"
+                        required>
+                        <option *ngFor="let condition of getConditionEnumValues()" [value]="condition">{{condition}}
+                        </option>
+                    </select>
+                </div>
+                <div class="alert-danger" *ngIf="estado.errors && editBike.submitted">
+                    <p class="text-danger " *ngIf="estado.errors['required']">You must select a condition of the bike
+                    </p>
+                </div>
+
+                <label for="estacion">Station</label>
+                <div class="input-group">
+                    <select #estacion="ngModel" class="form-select" [(ngModel)]="formEditBike.estacion" name="estacion">
                         <option value="-1" style="font-weight: bold;">Without station</option>
                         <option *ngFor="let station of stations" [value]="station.number">{{station.name}}</option>
                     </select>

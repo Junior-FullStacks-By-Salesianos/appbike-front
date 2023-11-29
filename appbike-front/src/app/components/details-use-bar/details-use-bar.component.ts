@@ -27,6 +27,7 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy, OnInit {
     this.usoService.getCurrentCost().subscribe(resp => {
       this.cost = resp.precioMinuto;
     })
+    this.tiempoTranscurridoService.obtenerFecha(this.fechaInicio)
   }
 
   ngOnChanges(changes: SimpleChanges): void {

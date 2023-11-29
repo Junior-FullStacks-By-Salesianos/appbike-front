@@ -25,7 +25,10 @@ export class HorizontalNavbarComponent {
   userDetails!: UserBikeResponse;
   tiempoTranscurrido: string = '00:00:00';
   finViaje: boolean = false;
+  fechaInicio!: Date;
+  intervalId: any;
   terminado = true;
+
 
   constructor(private tokenStorageService: TokenStorageService, private userService: UserService, private modalService: NgbModal, private tiempoTranscurridoService: TiempoTranscurridoService, private router: Router) { }
 
@@ -57,17 +60,23 @@ export class HorizontalNavbarComponent {
       console.log(JSON.stringify(this.user));
     }
 
-    this.tiempoTranscurridoService.tiempoTranscurrido$.subscribe(tiempo => {
-      this.tiempoTranscurrido = tiempo;
-    });
     this.tiempoTranscurridoService.contadorIniciado$.subscribe((iniciado) => {
-      this.terminado = false
+      this.terminado = false;
     });
     this.tiempoTranscurridoService.contadorDetenido$.subscribe((detenido) => {
       this.terminado = true;
     });
 
   }
+
+
+  inTravel(tiempo: string) {
+    if (tiempo === '00:00:00') {
+      return 'In travel';
+    }
+    return tiempo;
+  }
+
 
   logout(): void {
     this.tokenStorageService.signOut();

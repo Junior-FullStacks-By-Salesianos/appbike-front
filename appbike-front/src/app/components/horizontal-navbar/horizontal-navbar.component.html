@@ -4,15 +4,11 @@
       <img src="../../../favicon.ico" alt="BikeApp" width="59px" height="59px" style="margin-right: 10px;">
       <a class="navbar-brand companyName" [routerLink]="'/home'"
         style="margin-right: 10px; font-size: 30px;">BikeApp</a>
-      <a class="navbar-brand companyName" [routerLink]="'/home'"
-        style="margin-right: 10px; font-size: 30px;">BikeApp</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/home'" style="color: black; font-size: 30px;"
-            [ngClass]="isHomeRoute() ? 'interBold' : 'interRegular'">Home</a>
           <a class="nav-link" [routerLink]="'/home'" style="color: black; font-size: 30px;"
             [ngClass]="isHomeRoute() ? 'interBold' : 'interRegular'">Home</a>
         </li>
@@ -25,15 +21,12 @@
           <a class="nav-link" [routerLink]="'/travels'" style="color: black; font-size: 30px;"
             [ngClass]="isTravelRoute() ? 'interBold' : 'interRegular'">Travels</a>
         </li>
-        <a class="nav-link" [routerLink]="'/travels'" style="color: black; font-size: 30px;"
-          [ngClass]="isTravelRoute() ? 'interBold' : 'interRegular'">Travels</a>
-        </li>
       </ul>
 
       <ul class="navbar-nav">
         <li class="nav-item d-flex align-items-center" *ngIf="!terminado">
           <div class="blinking-circle"></div>
-          <a class="nav-link" [routerLink]="['/use/trip']">{{tiempoTranscurrido}}</a>
+          <a class="nav-link text-black" [routerLink]="['/use/trip']">{{tiempoTranscurrido}}</a>
         </li>
         <li class="nav-item" *ngIf="isUser">
           <a class="nav-link" (click)="openModal(content)" style="color: black;">Saldo</a>
@@ -49,7 +42,6 @@
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <a *ngIf="isUser" class="nav-link" [routerLink]="'/user'" style="color: black;">{{user.username}}</a>
-          <a *ngIf="isAdmin" class="nav-link" [routerLink]="'/admin/issues'" style="color: black;">Admin Board</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" (click)="logout()" style="color: black;">LogOut</a>
@@ -65,9 +57,6 @@
 </ngb-alert>
 
 <ng-template class="modalBalance" #content let-modal>
-  <!--<div class="modal-header">
-      
-  </div>-->
   <div *ngIf="!isLoadingModal" class="modal-body">
     <button type="button" class="btn-close" style="float: right;" aria-label="Close"
       (click)="modal.dismiss('Cross click')"></button>

@@ -34,6 +34,7 @@ export class LoginFormComponent {
         //this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data);
+        localStorage.setItem("USER_ID",data.id)
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;

@@ -1,11 +1,14 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Bike } from '../../models/bike-list.interface';
 import { BikeService } from '../../services/bike.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsoService } from '../../services/uso.service';
 import { UsoBegin } from '../../models/uso.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
+import { StationsService } from '../../services/stations.service';
+import { StationResponse } from '../../models/list-stations.interface';
 
 
 @Component({
@@ -22,11 +25,16 @@ export class BikeListByStationComponent implements OnInit {
   errorRent = false;
   errorBalance = false;
   isLoading = true;
+  route: ActivatedRoute = inject(ActivatedRoute);
+  stationId!: string;
+  station!: StationResponse;
 
-  constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router) { }
+  constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router, private stationService: StationsService, private sanitazer: DomSanitizer) {
+    this.stationId = String(this.route.snapshot.params['id']);
+  }
 
   ngOnInit(): void {
-    this.bikeService.getBikeListForStation("f81345bb-894d-4dcd-8aa4-49987a95ff76").subscribe({
+    this.bikeService.getBikeListForStation(this.stationId).subscribe({
       next: resp => {
         this.bikeList = resp
         this.countBikes = resp.length;
@@ -34,6 +42,9 @@ export class BikeListByStationComponent implements OnInit {
       }, error: err => {
         this.router.navigate(['/page-404'])
       }
+    })
+    this.stationService.getStationById(this.stationId).subscribe(resp => {
+      this.station = resp;
     })
 
   }

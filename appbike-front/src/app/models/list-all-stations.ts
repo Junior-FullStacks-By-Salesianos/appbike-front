@@ -1,3 +1,5 @@
+import { Bike } from "./bike-list.interface";
+
 export interface AllStationsResponse {
    results: Station[];
 }
@@ -7,5 +9,5 @@ export interface Station{
     name:        string;
     coordinates: string;
     capacity:    number;
-    bikes:       number;
+    bikes:       Bike[];
 }

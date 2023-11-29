@@ -17,7 +17,7 @@ export class StationsService {
   }
 
   getAllStations(): Observable<Station[]> {
-    return this.http.get<Station[]>(`http://localhost:8080/stations/get`)
+    return this.http.get<Station[]>(`http://localhost:8080/station/get`)
   }
 
   deleteStation(naturalId: number) {
@@ -32,12 +32,12 @@ export class StationsService {
     return this.getAllStations().pipe(
       map((stations) => {
         const station = stations.find((s) => s.number === stationId);
-        return station ? station.bikes < station.capacity : false;
+        return station ? station.bikes.length < station.capacity : false;
       })
     );
   }
 
   getStationById(id: string): Observable<Station> {
-    return this.http.get<Station>(`${environment.apiBaseUrl}stations/get/${id}`);
+    return this.http.get<Station>(`${environment.apiBaseUrl}station/get/${id}`);
   }
 }

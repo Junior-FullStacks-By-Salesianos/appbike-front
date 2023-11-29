@@ -54,11 +54,11 @@ export class PageFinishRideComponent implements OnInit {
 
     this.stations.forEach(station => {
 
-      const stationNow = station.bikes;
+      const stationNow = station.bikes.length;
       let iconUrl = '';
       let clickable = true;
 
-      if (stationNow > 0) {
+      if (stationNow != station.capacity) {
         iconUrl = 'assets/img/bikes.png';
       } else {
         iconUrl = 'assets/img/fullStation.png';

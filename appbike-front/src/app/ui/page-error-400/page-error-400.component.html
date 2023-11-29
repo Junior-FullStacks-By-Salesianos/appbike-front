@@ -1,1 +1,6 @@
-<p>page-error-400 works!</p>
+<app-horizontal-navbar></app-horizontal-navbar>
+<div class="error-container">
+    <div class="error-code">400</div>
+    <div class="error-message">Uppss! There seems to have been an error</div>
+    <a [routerLink]="['/home']" class="btn btn-primary back-to-home">Back to Home</a>
+</div>

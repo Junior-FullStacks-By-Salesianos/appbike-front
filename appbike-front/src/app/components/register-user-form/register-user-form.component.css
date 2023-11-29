@@ -8,10 +8,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    background: #00E5FF;
-    min-height: 100vh;
-}
 
 .wrapper {
     max-width: 850px;
@@ -84,7 +80,7 @@ body {
 }
 
 .wrapper .form-right h2 {
-    color: #3786bd;
+    color: #103c3b;
 }
 
 .wrapper .form-right label {
@@ -106,7 +102,7 @@ body {
 }
 
 .wrapper .form-right .input-field:focus {
-    border: 1px solid #31a031;
+    border: 1px solid #103c3b;
 }
 
 
@@ -154,7 +150,7 @@ body {
     content: "\2713";
     position: absolute;
     display: none;
-    color: #3786bd;
+    color: #103c3b;
     font-size: 1rem;
 }
 
@@ -171,7 +167,7 @@ body {
 
 .wrapper .register {
     padding: 12px;
-    background: #3786bd;
+    background: #103c3b;
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
     width: 130px;
@@ -184,7 +180,7 @@ body {
 }
 
 .wrapper .register:hover {
-    background-color: #3785bde0;
+    background-color: #103c3bbd
 }
 
 .wrapper a {

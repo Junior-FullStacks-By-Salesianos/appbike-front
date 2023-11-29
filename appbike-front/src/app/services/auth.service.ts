@@ -14,8 +14,8 @@ const httpOptions = {
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-  userRole! :string;
-  tokenStorageService! :TokenStorageService;
+  userRole!: string;
+  tokenStorageService!: TokenStorageService;
 
   registerUser(form: any): Observable<any> {
     return this.http.post(`${environment.authUrl}register`,
@@ -36,7 +36,7 @@ export class AuthService {
     });
   }
 
-  isAdmin(): boolean{
+  isAdmin(): boolean {
     if (inject(TokenStorageService).getUser().role === 'ROLE_ADMIN') return true;
 
     return false;

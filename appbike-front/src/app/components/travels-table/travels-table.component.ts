@@ -3,6 +3,7 @@ import { UsoService } from '../../services/uso.service';
 import { Use } from '../../models/use-list.inteface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { error } from 'console';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @Component({
   selector: 'app-travels-table',
@@ -28,18 +29,23 @@ export class TravelsTableComponent implements OnInit {
   f: any;
   selectedUse!: Use;
 
-  constructor(private useService: UsoService, private modalService: NgbModal) { }
+  constructor(private useService: UsoService, private modalService: NgbModal, private errorHandler: ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.loadNewPage()
   }
 
   loadNewPage(): void {
-    this.useService.getUseListAdmin(this.currentPage).subscribe(resp => {
-      this.useList = resp.content;
-      this.countUses = resp.totalElements;
-      this.currentPage = resp.pageNumber;
-      this.pageForPagination = this.currentPage + 1;
+    this.useService.getUseListAdmin(this.currentPage).subscribe({
+      next: resp => {
+        this.useList = resp.content;
+        this.countUses = resp.totalElements;
+        this.currentPage = resp.pageNumber;
+        this.pageForPagination = this.currentPage + 1;
+      },
+      error: err => {
+        this.errorHandler.handleHttpError(err)
+      }
     });
   }
 

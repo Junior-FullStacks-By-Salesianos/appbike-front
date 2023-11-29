@@ -3,6 +3,7 @@ import { StationsService } from '../../services/stations.service';
 import { Station } from '../../models/list-all-stations';
 import { Loader } from '@googlemaps/js-api-loader';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @Component({
   selector: 'app-list-user-stations',
@@ -14,55 +15,60 @@ export class ListUserStationsComponent {
   map: google.maps.Map | undefined;
   markers: google.maps.Marker[] = [];
 
-  constructor(private stationService: StationsService,private router: Router) {}
+  constructor(private stationService: StationsService, private router: Router, private errorHandler: ErrorHandlerService) { }
 
   ngOnInit(): void {
-    this.stationService.getAllStations().subscribe(resp => {
-      this.stations = resp;
-      this.initMap();
-    });
+    this.stationService.getAllStations().subscribe({
+      next: data => {
+        this.stations = data;
+        this.initMap();
+      },
+      error: err => {
+        this.errorHandler.handleHttpError
+      }
+    })
   }
 
   showOnMap(): void {
     if (!this.map) return;
 
     this.markers.forEach(marker => {
-      marker.setMap(null); 
+      marker.setMap(null);
     });
     this.markers = [];
 
     this.stations.forEach(station => {
-  
-      const stationCapacity = station.capacity - station.bikes; 
-    
+
+      const stationCapacity = station.capacity - station.bikes;
+
       let iconUrl = '';
       if (stationCapacity > 0) {
         iconUrl = 'assets/img/bikes.png';
       } else {
         iconUrl = 'assets/img/fullStation.png';
       }
-    
+
       const coordinates = station.coordinates.split(',');
       const latitude = parseFloat(coordinates[0]);
       const longitude = parseFloat(coordinates[1]);
-    
+
       const marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map: this.map,
         title: station.name,
-        icon: { 
+        icon: {
           url: iconUrl,
           scaledSize: new google.maps.Size(65, 65)
         }
       });
-    
+
       this.markers.push(marker);
-    
+
       marker.addListener('click', () => {
         this.router.navigate(['/rentbystation', station.id]);
       });
     });
-    
+
   }
 
   initMap(): void {

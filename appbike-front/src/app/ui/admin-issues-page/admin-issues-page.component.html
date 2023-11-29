@@ -9,39 +9,39 @@
                 <h1 class="text-center ">Issues</h1>
             <button class="btn btn-gray w-50 side-margin-auto mb-3 w-100" (click)="open(newIssueModal)"><i
                     class=" m-auto bi bi-plus-square"></i></button>
-            <table class="table">
-                <thead>
+            <table class="table table-bordered table-striped custom-table">
+                <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Station</th>
-                        <th scope="col">Deadline Day</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Finished At</th>
-                        <th scope="col">Assigned To</th>
-                        <th scope="col"></th>
+                        <th class="fw-bolder" scope="col">Station</th>
+                        <th class="fw-bolder" scope="col">Deadline Day</th>
+                        <th class="fw-bolder" scope="col">Status</th>
+                        <th class="fw-bolder" scope="col">Finished At</th>
+                        <th class="fw-bolder" scope="col">Assigned To</th>
+                        <th class="fw-bolder" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let issue of issueList">
                         <td>{{issue.nombreEstacion}}</td>
                         <td>{{issue.fechaProgramada}}</td>
-                        <td class="d-flex">{{issue.estado}} <p class="ms-3"
-                                *ngIf="isFinished(issue) && isOnTime(issue)">On Time</p>
-                            <p class="ms-3" *ngIf="!isOnTime(issue)">After Deadline</p>
+                        <td>{{issue.estado}}
+                            <p *ngIf="isFinished(issue) && isOnTime(issue)">On Time</p>
+                            <p *ngIf="!isOnTime(issue)">After Deadline</p>
                         </td>
                         <td>{{issue.fechaRealizacion}}</td>
                         <td>{{issue.nombreTrabajador}}</td>
-                        <td class="text-end ">
-                            <button class="btn btn-light" *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i
-                                    class="bi bi-check" style="color: #2fb63f;"></i></button>
-                            <button class="btn btn-light" (click)="showNotes(issue.anotaciones)"><i
-                                    class="bi bi-journal-bookmark "></i></button>
-                            <button class="btn btn-light"><i class="bi bi-trash"
+                        <td class="text-end d-flex justify-content-around">
+                            <button class="btn btn-info" *ngIf="!isFinished(issue)" (click)="setAsDone(issue)"><i
+                                    class="bi bi-check"  style="color: white; font-size: 17px;"></i></button>
+                            <button class="btn btn-info" (click)="showNotes(issue.anotaciones)"><i
+                                    class="bi bi-journal-bookmark"  style="color: white; font-size: 17px;"></i></button>
+                            <button class="btn btn-info"  style="color: white; font-size: 17px;"><i class="bi bi-trash text-white"
                                     (click)="deleteIssue(issue.id)"></i></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            
+
             <div *ngIf="listSize >= 10" class="paginationContainer position-absolute  bottom-0 center">
                 <ngb-pagination class="custom-pagination" [boundaryLinks]="true" [collectionSize]="listSize"
                     [(page)]="currentPage" [pageSize]="10" (pageChange)="loadNewPage()" aria-label="Default pagination">

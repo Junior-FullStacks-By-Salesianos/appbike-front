@@ -194,6 +194,9 @@ export class BikeListComponent implements OnInit {
           duration: 3000,
         });
         this.loadNewPage();
+      },
+      error: err =>{
+        console.log("Failed to delete an issue. ", err.errorMessage);
       }
     });
   }

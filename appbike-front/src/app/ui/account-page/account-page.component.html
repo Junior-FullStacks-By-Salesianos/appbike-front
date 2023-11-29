@@ -28,7 +28,8 @@
                     </div>
                 </div>
                 <div class="balanceContainer mt-auto d-flex flex-column ">
-                    <h1 class="ps-2">{{userDetails.saldo}}€</h1>
+                    <h1 *ngIf="userDetails.saldo > 0" class="ps-2">{{userDetails.saldo}}€</h1>
+                    <h1 *ngIf="userDetails.saldo < 0" class="ps-2 text-danger">{{userDetails.saldo}}€</h1>
                     <button class="btn btn-dark btn-outline-light w-50 ms-2 mb-1">Add Balance</button>
                 </div>
             </div>
@@ -55,7 +56,7 @@
         </div>
     </div>
 
-    <table class="table mt-5">
+    <table class="table table-bordered table-striped custom-table mt-5">
         <thead>
             <tr>
                 <th scope="col">Bike</th>

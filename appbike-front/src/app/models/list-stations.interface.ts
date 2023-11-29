@@ -5,5 +5,5 @@ export interface StationResponse {
     name:        string;
     coordinates: string;
     capacity:    number;
-    bikes:       Bike[];
+    bikes:       number;
 }

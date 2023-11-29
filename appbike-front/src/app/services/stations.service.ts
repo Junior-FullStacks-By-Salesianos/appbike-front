@@ -32,7 +32,7 @@ export class StationsService {
     return this.getAllStations().pipe(
       map((stations) => {
         const station = stations.find((s) => s.number === stationId);
-        return station ? station.bikes.length < station.capacity : false;
+        return station ? station.bikes < station.capacity : false;
       })
     );
   }

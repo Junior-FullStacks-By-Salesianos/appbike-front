@@ -9,5 +9,5 @@ export interface Station{
     name:        string;
     coordinates: string;
     capacity:    number;
-    bikes:       Bike[];
+    bikes:       number;
 }

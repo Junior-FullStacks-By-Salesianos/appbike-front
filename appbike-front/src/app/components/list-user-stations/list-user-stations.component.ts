@@ -33,7 +33,7 @@ export class ListUserStationsComponent {
 
     this.stations.forEach(station => {
   
-      const stationNow = station.bikes.length;
+      const stationNow = station.bikes;
       let iconUrl = '';
       let clickable = true;
 

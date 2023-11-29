@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading" id="my-card" class="card w-40 d-block mx-auto">
     <div class="image-container" style="background-image: url('../../../assets/img/banner-stations.png');"></div>
-    <h1 class="card-img-overlay text-white text-center mt-4">Station #1: Plaza de Armas</h1>
+    <h1 class="card-img-overlay text-white text-center mt-4">Station: {{station.name}}</h1>
 </div>
 <div *ngIf="errorRent" class="container">
     <ngb-alert [dismissible]="false">

@@ -7,6 +7,8 @@ import { UsoBegin } from '../../models/uso.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { StationsService } from '../../services/stations.service';
+import { StationResponse } from '../../models/list-stations.interface';
 
 
 @Component({
@@ -25,8 +27,9 @@ export class BikeListByStationComponent implements OnInit {
   isLoading = true;
   route: ActivatedRoute = inject(ActivatedRoute);
   stationId!: string;
+  station!: StationResponse;
 
-  constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router, private sanitazer: DomSanitizer) {
+  constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router, private stationService: StationsService, private sanitazer: DomSanitizer) {
     this.stationId = String(this.route.snapshot.params['id']);
   }
 
@@ -39,6 +42,9 @@ export class BikeListByStationComponent implements OnInit {
       }, error: err => {
         this.router.navigate(['/page-404'])
       }
+    })
+    this.stationService.getStationById(this.stationId).subscribe(resp => {
+      this.station = resp;
     })
 
   }

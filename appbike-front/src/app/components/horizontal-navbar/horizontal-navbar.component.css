@@ -14,3 +14,23 @@ a {
 .alert {
     top: 100px;
 }
+
+.blinking-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    display: inline-block;
+    margin-right: 5px;
+    animation: blinking 1s infinite alternate;
+}
+
+@keyframes blinking {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.5;
+    }
+}

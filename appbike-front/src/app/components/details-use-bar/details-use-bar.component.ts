@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { environment } from '../../environments/environments';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { TiempoTranscurridoService } from '../../services/tiempo-transcurrido.service';
 
 @Component({
   selector: 'app-details-use-bar',
@@ -20,7 +21,7 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy, OnInit {
   tiempoTranscurrido: string = '00:00:00';  // Inicializar con el valor deseado
   intervalId: any;
 
-  constructor(private modalService: NgbModal, private usoService: UsoService, private router: Router) { }
+  constructor(private modalService: NgbModal, private usoService: UsoService, private router: Router, private tiempoTranscurridoService: TiempoTranscurridoService) { }
 
   ngOnInit(): void {
     this.usoService.getCurrentCost().subscribe(resp => {
@@ -42,7 +43,7 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy, OnInit {
     this.detenerContador();
   }
 
-  iniciarContador(): void {
+  /*iniciarContador(): void {
     this.intervalId = setInterval(() => {
       if (this.fechaInicio) {
         const ahora = new Date();
@@ -50,9 +51,22 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy, OnInit {
         this.tiempoTranscurrido = this.formatoTiempo(diferencia);
       }
     }, 1000);
+  }*/
+
+  iniciarContador(): void {
+    this.tiempoTranscurridoService.iniciarContador();
+    this.intervalId = setInterval(() => {
+      if (this.fechaInicio) {
+        const ahora = new Date();
+        const diferencia = ahora.getTime() - this.fechaInicio.getTime();
+        this.tiempoTranscurrido = this.formatoTiempo(diferencia);
+        this.tiempoTranscurridoService.actualizarTiempoTranscurrido(this.tiempoTranscurrido);
+      }
+    }, 1000);
   }
 
   detenerContador(): void {
+    this.tiempoTranscurridoService.detenerContador();
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
@@ -77,7 +91,6 @@ export class DetailsUseBarComponent implements OnChanges, OnDestroy, OnInit {
   finishTrip() {
     this.usoService.finishUse("601c5250-9d2e-4d29-af43-7f61cf1309e2").subscribe(resp => {
       this.uso = resp;
-
       this.router.navigate(['use/trip/resume']);
     })
   }

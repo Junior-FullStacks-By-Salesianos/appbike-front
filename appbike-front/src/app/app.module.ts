@@ -38,6 +38,8 @@ import { BikeCardResumeTripComponent } from './components/bike-card-resume-trip/
 import { SummaryTripComponent } from './components/summary-trip/summary-trip.component';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
+import { AccountPageComponent } from './ui/account-page/account-page.component';
+import { EqualValidatorDirective } from './directives/confirmed-pin.directive';
 import { PageAdminTravelsComponent } from './ui/page-admin-travels/page-admin-travels.component';
 import { TravelsTableComponent } from './components/travels-table/travels-table.component';
 import { DeliverBikeComponent } from './components/deliver-bike/deliver-bike.component';
@@ -68,6 +70,8 @@ import { DeliverBikeComponent } from './components/deliver-bike/deliver-bike.com
     PageDetailsTripComponent,
     BikeCardResumeTripComponent,
     SummaryTripComponent,
+    AccountPageComponent,
+    EqualValidatorDirective,
     PageAdminTravelsComponent,
     TravelsTableComponent,
     DeliverBikeComponent

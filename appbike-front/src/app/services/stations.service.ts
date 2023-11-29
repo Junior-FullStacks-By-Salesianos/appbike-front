@@ -20,11 +20,11 @@ export class StationsService {
     return this.http.get<Station[]>(`http://localhost:8080/stations/get`)
   }
 
-  deleteStation(naturalId:number){
+  deleteStation(naturalId: number) {
     return this.http.delete(`http://localhost:8080/admin/delete/${naturalId}`)
   }
 
-  editStation(naturalId:number,stationData: any){
+  editStation(naturalId: number, stationData: any) {
     return this.http.put(`http://localhost:8080/admin/edit/${naturalId}`, stationData);
   }
 
@@ -35,5 +35,9 @@ export class StationsService {
         return station ? station.bikes < station.capacity : false;
       })
     );
+  }
+
+  getStationById(id: string): Observable<Station> {
+    return this.http.get<Station>(`${environment.apiBaseUrl}stations/get/${id}`);
   }
 }

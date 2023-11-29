@@ -26,7 +26,7 @@ export class DetailsUseBarComponent implements OnChanges , OnInit {
   map: google.maps.Map | undefined;
   markers: google.maps.Marker[] = [];
   stations: Station[] = [];
-
+  stationSelected !: Station;
   constructor(private modalService: NgbModal, private usoService: UsoService, private router: Router, private tiempoTranscurridoService: TiempoTranscurridoService,private stationService : StationsService ){ }
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class DetailsUseBarComponent implements OnChanges , OnInit {
 
       const stationNow = station.bikes;
       let iconUrl = '';
-      let clickable = false;
+      let clickable = true;
 
       if (stationNow != station.capacity) {
         iconUrl = 'assets/img/bikes.png';
@@ -87,7 +87,8 @@ export class DetailsUseBarComponent implements OnChanges , OnInit {
 
       if (clickable) {
         marker.addListener('click', () => {
-          this.router.navigate(['/rentbystation', station.id]);
+          this.finishTrip(station.id)
+          this.modalService.dismissAll()
         })
       };
     });
@@ -157,11 +158,14 @@ export class DetailsUseBarComponent implements OnChanges , OnInit {
 
   openModal(content: TemplateRef<any>) {
     this.initMap();
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, { size: 'lg',
+    centered: true, 
+    backdrop: 'static',
+    keyboard: false});
   }
 
-  finishTrip() {
-    this.usoService.finishUse("601c5250-9d2e-4d29-af43-7f61cf1309e2").subscribe(resp => {
+  finishTrip(stationId : string) {
+    this.usoService.finishUse(stationId).subscribe(resp => {
       this.uso = resp;
       this.router.navigate(['use/trip/resume']);
     })

@@ -15,7 +15,7 @@
                                 <th>Condition</th>
                                 <th>Station</th>
                                 <th>Uses</th>
-                                <th>Available</th>
+                                <!--<th>Available</th>!-->
                                 <th></th>
                             </tr>
                         </thead>
@@ -27,7 +27,13 @@
                                 <td>{{b.estado}}</td>
                                 <td>{{b.estacion}}</td>
                                 <td>{{b.usos}}</td>
-                                <td><a class="btn avail btn-success boton">Yes</a></td>
+                                <!--<td>
+                                    @if (disponibilidad.get(b.nombre) && printDisp(disponibilidad)) {
+                                    <a class="btn avail btn-success boton">Yes</a>
+                                    } @else {
+                                    <a class="btn avail btn-danger boton">No</a>
+                                    }
+                                </td>!-->
                                 <td class="columnaButtons"><a class="btn btn-info"
                                         (click)="openEditModal(bikeEditModal,b)"><span class="bi bi-pencil-square"
                                             style="color: white; font-size: 17px;"></span></a>

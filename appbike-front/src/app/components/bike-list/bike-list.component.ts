@@ -22,6 +22,7 @@ export class BikeListComponent implements OnInit {
   countBikes: number = 0;
   currentPage: number = 1;
   stations: Station[] = [];
+  disponibilidad: Map<String, boolean> = new Map();
   myControl = new FormControl<string | Station>('');
   private modalRef: NgbModalRef | undefined;
 
@@ -61,6 +62,11 @@ export class BikeListComponent implements OnInit {
     this.bikeService.getBikeListForAdmin(this.currentPage - 1).subscribe(resp => {
       this.listBikes = resp.content;
       this.countBikes = resp.totalElements;
+      /*this.listBikes.forEach(b => {
+        this.bikeService.verificarDisponibilidadByName(b.nombre).subscribe(resp => {
+          this.disponibilidad.set(b.nombre, resp);
+        });
+      })*/
     });
   }
 

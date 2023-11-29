@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
-import { UsoBegin, UsoResponse } from '../models/uso.interface';
+import { UsoBegin, UsoListResponse, UsoResponse } from '../models/uso.interface';
 import { CostResponse } from '../models/cost.interface';
 import { UseListResponse } from '../models/use-list.inteface';
 
@@ -42,5 +42,9 @@ export class UsoService {
             {
                 "coste": use.coste
             })
+    }
+
+    getUsosByUser(userId: string, currentPage: number): Observable<UsoListResponse>{
+        return this.http.get<UsoListResponse>(`${environment.apiBaseUrl}use/${userId}?page=${currentPage}`);  
     }
 }

@@ -6,7 +6,13 @@ export interface BikeUser {
     email:      string;
     nombre:     string;
     username:   string;
-    numTarjeta: null;
-    pin:        null;
+    numTarjeta: string | null;
+    pin:        string | null;
     saldo:      number;
+}
+
+export interface UserCardData{
+    numTarjeta: string;
+    pin:        string;
+    pinCorfirmation: string;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BikeUserService } from '../../services/bike-user.service';
-import { BikeUser } from '../../models/user.interface';
+import { BikeUser, UserCardData } from '../../models/user.interface';
 import { UsoService } from '../../services/uso.service';
 import { forkJoin } from 'rxjs';
 import { Uso } from '../../models/uso.interface';
@@ -15,6 +15,7 @@ import { UserBikeResponse } from '../../models/user-bike.interface';
   styleUrl: './account-page.component.css'
 })
 export class AccountPageComponent implements OnInit {
+  userCardData!: UserCardData;
   userDetails!: BikeUser;
   userSaldo!: UserBikeResponse;
   usesByUserList!: Uso[];
@@ -100,9 +101,10 @@ export class AccountPageComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userDetails.numTarjeta = this.form.cardNumber;
-    this.userDetails.pin = this.form.pin;
-    this.bikeUserService.setCard(this.userId, this.userDetails).subscribe(resp => {
+    this.userCardData.numTarjeta = this.form.cardNumber;
+    this.userCardData.pin = this.form.pin;
+    this.userCardData.pinCorfirmation = this.form.pinRepeat;
+    this.bikeUserService.setCard(this.userId, this.userCardData).subscribe(resp => {
       this.userDetails = resp;
       window.location.reload();
     })

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BikeUser } from '../models/user.interface';
+import { BikeUser, UserCardData } from '../models/user.interface';
 import { environment } from '../environments/environments';
 
 const httpOptions = {
@@ -19,9 +19,9 @@ export class BikeUserService {
     return this.http.get<BikeUser>(`${environment.apiBaseUrl}user/${id}`);
   }
 
-  setCard(id:string | null, userDetails: BikeUser):Observable<BikeUser>{
+  setCard(id:string | null, cardData: UserCardData):Observable<BikeUser>{
     return this.http.put<BikeUser>(`${environment.apiBaseUrl}user/setCard/${id}`,{
-      userDetails
+      cardData
     },httpOptions)
   }
 }

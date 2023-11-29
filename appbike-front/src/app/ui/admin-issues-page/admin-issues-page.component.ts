@@ -26,6 +26,8 @@ export class AdminIssuesPageComponent implements OnInit {
   stationList: Station[] = [];
   workerList: Workerr[] = [];
   errorMessage!: string;
+  listSize!: number;
+  currentPage = 1;
 
   form: any = {
     deadline: null,
@@ -35,8 +37,9 @@ export class AdminIssuesPageComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.issueService.getAll().subscribe(resp => {
+    this.issueService.getAll(this.currentPage -1).subscribe(resp => {
       this.issueList = resp.content;
+      this.listSize = resp.totalElements;
     })
   }
 
@@ -146,6 +149,13 @@ export class AdminIssuesPageComponent implements OnInit {
 
     const modalRef = this.modalService.open(NgbdModalContent);
     modalRef.componentInstance.notes = notes;
+  }
+
+  loadNewPage() {
+      this.issueService.getAll(this.currentPage - 1).subscribe(resp => {
+        this.issueList = resp.content;
+      }) 
+
   }
   
 }

@@ -41,6 +41,11 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <div *ngIf="listSize >= 10" class="paginationContainer position-absolute  bottom-0 center">
+                <ngb-pagination class="custom-pagination" [boundaryLinks]="true" [collectionSize]="listSize"
+                    [(page)]="currentPage" [pageSize]="10" (pageChange)="loadNewPage()" aria-label="Default pagination">
+                </ngb-pagination>
             </div>
         </div>
     </div>

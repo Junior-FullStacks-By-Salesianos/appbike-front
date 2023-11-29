@@ -16,8 +16,8 @@ const httpOptions = {
 export class IssuesService {
   constructor(private http: HttpClient) { }
 
-  getAll():Observable<IssueResponse>{
-    return this.http.get<IssueResponse>(`${environment.apiBaseUrl}admin/issues/`);
+  getAll(currentPage: number):Observable<IssueResponse>{
+    return this.http.get<IssueResponse>(`${environment.apiBaseUrl}admin/issues/?page=${currentPage}`);
   }
 
   setAsDone(issue:Issue){

@@ -1,7 +1,12 @@
 <h1 *ngIf="!isLoading">Banner Estacion</h1>
-<div class="container">
-    <ngb-alert *ngIf="errorRent" [dismissible]="false">
+<div *ngIf="errorRent" class="container">
+    <ngb-alert [dismissible]="false">
         <strong>Warning!</strong> Yo can´t rent a bike. First, you have to finish your current trip.
+    </ngb-alert>
+</div>
+<div *ngIf="errorBalance" class="container">
+    <ngb-alert [dismissible]="false">
+        <strong>Warning!</strong> Yo can´t rent a bike. First, you have to recharge your balance.
     </ngb-alert>
 </div>
 <div *ngIf="!isLoading" class="container">

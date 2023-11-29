@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="balanceContainer mt-auto d-flex flex-column ">
-                    <h1 class="ps-2">${{userDetails.saldo}}</h1>
+                    <h1 class="ps-2">{{userDetails.saldo}}€</h1>
                     <button class="btn btn-dark btn-outline-light w-50 ms-2 mb-1">Add Balance</button>
                 </div>
             </div>
@@ -59,8 +59,6 @@
         <thead>
             <tr>
                 <th scope="col">Bike</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Model</th>
                 <th scope="col">Started At</th>
                 <th scope="col">Finished At</th>
                 <th scope="col">Final Cost</th>
@@ -70,8 +68,6 @@
         <tbody>
             <tr *ngFor="let uso of usesByUserList">
                 <td>{{uso.bicicleta}}</td>
-                <td>{{uso.marcaBicicleta}}</td>
-                <td>{{uso.modeloBicicleta}}</td>
                 <td>{{uso.fechaInicio}}</td>
                 <td>{{uso.fechaFin}} in {{uso.estacionFin}}</td>
                 <td>{{uso.coste}}€</td>

@@ -90,15 +90,29 @@ i {
     background-color: transparent;
 }
 
-.btn {
+.avail {
     margin-left: 36px !important;
     cursor: default;
 }
 
-.btn:hover {
+.avail:hover {
     cursor: default;
+    background-color: #198754;
+
 }
 
 .btnSubmit {
     margin-right: 45%;
+}
+
+i {
+    background-color: transparent;
+}
+
+.columnaButtons a {
+    margin-left: 10px;
+}
+
+.buttonsDelete a {
+    margin-left: 90px;
 }

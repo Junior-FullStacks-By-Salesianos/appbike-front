@@ -36,6 +36,7 @@ export class DetailsUseBarComponent implements OnChanges , OnInit {
     this.stationService.getAllStations().subscribe(resp => {
       this.stations = resp;
     });
+    this.tiempoTranscurridoService.obtenerFecha(this.fechaInicio)
   }
 
   ngOnChanges(changes: SimpleChanges): void {

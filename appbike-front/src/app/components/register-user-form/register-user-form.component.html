@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper mt-5">
     <form *ngIf="!isSuccessful" class="form-right" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
         <h2 class="text-uppercase">Registration form</h2>
         <div class="row">
@@ -80,8 +80,13 @@
                 </div>
             </div>
         </div>
-        <div class="form-field">
-            <input type="submit" value="Register" class="register" name="register">
+        <div class="form-field " style="height: 70px;">
+            <input style="width: 100%;" type="submit" value="Register" class="register" name="register">
+        </div>
+        <div class="text-center mt-0">
+            <p class="mb-0">Already have an account? <a routerLink="/login" class="text-black-50 fw-bold">Sign
+                    In</a>
+            </p>
         </div>
     </form>
 </div>

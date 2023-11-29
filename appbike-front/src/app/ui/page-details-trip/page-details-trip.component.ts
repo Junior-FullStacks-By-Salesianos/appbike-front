@@ -7,6 +7,7 @@ import { Bike } from '../../models/bike-list.interface';
 import { BikeService } from '../../services/bike.service';
 import { error } from 'console';
 import { TokenStorageService } from '../../services/token-storage.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @Component({
   selector: 'app-page-details-trip',
@@ -22,7 +23,7 @@ export class PageDetailsTripComponent implements OnInit {
   bikeName!: string;
   isLoading = true;
 
-  constructor(private useService: UsoService, private bikeService: BikeService, private router: Router, private tokenStorage: TokenStorageService) {
+  constructor(private useService: UsoService, private bikeService: BikeService, private router: Router, private tokenStorage: TokenStorageService, private errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +39,7 @@ export class PageDetailsTripComponent implements OnInit {
         this.isLoading = false;
       }, error: err => {
         if (err.status == 404) {
-          this.router.navigate(['/page-404'])
+          this.errorHandler.handleHttpError(err)
         }
       }
     })

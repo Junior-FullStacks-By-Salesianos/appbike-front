@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'register', component: RegisterUserFormComponent },
   { path: 'login', component: LoginFormComponent },
-  { path: 'user/stations', component: ListUserStationsComponent },
+  { path: 'rentabike', component: ListUserStationsComponent },
 
   { path: 'rentbystation/:id', component: BikeListByStationComponent },
   { path: 'use/trip', component: PageFinishRideComponent },

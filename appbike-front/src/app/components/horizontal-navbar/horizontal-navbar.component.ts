@@ -23,13 +23,12 @@ export class HorizontalNavbarComponent {
     pin: null,
   };
   userDetails!: UserBikeResponse;
-  isLoadingModal = true;
-  isSuccessful = false;
-  errorMessage = '';
-  incorrectPin = false;
   tiempoTranscurrido: string = '00:00:00';
   finViaje: boolean = false;
+  fechaInicio!: Date;
+  intervalId: any;
   terminado = true;
+
 
   constructor(private tokenStorageService: TokenStorageService, private userService: UserService, private modalService: NgbModal, private tiempoTranscurridoService: TiempoTranscurridoService, private router: Router) { }
 
@@ -40,7 +39,7 @@ export class HorizontalNavbarComponent {
   }
 
   isBikeRoute(): any {
-    if (this.router.url == "/rent") return true;
+    if (this.router.url == "/rentabike") return true;
 
     return false;
   }
@@ -61,11 +60,8 @@ export class HorizontalNavbarComponent {
       console.log(JSON.stringify(this.user));
     }
 
-    this.tiempoTranscurridoService.tiempoTranscurrido$.subscribe(tiempo => {
-      this.tiempoTranscurrido = tiempo;
-    });
     this.tiempoTranscurridoService.contadorIniciado$.subscribe((iniciado) => {
-      this.terminado = false
+      this.terminado = false;
     });
     this.tiempoTranscurridoService.contadorDetenido$.subscribe((detenido) => {
       this.terminado = true;
@@ -73,40 +69,18 @@ export class HorizontalNavbarComponent {
 
   }
 
+
+  inTravel(tiempo: string) {
+    if (tiempo === '00:00:00') {
+      return 'In travel';
+    }
+    return tiempo;
+  }
+
+
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();
   }
 
-  openModal(arg0: any) {
-    this.userService.getUserDetails().subscribe(resp => {
-      this.userDetails = resp
-      this.isLoadingModal = false;
-    })
-    this.isSuccessful = false;
-    this.modalService.open(arg0, {
-      keyboard: false
-
-    })
-  }
-
-  onSubmit() {
-    this.userService.recharge(this.form).subscribe({
-      next: data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.incorrectPin = false;
-        this.modalService.dismissAll()
-        this.ngOnInit();
-      },
-      error: err => {
-        if (err.status == 400) {
-          this.incorrectPin = true;
-          this.isSuccessful = false;
-        }
-        this.errorMessage = err.error.message;
-        console.log(err);
-      },
-    });
-  }
 }

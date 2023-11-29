@@ -5,6 +5,9 @@ import { UsoService } from '../../services/uso.service';
 import { forkJoin } from 'rxjs';
 import { Uso } from '../../models/uso.interface';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../services/user.service';
+import { UserBikeResponse } from '../../models/user-bike.interface';
 
 @Component({
   selector: 'app-account-page',
@@ -13,6 +16,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AccountPageComponent implements OnInit {
   userDetails!: BikeUser;
+  userSaldo!: UserBikeResponse;
   usesByUserList!: Uso[];
   today = this.getReadableDate();
   userId!: string | null;
@@ -25,7 +29,16 @@ export class AccountPageComponent implements OnInit {
     pinRepeat: null
   };
 
-  constructor(private bikeUserService: BikeUserService, private usoService: UsoService,
+  form2: any = {
+    recharge: null,
+    pin: null,
+  };
+  isLoadingModal = true;
+  isSuccessful = false;
+  errorMessage = '';
+  incorrectPin = false;
+
+  constructor(private bikeUserService: BikeUserService, private userService: UserService, private usoService: UsoService,
     private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -76,17 +89,17 @@ export class AccountPageComponent implements OnInit {
   }
 
   private getDismissReason(reason: any): string {
-		switch (reason) {
-			case ModalDismissReasons.ESC:
-				return 'by pressing ESC';
-			case ModalDismissReasons.BACKDROP_CLICK:
-				return 'by clicking on a backdrop';
-			default:
-				return `with: ${reason}`;
-		}
-	}
+    switch (reason) {
+      case ModalDismissReasons.ESC:
+        return 'by pressing ESC';
+      case ModalDismissReasons.BACKDROP_CLICK:
+        return 'by clicking on a backdrop';
+      default:
+        return `with: ${reason}`;
+    }
+  }
 
-  onSubmit(){
+  onSubmit() {
     this.userDetails.numTarjeta = this.form.cardNumber;
     this.userDetails.pin = this.form.pin;
     this.bikeUserService.setCard(this.userId, this.userDetails).subscribe(resp => {
@@ -95,4 +108,35 @@ export class AccountPageComponent implements OnInit {
     })
   }
 
+  openModal(arg0: any) {
+    this.userService.getUserDetails().subscribe(resp => {
+      this.userSaldo = resp
+      this.isLoadingModal = false;
+    })
+    this.isSuccessful = false;
+    this.modalService.open(arg0, {
+      keyboard: false
+
+    })
+  }
+
+  onSubmitSaldo() {
+    this.userService.recharge(this.form2).subscribe({
+      next: data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.incorrectPin = false;
+        this.modalService.dismissAll()
+        this.ngOnInit();
+      },
+      error: err => {
+        if (err.status == 400) {
+          this.incorrectPin = true;
+          this.isSuccessful = false;
+        }
+        this.errorMessage = err.error.message;
+        console.log(err);
+      },
+    });
+  }
 }

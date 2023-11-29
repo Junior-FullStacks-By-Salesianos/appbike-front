@@ -9,15 +9,15 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/home'" style="color: black; font-size: 30px;"
+          <a *ngIf="isLoggedIn" class="nav-link" [routerLink]="'/home'" style="color: black; font-size: 30px;"
             [ngClass]="isHomeRoute() ? 'interBold' : 'interRegular'">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/user/stations'"
+          <a *ngIf="isUser" class="nav-link" [routerLink]="'/rentabike'"
             style="color: black; font-size: 30px; margin-left: 20px; margin-right: 20px;"
             [ngClass]="isBikeRoute() ? 'interBold' : 'interRegular'">Rent a Bike</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="isUser" class="nav-item">
           <a class="nav-link" [routerLink]="'/travels'" style="color: black; font-size: 30px;"
             [ngClass]="isTravelRoute() ? 'interBold' : 'interRegular'">Travels</a>
         </li>
@@ -26,10 +26,7 @@
       <ul class="navbar-nav">
         <li class="nav-item d-flex align-items-center" *ngIf="!terminado">
           <div class="blinking-circle"></div>
-          <a class="nav-link text-black" [routerLink]="['/use/trip']">{{tiempoTranscurrido}}</a>
-        </li>
-        <li class="nav-item" *ngIf="isUser">
-          <a class="nav-link" (click)="openModal(content)" style="color: black;">Saldo</a>
+          <a class="nav-link text-black" [routerLink]="['/use/trip']">In travel</a>
         </li>
         <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" [routerLink]="'/admin/stations'" style="color: black;">Admin Board</a>

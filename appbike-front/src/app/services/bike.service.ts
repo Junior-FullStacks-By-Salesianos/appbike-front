@@ -49,4 +49,8 @@ export class BikeService {
   deleteBikeByName(name: String) {
     return this.http.delete(`${environment.apiBaseUrl}admin/bikes/delete/${name}`)
   }
+
+  verificarDisponibilidadByName(name: string): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiBaseUrl}admin/bikes/available/${name}`);
+  }
 }

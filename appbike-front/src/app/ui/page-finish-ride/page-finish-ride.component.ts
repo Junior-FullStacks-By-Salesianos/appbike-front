@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsoService } from '../../services/uso.service';
 import { UsoResponse } from '../../models/uso.interface';
+import { Router } from '@angular/router';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @Component({
   selector: 'app-page-finish-ride',
@@ -16,7 +18,7 @@ export class PageFinishRideComponent implements OnInit {
   constructor(
     private usoService: UsoService,
     private router: Router
-  ) { }
+  , private errorHandler: ErrorHandlerService) { }
 
   ngOnInit(): void {
     
@@ -24,11 +26,8 @@ export class PageFinishRideComponent implements OnInit {
       next: resp => {
         this.uso = resp;
         this.isLoading = false;
-      },
-      error: err => {
-        if (err.status == 404) {
-          this.router.navigate(['/page-404'])
-        }
+      }, error: err => {
+        this.errorHandler.handleHttpError(err)
       }
     })
   }

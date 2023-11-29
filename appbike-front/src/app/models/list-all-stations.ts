@@ -1,3 +1,5 @@
+import { Bike } from "./bike-list.interface";
+
 export interface AllStationsResponse {
    results: Station[];
 }

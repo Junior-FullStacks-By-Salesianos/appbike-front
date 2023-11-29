@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { StationsService } from '../../services/stations.service';
-import { Station } from '../../models/list-all-stations';
+import { Station } from '../../models/list-paged-station.interface';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
-import { response } from 'express';
 @Component({
   selector: 'app-list-admin-stations',
   templateUrl: './list-admin-stations.component.html',
@@ -22,12 +21,15 @@ export class ListAdminStationsComponent {
   selectedStation: Station | undefined;
   stations: Station[] = [];
   stationForm: any;
+  countBikes: number = 0;
+  currentPage: number = 1;
 
   constructor(private stationService: StationsService, private modalService: NgbModal, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit(): void {
+    
     this.loadNewPage();
   }
 
@@ -65,8 +67,10 @@ export class ListAdminStationsComponent {
   }
 
   loadNewPage() {
-    this.stationService.getAllStations().subscribe(resp => {
-      this.stations = resp;
+    this.stationService.getAllStationsPaged(this.currentPage - 1).subscribe(resp => {
+      this.stations = resp.content;
+      this.countBikes = resp.totalElements;
+      this.currentPage=resp.number;
     });
   }
 
@@ -74,7 +78,7 @@ export class ListAdminStationsComponent {
     this.stationData.capacidad = +this.stationData.capacidad;
 
     if (this.selectedStation) {
-      this.stationService.editStation(this.selectedStation.number, this.stationData).subscribe(
+      this.stationService.editStation(this.selectedStation.numero, this.stationData).subscribe(
         (response) => {
           console.log('La estación se ha editado con éxito:', response);
           this.loadNewPage();
@@ -99,7 +103,7 @@ export class ListAdminStationsComponent {
   }
   edit() {
     if (this.selectedStation) {
-      this.stationService.editStation(this.selectedStation.number, this.stationData).subscribe(
+      this.stationService.editStation(this.selectedStation.numero, this.stationData).subscribe(
         (response) => {
           console.log('La estación se ha editado con éxito:', response);
           this.clearFormData();

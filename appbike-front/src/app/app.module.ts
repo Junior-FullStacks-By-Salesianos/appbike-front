@@ -42,6 +42,7 @@ import { AccountPageComponent } from './ui/account-page/account-page.component';
 import { EqualValidatorDirective } from './directives/confirmed-pin.directive';
 import { PageAdminTravelsComponent } from './ui/page-admin-travels/page-admin-travels.component';
 import { TravelsTableComponent } from './components/travels-table/travels-table.component';
+import { DeliverBikeComponent } from './components/deliver-bike/deliver-bike.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { TravelsTableComponent } from './components/travels-table/travels-table.
     AccountPageComponent,
     EqualValidatorDirective,
     PageAdminTravelsComponent,
-    TravelsTableComponent
+    TravelsTableComponent,
+    DeliverBikeComponent
   ],
   imports: [
     BrowserModule,

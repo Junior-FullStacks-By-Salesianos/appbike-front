@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Station } from '../models/list-all-stations';
 import { Observable, map } from 'rxjs';
 import { environment } from '../environments/environments';
+import { PagedStationList } from '../models/list-paged-station.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,10 @@ export class StationsService {
   }
 
   getAllStations(): Observable<Station[]> {
-    return this.http.get<Station[]>(`http://localhost:8080/stations/get`)
+    return this.http.get<Station[]>(`http://localhost:8080/station/get`)
+  }
+  getAllStationsPaged(page : any): Observable<PagedStationList> {
+    return this.http.get<PagedStationList>(`http://localhost:8080/admin/station`)
   }
 
   deleteStation(naturalId: number) {
@@ -38,6 +42,6 @@ export class StationsService {
   }
 
   getStationById(id: string): Observable<Station> {
-    return this.http.get<Station>(`${environment.apiBaseUrl}stations/get/${id}`);
+    return this.http.get<Station>(`${environment.apiBaseUrl}station/get/${id}`);
   }
 }

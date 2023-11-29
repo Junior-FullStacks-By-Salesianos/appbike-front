@@ -14,16 +14,18 @@
         </div>
     </div>
 </div>
+
 <ng-template #content let-modal>
-    <div class="modal-body">
-        <p>Are you sure that you want to finish your ride?</p>
-        <!--MAPAAAAA-->
-        <div class="row">
-            <button type="button" class="btn btn-danger offset-2 col-3"
-                (click)="modal.close('Close click')">Cancel</button>
-            <button type="button" class="btn btn-primary offset-2 col-3"
-                (click)="modal.close('Close click'); finishTrip()">Yes,
-                I´m sure</button>
+    <div class="modal-fullscreen">
+      <button type="button" class="close btn-dark" style="background-color: black;" aria-label="Close" (click)="modal.close()">
+        <span aria-hidden="true" style="color: white;">&times;</span>
+      </button>
+      <div class="modal-body">
+        <p>Choose a Station to finish your ride</p>
+        <div class="map-container">
+          <div id="map"></div>
         </div>
+      </div>
     </div>
-</ng-template>
+  </ng-template>
+  

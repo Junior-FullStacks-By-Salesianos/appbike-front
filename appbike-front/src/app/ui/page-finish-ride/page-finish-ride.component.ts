@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsoService } from '../../services/uso.service';
 import { UsoResponse } from '../../models/uso.interface';
-import { Router } from '@angular/router';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @Component({

@@ -37,3 +37,6 @@
   font-family: 'Inter-Bold';
   src: url("../../../assets/fonts/static/Inter-Bold.ttf");
 }
+.card {
+  background-color: #DDDDDD;
+}

@@ -22,6 +22,10 @@ export class HorizontalNavbarComponent {
     recharge: null,
     pin: null,
   };
+  isLoadingModal = true;
+  isSuccessful = false;
+  errorMessage = '';
+  incorrectPin = false;
   userDetails!: UserBikeResponse;
   tiempoTranscurrido: string = '00:00:00';
   finViaje: boolean = false;
@@ -49,6 +53,36 @@ export class HorizontalNavbarComponent {
     return false;
   }
 
+  openModal(arg0: any) {
+    this.userService.getUserDetails().subscribe(resp => {
+      this.userDetails = resp
+      this.isLoadingModal = false;
+    })
+    this.isSuccessful = false;
+    this.modalService.open(arg0, {
+      keyboard: false
+
+    })
+  }
+ onSubmit() {
+    this.userService.recharge(this.form).subscribe({
+      next: data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.incorrectPin = false;
+        this.modalService.dismissAll()
+        this.ngOnInit();
+      },
+      error: err => {
+        if (err.status == 400) {
+          this.incorrectPin = true;
+          this.isSuccessful = false;
+        }
+        this.errorMessage = err.error.message;
+        console.log(err);
+      },
+    });
+  }
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 

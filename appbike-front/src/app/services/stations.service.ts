@@ -18,7 +18,7 @@ export class StationsService {
   }
 
   getAllStations(): Observable<Station[]> {
-    return this.http.get<Station[]>(`http://localhost:8080/station/get`)
+    return this.http.get<Station[]>(`http://localhost:8080/stations/get`)
   }
   getAllStationsPaged(page : any): Observable<PagedStationList> {
     return this.http.get<PagedStationList>(`http://localhost:8080/admin/station`)

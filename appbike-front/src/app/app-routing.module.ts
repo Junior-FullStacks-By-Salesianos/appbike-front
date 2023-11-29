@@ -18,6 +18,7 @@ import { NgModule } from '@angular/core';
 import { PageDetailsTripComponent } from './ui/page-details-trip/page-details-trip.component';
 import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stations-page.component';
 import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
+import { AccountPageComponent } from './ui/account-page/account-page.component';
 import { PageAdminTravelsComponent } from './ui/page-admin-travels/page-admin-travels.component';
 
 const routes: Routes = [
@@ -26,8 +27,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterUserFormComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'user/stations', component: ListUserStationsComponent },
-  { path: 'admin/issues', component: AdminIssuesPageComponent, canActivate: [AuthGuard] },
-  { path: 'admin/travels', component: AdminTravelsPageComponent, canActivate: [AuthGuard] },
+  { path: 'rentbystation', component: BikeListByStationComponent },
   { path: 'rentbystation/:id', component: BikeListByStationComponent }, //cambiar cuando tenga la parte de estaciones
   { path: 'use/trip', component: PageFinishRideComponent },
   { path: 'error-404', component: PageError404Component },
@@ -35,6 +35,7 @@ const routes: Routes = [
   { path: 'error-400', component: PageError400Component },
   { path: 'error', component: PageErrorUnespectedComponent },
   { path: 'use/trip/resume', component: PageDetailsTripComponent },
+  {path: 'user', component:AccountPageComponent},
 
   {
     path: 'admin',

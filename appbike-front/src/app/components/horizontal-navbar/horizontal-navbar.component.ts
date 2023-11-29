@@ -3,6 +3,7 @@ import { TokenStorageService } from '../../services/token-storage.service';
 import { UserService } from '../../services/user.service';
 import { UserBikeResponse } from '../../models/user-bike.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 
 
@@ -27,7 +28,24 @@ export class HorizontalNavbarComponent {
   isSuccessful = false;
   errorMessage = '';
   incorrectPin = false;
-  constructor(private tokenStorageService: TokenStorageService, private userService: UserService, private modalService: NgbModal) { }
+  constructor(private tokenStorageService: TokenStorageService, private userService: UserService, private modalService: NgbModal,private router: Router) { }
+
+  isHomeRoute(): any {
+    if (this.router.url == "/home") return true;
+
+    return false;
+  }
+
+  isBikeRoute(): any {
+    if (this.router.url == "/rent") return true;
+
+    return false;
+  }
+  isTravelRoute(): any {
+    if (this.router.url == "/travels") return true;
+
+    return false;
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

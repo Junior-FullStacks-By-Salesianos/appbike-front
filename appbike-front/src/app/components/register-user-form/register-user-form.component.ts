@@ -55,7 +55,7 @@ export class RegisterUserFormComponent {
         this.tokenStorage.saveUser(data);
 
         this.roles = ['ROLE_USER'];
-        this.reloadPage();
+        this.router.navigate(['/home']);
       },
       error: err => {
         // Handle registration failure
@@ -65,11 +65,4 @@ export class RegisterUserFormComponent {
       },
     });
   }
-
-
-
-  reloadPage(): void {
-    window.location.reload();
-  }
-
 }

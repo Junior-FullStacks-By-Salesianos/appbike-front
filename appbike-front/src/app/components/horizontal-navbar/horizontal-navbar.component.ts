@@ -23,10 +23,6 @@ export class HorizontalNavbarComponent {
     pin: null,
   };
   userDetails!: UserBikeResponse;
-  isLoadingModal = true;
-  isSuccessful = false;
-  errorMessage = '';
-  incorrectPin = false;
   tiempoTranscurrido: string = '00:00:00';
   finViaje: boolean = false;
   terminado = true;
@@ -40,7 +36,7 @@ export class HorizontalNavbarComponent {
   }
 
   isBikeRoute(): any {
-    if (this.router.url == "/rent") return true;
+    if (this.router.url == "/rentabike") return true;
 
     return false;
   }
@@ -78,35 +74,4 @@ export class HorizontalNavbarComponent {
     window.location.reload();
   }
 
-  openModal(arg0: any) {
-    this.userService.getUserDetails().subscribe(resp => {
-      this.userDetails = resp
-      this.isLoadingModal = false;
-    })
-    this.isSuccessful = false;
-    this.modalService.open(arg0, {
-      keyboard: false
-
-    })
-  }
-
-  onSubmit() {
-    this.userService.recharge(this.form).subscribe({
-      next: data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.incorrectPin = false;
-        this.modalService.dismissAll()
-        this.ngOnInit();
-      },
-      error: err => {
-        if (err.status == 400) {
-          this.incorrectPin = true;
-          this.isSuccessful = false;
-        }
-        this.errorMessage = err.error.message;
-        console.log(err);
-      },
-    });
-  }
 }

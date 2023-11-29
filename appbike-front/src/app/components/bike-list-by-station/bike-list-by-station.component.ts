@@ -9,6 +9,7 @@ import { catchError, throwError } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { StationsService } from '../../services/stations.service';
 import { StationResponse } from '../../models/list-stations.interface';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class BikeListByStationComponent implements OnInit {
   stationId!: string;
   station!: StationResponse;
 
-  constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router, private stationService: StationsService, private sanitazer: DomSanitizer) {
+  constructor(private bikeService: BikeService, private modalService: NgbModal, private usoService: UsoService, private router: Router, private errorHandler: ErrorHandlerService, private stationService: StationsService, private sanitazer: DomSanitizer) {
     this.stationId = String(this.route.snapshot.params['id']);
   }
 
@@ -40,7 +41,7 @@ export class BikeListByStationComponent implements OnInit {
         this.countBikes = resp.length;
         this.isLoading = false
       }, error: err => {
-        this.router.navigate(['/page-404'])
+        this.errorHandler.handleHttpError(err);
       }
     })
     this.stationService.getStationById(this.stationId).subscribe(resp => {

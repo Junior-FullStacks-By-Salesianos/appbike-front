@@ -1,5 +1,10 @@
+<app-horizontal-navbar></app-horizontal-navbar>
 <div class="banner position-absolute"></div>
 <div class="container z-3 position-relative min-vh-90 ">
+    <ngb-alert *ngIf="isSuccessful"
+        class="mt-4 text-center alert w-75 mx-auto position-absolute start-50 translate-middle" type="success">
+        The balance recharge was successful!
+    </ngb-alert>
     <div class="row">
         <div class="col-8">
             <div class="userDetailscontainer d-flex vh-25 flex-wrap align-content-center overflow-hidden">
@@ -30,7 +35,8 @@
                 <div class="balanceContainer mt-auto d-flex flex-column ">
                     <h1 *ngIf="userDetails.saldo > 0" class="ps-2">{{userDetails.saldo}}€</h1>
                     <h1 *ngIf="userDetails.saldo < 0" class="ps-2 text-danger">{{userDetails.saldo}}€</h1>
-                    <button class="btn btn-dark btn-outline-light w-50 ms-2 mb-1">Add Balance</button>
+                    <button class="btn btn-dark btn-outline-light w-50 ms-2 mb-1" (click)="openModal(content)">Add
+                        Balance</button>
                 </div>
             </div>
 
@@ -83,32 +89,88 @@
     </div>
 </div>
 
+<ng-template class="modalBalance" #content let-modal>
+    <!--<div class="modal-header">
+      
+  </div>-->
+    <div *ngIf="!isLoadingModal" class="modal-body">
+        <button type="button" class="btn-close" style="float: right;" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+        <div class="text-center mt-3">
+            <h1><i class="bi bi-coin"></i> My Balance</h1>
+        </div>
+        <div class="fondoGris mx-4">
+            <div class="row text-center">
+                <p class="text-center saldo">{{userSaldo.saldo.toFixed(2)}}€</p>
+            </div>
+            <form (ngSubmit)="f.form.valid && onSubmitSaldo()" #f="ngForm" novalidate>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="recharge" class="form-label">Recharge</label>
+                        <input [(ngModel)]="form2.recharge" type="number" name="recharge" id="recharge"
+                            class="form-control" required min="2" max="100" #recharge="ngModel">
+                        <div class="alert-danger" *ngIf="recharge.errors && f.submitted">
+                            <div class="error" *ngIf="recharge.errors['required']">Recharge is required</div>
+                            <div class="error" *ngIf="recharge.errors['min']">The minimum recharge is 2€</div>
+                            <div class="error" *ngIf="recharge.errors['max']">The maximum recharge is 100€</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="pin" class="form-label">Pin</label>
+                        <input [(ngModel)]="form2.pin" type="password" name="pin" id="pin" class="form-control" required
+                            minlength="4" maxlength="4" minlength="4" #pin="ngModel">
+                        <div class="alert-danger" *ngIf="pin.errors && f.submitted">
+                            <div class="error" *ngIf="pin.errors['required']">The PIN is required</div>
+                            <div class="error" *ngIf="pin.errors['maxlength']">The pin must be 4 characters long</div>
+                            <div class="error" *ngIf="pin.errors['minlength']">The pin must be 4 characters long</div>
+                            <!--alert verde que se ha agregado correctamente-->
+                        </div>
+                        <div class="error" *ngIf="incorrectPin">Incorrect Pin</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-3 form-field">
+                        <button type="submit" class="btn btn-dark rounded-pill shadow"
+                            style="width: 100%;">Recargar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="isLoadingModal" class="d-flex justify-content-center align-items-center vh-80">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>
+
 <!-- Add Card Modal -->
 <ng-template #addCardModal let-modal>
     <div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Add Card</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<form #addCard="ngForm" (ngSubmit)="addCard.form.valid && onSubmit()">
-			<div class="mb-3">
-				<label for="cardNumber">Card Number</label>
-				<div class="input-group">
-					<input [(ngModel)]="form.cardNumber" #cardNumber="ngModel" name="cardNumber" required
-                    pattern="\d{4}-\d{4}-\d{4}-\d{4}" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" />
-				</div>
+        <h4 class="modal-title" id="modal-basic-title">Add Card</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form #addCard="ngForm" (ngSubmit)="addCard.form.valid && onSubmit()">
+            <div class="mb-3">
+                <label for="cardNumber">Card Number</label>
+                <div class="input-group">
+                    <input [(ngModel)]="form.cardNumber" #cardNumber="ngModel" name="cardNumber" required
+                        pattern="\d{4}-\d{4}-\d{4}-\d{4}" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" />
+                </div>
                 <div class="alert-danger" *ngIf="cardNumber.errors && addCard.submitted">
                     <p class="text-danger" *ngIf="cardNumber.errors['required']">Card number is required.</p>
                 </div>
                 <div class="alert-danger" *ngIf="cardNumber.errors && addCard.submitted">
-                    <p class="text-danger" *ngIf="cardNumber.errors['pattern']">Correct format is: XXXX-XXXX-XXXX-XXXX</p>
+                    <p class="text-danger" *ngIf="cardNumber.errors['pattern']">Correct format is: XXXX-XXXX-XXXX-XXXX
+                    </p>
                 </div>
-			</div>
+            </div>
 
             <label for="pin">Pin Number</label>
             <div class="input-group">
                 <input class="form-control" [(ngModel)]="form.pin" #pin="ngModel" name="pin" required pattern="\d{4}"
-                placeholder="1234">
+                    placeholder="1234">
             </div>
             <div class="alert-danger" *ngIf="pin.errors && addCard.submitted">
                 <p class="text-danger" *ngIf="pin.errors['required']">Pin is required.</p>
@@ -119,8 +181,8 @@
 
             <label for="pinRepeat">Confirm Pin Number</label>
             <div class="input-group">
-                <input class="form-control" [(ngModel)]="form.pinRepeat" #pinRepeat="ngModel" name="pinRepeat" required pattern="\d{4}"
-                placeholder="1234" pinMatch [pin]="form.pin">
+                <input class="form-control" [(ngModel)]="form.pinRepeat" #pinRepeat="ngModel" name="pinRepeat" required
+                    pattern="\d{4}" placeholder="1234" pinMatch [pin]="form.pin">
             </div>
             <div class="alert-danger" *ngIf="pinRepeat.errors && addCard.submitted">
                 <p class="text-danger" *ngIf="pinRepeat.errors['required']">Pin must be confirmed.</p>
@@ -130,6 +192,6 @@
             </div>
 
             <button type="submit" class="btn btn-outline-dark mt-2 ">Add</button>
-		</form>
-	</div>
+        </form>
+    </div>
 </ng-template>

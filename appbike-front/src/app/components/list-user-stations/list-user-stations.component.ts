@@ -33,13 +33,15 @@ export class ListUserStationsComponent {
 
     this.stations.forEach(station => {
   
-      const stationCapacity = station.capacity - station.bikes; 
-    
+      const stationNow = station.bikes;
       let iconUrl = '';
-      if (stationCapacity > 0) {
+      let clickable = true;
+
+      if (stationNow > 0) {
         iconUrl = 'assets/img/bikes.png';
       } else {
         iconUrl = 'assets/img/fullStation.png';
+        clickable = false; 
       }
     
       const coordinates = station.coordinates.split(',');
@@ -50,6 +52,7 @@ export class ListUserStationsComponent {
         position: { lat: latitude, lng: longitude },
         map: this.map,
         title: station.name,
+        clickable: clickable,
         icon: { 
           url: iconUrl,
           scaledSize: new google.maps.Size(65, 65)
@@ -58,9 +61,11 @@ export class ListUserStationsComponent {
     
       this.markers.push(marker);
     
-      marker.addListener('click', () => {
-        this.router.navigate(['/rentbystation', station.id]);
-      });
+      if (clickable) {
+        marker.addListener('click', () => {
+          this.router.navigate(['/rentbystation', station.id]);
+        })
+      };
     });
     
   }

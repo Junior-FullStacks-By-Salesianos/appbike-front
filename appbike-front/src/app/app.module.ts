@@ -40,6 +40,7 @@ import { AdminStationsPageComponent } from './ui/admin-stations-page/admin-stati
 import { AdminBikesPageComponent } from './ui/admin-bikes-page/admin-bikes-page.component';
 import { PageAdminTravelsComponent } from './ui/page-admin-travels/page-admin-travels.component';
 import { TravelsTableComponent } from './components/travels-table/travels-table.component';
+import { DeliverBikeComponent } from './components/deliver-bike/deliver-bike.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TravelsTableComponent } from './components/travels-table/travels-table.
     BikeCardResumeTripComponent,
     SummaryTripComponent,
     PageAdminTravelsComponent,
-    TravelsTableComponent
+    TravelsTableComponent,
+    DeliverBikeComponent
   ],
   imports: [
     BrowserModule,
